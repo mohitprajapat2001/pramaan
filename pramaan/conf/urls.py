@@ -8,4 +8,5 @@ urlpatterns = [
         "api/v1/",
         include(router.urls),
     ),
+    path("", include("landing.urls")),
 ]

@@ -8,6 +8,7 @@
     <title>{% block title %}Pramaan{%endblock%}</title>
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css/daisy5.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themes.css' %}">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     {%block extracss%}{%endblock%}
 </head>
@@ -17,9 +18,9 @@
 <script src="{% static 'js/index.js' %}"></script>
 {% block pre-extrajs %}{%endblock%}
 
-<body>
-    <h1 class="text-5xl font-bold text-center">Hello Pramaan</h1>
-
+<body data-theme="dark">
+    {% block content %}
+    {% endblock %}
 </body>
 {% block post-extrajs %}{%endblock%}
 

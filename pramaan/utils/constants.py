@@ -42,3 +42,7 @@ class CacheTimeout:
     @classmethod
     def x_minutes(cls, x: int):
         return x * 60
+
+
+class Templates:
+    LANDING = "landing/home.html"

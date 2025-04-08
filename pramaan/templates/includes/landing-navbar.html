@@ -1,0 +1,38 @@
+<header class="fixed top-2 z-30 w-full md:top-6">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div
+            class="relative flex h-14 items-center justify-between gap-3 rounded-2xl bg-base-300 shadow-lg backdrop-blur-xs border border-gray-700 px-3 py-2">
+            <a href="{% url 'landing:home' %}">
+                <span class="text-xl font-bold btn btn-ghost">
+                    Pramaan
+                </span>
+            </a>
+            <ul class="menu md:menu-horizontal rounded-box hidden md:flex">
+                <li>
+                    <a class="disabled">
+                        <i class="fas fa-link"></i>
+                        Link in Bio
+                    </a>
+                </li>
+                <li>
+                    <!-- TODO: add Docs Link -->
+                    <a>
+                        <i class="fas fa-book"></i>
+                        Docs
+                        <span class="md:hidden badge badge-xs badge-warning">V1.0</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/mohitprajapat2001/pramaan">
+                        <i class="fas fa-code"></i>
+                        Source Code
+                    </a>
+                </li>
+            </ul>
+            <div class="capitalize">
+                <a class="btn btn-sm btn-outline border-primary">Login</a>
+                <a class="btn btn-sm btn-primary">Get Started Now</a>
+            </div>
+        </div>
+    </div>
+</header>

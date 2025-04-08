@@ -1,165 +1,27 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block extracss %}
-<link rel="stylesheet" href="{%static 'css/swiper.css'%}">
-{%endblock%}
-
-{% block post-extrajs %}
-<script src="{% static 'js/swiper.min.js' %}"></script>
-<script src="{% static 'js/swiper.js' %}"></script>
-{%endblock%}
-
-{% block content %}
-<div class="flex min-h-screen flex-col overflow-hidden">
-    {% include 'includes/landing-navbar.html' %}
-    <main class="grow">
+<div class="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
+    <header class="fixed top-2 z-30 w-full md:top-6">
         <div class="mx-auto max-w-6xl px-4 sm:px-6">
-            <div class="pb-12 pt-32 md:pb-20 md:pt-40">
-                <div class="hero">
-                    <div class="grid grid-cols-9 gap-4 w-full">
-                        <div class="col-span-0 hidden md:block md:col-span-4 flex flex-col items-start">
-                            <h1 class="text-5xl font-bold">
-                                Trust in Every Profile
-                            </h1>
-                            <p class="py-6">
-                                Create and use your profile as passport for all your needs.
-                                <br>
-                                – multiple avatar, one bio, social connections, and verified links.
-                            </p>
-                            <button class="btn btn-primary">Start Free Now!</button>
-                        </div>
-                        <div class="col-span-9 md:col-span-5 border">
-                            <div class="mx-0 max-w-xl flex rounded-2xl bg-indigo-700">
-                                <div class="swiper-container flex-col flex  self-center">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden my-4">
-                                                <img class="w-full h-56 object-cover object-center"
-                                                    src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                                                    alt="avatar">
-                                                <div class="flex items-center px-6 py-3 bg-gray-900">
-                                                    <svg class="h-6 w-6 text-white fill-current" viewBox="0 0 512 512">
-                                                        <path
-                                                            d="M256 48C150 48 64 136.2 64 245.1v153.3c0 36.3 28.6 65.7 64 65.7h64V288h-85.3v-42.9c0-84.7 66.8-153.3 149.3-153.3s149.3 68.5 149.3 153.3V288H320v176h64c35.4 0 64-29.3 64-65.7V245.1C448 136.2 362 48 256 48z" />
-                                                    </svg>
-                                                    <h1 class="mx-3 text-white font-semibold text-lg">Focusing</h1>
-                                                </div>
-                                                <div class="py-4 px-6">
-                                                    <h1 class="text-2xl font-semibold text-gray-800">Patterson johnson
-                                                    </h1>
-                                                    <p class="py-2 text-lg text-gray-700">Full Stack maker & UI / UX
-                                                        Designer , love hip hop music Author of
-                                                        Building UI.</p>
-                                                    <div class="flex items-center mt-4 text-gray-700">
-                                                        <svg class="h-6 w-6 fill-current" viewBox="0 0 512 512">
-                                                            <path
-                                                                d="M239.208 343.937c-17.78 10.103-38.342 15.876-60.255 15.876-21.909 0-42.467-5.771-60.246-15.87C71.544 358.331 42.643 406 32 448h293.912c-10.639-42-39.537-89.683-86.704-104.063zM178.953 120.035c-58.479 0-105.886 47.394-105.886 105.858 0 58.464 47.407 105.857 105.886 105.857s105.886-47.394 105.886-105.857c0-58.464-47.408-105.858-105.886-105.858zm0 186.488c-33.671 0-62.445-22.513-73.997-50.523H252.95c-11.554 28.011-40.326 50.523-73.997 50.523z" />
-                                                            <g>
-                                                                <path
-                                                                    d="M322.602 384H480c-10.638-42-39.537-81.691-86.703-96.072-17.781 10.104-38.343 15.873-60.256 15.873-14.823 0-29.024-2.654-42.168-7.49-7.445 12.47-16.927 25.592-27.974 34.906C289.245 341.354 309.146 364 322.602 384zM306.545 200h100.493c-11.554 28-40.327 50.293-73.997 50.293-8.875 0-17.404-1.692-25.375-4.51a128.411 128.411 0 0 1-6.52 25.118c10.066 3.174 20.779 4.862 31.895 4.862 58.479 0 105.886-47.41 105.886-105.872 0-58.465-47.407-105.866-105.886-105.866-37.49 0-70.427 19.703-89.243 49.09C275.607 131.383 298.961 163 306.545 200z" />
-                                                            </g>
-                                                        </svg>
-                                                        <h1 class="px-2 text-sm">MerakiTeam</h1>
-                                                    </div>
-                                                    <div class="flex items-center mt-4 text-gray-700">
-                                                        <svg class="h-6 w-6 fill-current" viewBox="0 0 512 512">
-                                                            <path
-                                                                d="M256 32c-88.004 0-160 70.557-160 156.801C96 306.4 256 480 256 480s160-173.6 160-291.199C416 102.557 344.004 32 256 32zm0 212.801c-31.996 0-57.144-24.645-57.144-56 0-31.357 25.147-56 57.144-56s57.144 24.643 57.144 56c0 31.355-25.148 56-57.144 56z" />
-                                                        </svg>
-                                                        <h1 class="px-2 text-sm">California</h1>
-                                                    </div>
-                                                    <div class="flex items-center mt-4 text-gray-700">
-                                                        <svg class="h-6 w-6 fill-current" viewBox="0 0 512 512">
-                                                            <path
-                                                                d="M437.332 80H74.668C51.199 80 32 99.198 32 122.667v266.666C32 412.802 51.199 432 74.668 432h362.664C460.801 432 480 412.802 480 389.333V122.667C480 99.198 460.801 80 437.332 80zM432 170.667L256 288 80 170.667V128l176 117.333L432 128v42.667z" />
-                                                        </svg>
-                                                        <h1 class="px-2 text-sm">patterson@example.com</h1>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mt-12 swiper-pagination hidden"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div
+                class="relative flex h-14 items-center justify-between gap-3 rounded-2xl bg-white/90 px-3 shadow-lg shadow-black/[0.03] backdrop-blur-xs before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(var(--color-gray-100),var(--color-gray-200))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)]">
+                <div class="flex flex-1 items-center"><a class="inline-flex" aria-label="Cruip" href="/"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+                            <path class="fill-blue-500" fill-rule="evenodd"
+                                d="M15.052 0c6.914.513 12.434 6.033 12.947 12.947h-5.015a7.932 7.932 0 0 1-7.932-7.932V0Zm-2.105 22.985V28C6.033 27.487.513 21.967 0 15.053h5.015a7.932 7.932 0 0 1 7.932 7.932Z"
+                                clip-rule="evenodd"></path>
+                            <path class="fill-blue-300" fill-rule="evenodd"
+                                d="M0 12.947C.513 6.033 6.033.513 12.947 0v5.015a7.932 7.932 0 0 1-7.932 7.932H0Zm22.984 2.106h5.015C27.486 21.967 21.966 27.487 15.052 28v-5.015a7.932 7.932 0 0 1 7.932-7.932Z"
+                                clip-rule="evenodd"></path>
+                        </svg></a></div>
+                <ul class="flex flex-1 items-center justify-end gap-3">
+                    <li><a class="btn-sm bg-white text-gray-800 shadow-sm hover:bg-gray-50" href="/signin">Login</a>
+                    </li>
+                    <li><a class="btn-sm bg-gray-800 text-gray-200 shadow-sm hover:bg-gray-900"
+                            href="/signup">Register</a></li>
+                </ul>
             </div>
         </div>
-        <section class="relative">
-            <div class="mx-auto max-w-6xl px-4 sm:px-6">
-                <div class="pb-12 pt-32 md:pb-20 md:pt-40">
-                    <div class="pb-12 text-center md:pb-16">
-                        <div class="mb-6 border-y [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-300/.8),transparent)1] aos-init aos-animate"
-                            data-aos="zoom-y-out">
-                            <div class="-mx-0.5 flex justify-center -space-x-3"><img alt="Avatar 01" loading="lazy"
-                                    width="32" height="32" decoding="async" data-nimg="1"
-                                    class="box-content rounded-full border-2 border-gray-50" style="color:transparent"
-                                    srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-01.db6e576c.jpg&amp;w=32&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-01.db6e576c.jpg&amp;w=64&amp;q=75 2x"
-                                    src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-01.db6e576c.jpg&amp;w=64&amp;q=75"><img
-                                    alt="Avatar 01" loading="lazy" width="32" height="32" decoding="async" data-nimg="1"
-                                    class="box-content rounded-full border-2 border-gray-50" style="color:transparent"
-                                    srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-02.48b3bd4a.jpg&amp;w=32&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-02.48b3bd4a.jpg&amp;w=64&amp;q=75 2x"
-                                    src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-02.48b3bd4a.jpg&amp;w=64&amp;q=75"><img
-                                    alt="Avatar 02" loading="lazy" width="32" height="32" decoding="async" data-nimg="1"
-                                    class="box-content rounded-full border-2 border-gray-50" style="color:transparent"
-                                    srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-03.8cf37f63.jpg&amp;w=32&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-03.8cf37f63.jpg&amp;w=64&amp;q=75 2x"
-                                    src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-03.8cf37f63.jpg&amp;w=64&amp;q=75"><img
-                                    alt="Avatar 03" loading="lazy" width="32" height="32" decoding="async" data-nimg="1"
-                                    class="box-content rounded-full border-2 border-gray-50" style="color:transparent"
-                                    srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-04.cb374aa5.jpg&amp;w=32&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-04.cb374aa5.jpg&amp;w=64&amp;q=75 2x"
-                                    src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-04.cb374aa5.jpg&amp;w=64&amp;q=75"><img
-                                    alt="Avatar 04" loading="lazy" width="32" height="32" decoding="async" data-nimg="1"
-                                    class="box-content rounded-full border-2 border-gray-50" style="color:transparent"
-                                    srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-05.4e3d4b89.jpg&amp;w=32&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-05.4e3d4b89.jpg&amp;w=64&amp;q=75 2x"
-                                    src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-05.4e3d4b89.jpg&amp;w=64&amp;q=75"><img
-                                    alt="Avatar 05" loading="lazy" width="32" height="32" decoding="async" data-nimg="1"
-                                    class="box-content rounded-full border-2 border-gray-50" style="color:transparent"
-                                    srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-06.381445dd.jpg&amp;w=32&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-06.381445dd.jpg&amp;w=64&amp;q=75 2x"
-                                    src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar-06.381445dd.jpg&amp;w=64&amp;q=75">
-                            </div>
-                        </div>
-                        <h1 class="mb-6 border-y text-5xl font-bold [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-300/.8),transparent)1] md:text-6xl aos-init aos-animate"
-                            data-aos="zoom-y-out" data-aos-delay="150">The website builder you're <br
-                                class="max-lg:hidden">looking for</h1>
-                        <div class="mx-auto max-w-3xl">
-                            <p class="mb-8 text-lg text-gray-700 aos-init aos-animate" data-aos="zoom-y-out"
-                                data-aos-delay="300">Simple is a modern website builder powered by AI that changes how
-                                companies create user interfaces together.</p>
-                            <div
-                                class="relative before:absolute before:inset-0 before:border-y before:[border-image:linear-gradient(to_right,transparent,--theme(--color-slate-300/.8),transparent)1]">
-                                <div class="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center aos-init aos-animate"
-                                    data-aos="zoom-y-out" data-aos-delay="450"><a
-                                        class="btn group mb-4 w-full bg-linear-to-t from-blue-600 to-blue-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-sm hover:bg-[length:100%_150%] sm:mb-0 sm:w-auto"
-                                        href="#0"><span class="relative inline-flex items-center">Start Free
-                                            Trial<!-- --> <span
-                                                class="ml-1 tracking-normal text-blue-300 transition-transform group-hover:translate-x-0.5">-&gt;</span></span></a><a
-                                        class="btn w-full bg-white text-gray-800 shadow-sm hover:bg-gray-50 sm:ml-4 sm:w-auto"
-                                        href="#0">Learn More</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mx-auto max-w-3xl aos-init aos-animate" data-aos="zoom-y-out" data-aos-delay="600">
-                        <div
-                            class="relative aspect-video rounded-2xl bg-gray-900 px-5 py-3 shadow-xl before:pointer-events-none before:absolute before:-inset-5 before:border-y before:[border-image:linear-gradient(to_right,transparent,--theme(--color-slate-300/.8),transparent)1] after:absolute after:-inset-5 after:-z-10 after:border-x after:[border-image:linear-gradient(to_bottom,transparent,--theme(--color-slate-300/.8),transparent)1]">
-                            <div
-                                class="relative mb-8 flex items-center justify-between before:block before:h-[9px] before:w-[41px] before:bg-[length:16px_9px] before:[background-image:radial-gradient(circle_at_4.5px_4.5px,var(--color-gray-600)_4.5px,transparent_0)] after:w-[41px]">
-                                <span class="text-[13px] font-medium text-white">cruip.com</span>
-                            </div>
-                            <div class="font-mono text-gray-500 [&amp;_span]:opacity-0"><span
-                                    class="animate-[code-1_10s_infinite] text-gray-200">npm login</span> <span
-                                    class="animate-[code-2_10s_infinite]">--registry=https://npm.pkg.github.com</span><br><span
-                                    class="animate-[code-3_10s_infinite]">--scope=@phanatic</span> <span
-                                    class="animate-[code-4_10s_infinite]">Successfully logged-in.</span><br><br><span
-                                    class="animate-[code-5_10s_infinite] text-gray-200">npm publish</span><br><span
-                                    class="animate-[code-6_10s_infinite]">Package published.</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    </header>
+    <main class="grow">
         <section class="relative">
             <div class="pointer-events-none absolute left-1/2 top-0 -z-10 -translate-x-1/2 transform"
                 aria-hidden="true"><img alt="Stripes" width="768" height="438" decoding="async" data-nimg="1"
@@ -683,4 +545,3 @@
         </div>
     </footer>
 </div>
-{% endblock%}

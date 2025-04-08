@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Pramaan{%endblock%}</title>
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/daisy5.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    {%block extracss%}{%endblock%}
+</head>
+<script src="{% static 'js/jQuery.js' %}"></script>
+<script src="{% static 'js/tailwind.js' %}"></script>
+<script src="{% static 'js/constants.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script>
+{% block pre-extrajs %}{%endblock%}
+
+<body>
+    <h1 class="text-5xl font-bold text-center">Hello Pramaan</h1>
+
+</body>
+{% block post-extrajs %}{%endblock%}
+
+</html>

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extracss %}
+<link rel="stylesheet" href="{%static 'css/swiper.css'%}">
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{%endblock%}
+
+{% block post-extrajs %}
+<script src="{% static 'js/swiper.min.js' %}"></script>
+<script src="{% static 'js/swiper.js' %}"></script>
+{%endblock%}
+
+{% block content %}
+<div class="overflow-hidden">
+    {% include 'includes/landing-navbar.html' %}
+    <div class="scroll-container h-screen overflow-y-auto overflow-x-hidden relative" style="scrollbar-width: none;">
+        <!-- Section Slider -->
+        {% include 'landing/main.html' %}
+        {% include 'landing/horizontal-scroll.html' %}
+        {% include 'landing/developers.html' %}
+        {% include 'landing/call-to-action.html' %}
+        {%include 'includes/landing-footer.html' %}
+    </div>
+</div>
+{% endblock%}

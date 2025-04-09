@@ -1,0 +1,120 @@
+{% load static %}
+<section class="scroll-section relative h-screen flex flex-col md:flex-row">
+    <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden group shine-effect">
+        <img src="{% static 'img/landing/update-sync.gif' %}" alt="Architectural detail"
+            class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 group-hover:rotate-1" />
+        <div
+            class="absolute inset-0 bg-gradient-to-r from-neutral-950/70 to-neutral-950/50 transition-opacity duration-500 group-hover:opacity-0">
+        </div>
+    </div>
+    <div class="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-8">
+        <div class="max-w-lg float-animation">
+            <span class="tracking-wider text-sm font-mono">01 / Update Sync</span>
+            <h2
+                class="mt-4 text-5xl md:text-7xl font-bold leading-none bg-gradient-to-r from-white to-neutral-400 bg-clip-text">
+                Update Once Sync Everywhere
+            </h2>
+            <p class="mt-6 text-lg leading-relaxed">
+                When you update your avatar or profile, your changes are instantly reflected across multiple platforms,
+                ensuring a
+                seamless and consistent online presence while saving you time.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="scroll-section relative h-screen flex flex-col md:flex-row">
+    <div class="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-8">
+        <div class="max-w-lg float-animation">
+            <span class="tracking-wider text-sm font-mono">02 / DESIGN</span>
+            <h2
+                class="mt-4 text-5xl md:text-7xl font-bold leading-none bg-gradient-to-r from-white to-neutral-400 bg-clip-text">
+                Your Profile, Your Style
+            </h2>
+            <p class="mt-6 text-lg leading-relaxed">
+                Effortlessly share your social media profiles, portfolio, website, and other important links. Your
+                Pramaan profile
+                serves as a sleek, digital business card — personalized, professional, and uniquely yours. Ideal for
+                your link-in-bio.
+            </p>
+            <!-- TODO: Register Link -->
+            <a role="button" class="btn btn-sm rounded-full mt-4 btn-soft hover:border-gray-700 focus:border-gray-600">
+                Start Now Free →
+            </a>
+        </div>
+    </div>
+    <!-- Left content -->
+    <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden group shine-effect">
+        <img src="{% static 'img/landing/your-profile-your-style.gif' %}" alt="Urban landscape"
+            class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 group-hover:rotate-1" />
+        <div
+            class="absolute inset-0 bg-gradient-to-l from-neutral-950/70 to-neutral-950/50 transition-opacity duration-500 group-hover:opacity-0">
+        </div>
+    </div>
+</section>
+
+<section class="scroll-section relative h-screen flex flex-col md:flex-row">
+    <!-- Left content -->
+    <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden group shine-effect">
+        <img src="{% static 'img/landing/multiple-identity.webp' %}" alt="Minimalist interior"
+            class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 group-hover:rotate-1" />
+        <div
+            class="absolute inset-0 bg-gradient-to-r from-neutral-950/70 to-neutral-950/50 transition-opacity duration-500 group-hover:opacity-0">
+        </div>
+    </div>
+    <!-- Right content -->
+    <div class="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-8">
+        <div class="max-w-lg float-animation">
+            <span class="tracking-wider text-sm font-mono">03 / Identity</span>
+            <h2
+                class="mt-4 text-5xl md:text-7xl font-bold leading-none bg-gradient-to-r from-white to-neutral-400 bg-clip-text">
+                Manage Multiple Identities
+            </h2>
+            <p class="mt-6 text-lg leading-relaxed">
+                Pramaan connects your identity to an email address, allowing you to effortlessly manage your work,
+                personal, and anonymous
+                profiles with ease and flexibility
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="scroll-section relative h-screen flex flex-col md:flex-row">
+    <!-- Left content -->
+    <div class="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-8">
+        <div class="max-w-lg float-animation">
+            <span class="tracking-wider text-sm font-mono">04 / Privacy</span>
+            <h2
+                class="mt-4 text-5xl md:text-7xl font-bold leading-none bg-gradient-to-r from-white to-neutral-400 bg-clip-text">
+                Privacy First Design
+            </h2>
+            <p class="mt-6 text-lg leading-relaxed">
+                You're in control. Decide what to share and when, or keep your profile private. With Pramaan, your data
+                remains yours —
+                secure, private, and fully under your control.
+            </p>
+        </div>
+    </div>
+    <!-- Right content -->
+    <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden group shine-effect">
+        <img src="{% static 'img/landing/privacy-first.gif' %}" alt="Minimalist interior"
+            class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 group-hover:rotate-1" />
+        <div
+            class="absolute inset-0 bg-gradient-to-r from-neutral-950/70 to-neutral-950/50 transition-opacity duration-500 group-hover:opacity-0">
+        </div>
+    </div>
+</section>
+
+<!--
+ <div class="fixed right-8 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-50">
+    <button onclick="scrollToSection(0)"
+        class="w-3 h-3 rounded-full bg-white/20 hover:bg-white transition-colors hover:scale-150"
+        title="Go to section 1"></button>
+    <button onclick="scrollToSection(1)"
+        class="w-3 h-3 rounded-full bg-white/20 hover:bg-white transition-colors hover:scale-150"
+        title="Go to section 2"></button>
+    <button onclick="scrollToSection(2)"
+        class="w-3 h-3 rounded-full bg-white/20 hover:bg-white transition-colors hover:scale-150"
+        title="Go to section 3"></button>
+</div>
+ -->

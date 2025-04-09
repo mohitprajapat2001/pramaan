@@ -8,7 +8,11 @@
     <title>{% block title %}Pramaan{%endblock%}</title>
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css/daisy5.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themes.css' %}">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     {%block extracss%}{%endblock%}
 </head>
 <script src="{% static 'js/jQuery.js' %}"></script>
@@ -17,9 +21,9 @@
 <script src="{% static 'js/index.js' %}"></script>
 {% block pre-extrajs %}{%endblock%}
 
-<body>
-    <h1 class="text-5xl font-bold text-center">Hello Pramaan</h1>
-
+<body data-theme="dark" class="bg-base-300">
+    {% block content %}
+    {% endblock %}
 </body>
 {% block post-extrajs %}{%endblock%}
 

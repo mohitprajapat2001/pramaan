@@ -1,0 +1,29 @@
+{% load static %}
+<section class="scroll-section relative h-screen flex flex-col md:flex-row bg-neutral">
+    <div class="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-8">
+        <div class="max-w-lg float-animation">
+            <span class="tracking-wider text-sm font-mono">
+                <i class="fas fa-square-binary"></i>
+                PROFILE-AS-A-SERVICE
+            </span>
+            <h2
+                class="mt-4 text-5xl md:text-7xl font-bold leading-none bg-gradient-to-r from-white to-neutral-400 bg-clip-text">
+                For Developers
+            </h2>
+            <p class="mt-6 text-lg leading-relaxed">
+                Customize user experiences and build your community with verified user profiles, including avatars,
+                social links, and
+                more. Integrating Pramaan is simple with our REST API.
+            </p>
+            <!-- TODO: add documentation link -->
+            <a role="button" class="btn btn-soft rounded-full mt-3">Learn about APIs!</a>
+        </div>
+    </div>
+    <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden group">
+        <img src="{% static 'img/landing/developer.gif' %}" alt="Architectural detail"
+            class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 group-hover:rotate-1" />
+        <div
+            class="absolute inset-0 bg-gradient-to-r from-neutral-950/70 to-neutral-950/50 transition-opacity duration-500 group-hover:opacity-0">
+        </div>
+    </div>
+</section>

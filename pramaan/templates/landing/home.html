@@ -2,6 +2,7 @@
 {% load static %}
 {% block extracss %}
 <link rel="stylesheet" href="{%static 'css/swiper.css'%}">
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
 {%endblock%}
 
 {% block post-extrajs %}
@@ -10,83 +11,27 @@
 {%endblock%}
 
 {% block content %}
-<div class="flex min-h-screen flex-col overflow-hidden">
+<div class="overflow-hidden">
     {% include 'includes/landing-navbar.html' %}
     <main class="grow">
-        <div class="mx-auto max-w-6xl px-4 sm:px-6">
-            <div class="pb-12 pt-32 md:pb-20 md:pt-40">
-                <div class="hero">
-                    <div class="grid grid-cols-9 gap-4 w-full">
-                        <div class="col-span-0 hidden md:block md:col-span-4 flex flex-col items-start">
-                            <h1 class="text-5xl font-bold">
-                                Trust in Every Profile
-                            </h1>
-                            <p class="py-6">
-                                Create and use your profile as passport for all your needs.
-                                <br>
-                                – multiple avatar, one bio, social connections, and verified links.
-                            </p>
-                            <button class="btn btn-primary">Start Free Now!</button>
-                        </div>
-                        <div class="col-span-9 md:col-span-5 border">
-                            <div class="mx-0 max-w-xl flex rounded-2xl bg-indigo-700">
-                                <div class="swiper-container flex-col flex  self-center">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden my-4">
-                                                <img class="w-full h-56 object-cover object-center"
-                                                    src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                                                    alt="avatar">
-                                                <div class="flex items-center px-6 py-3 bg-gray-900">
-                                                    <svg class="h-6 w-6 text-white fill-current" viewBox="0 0 512 512">
-                                                        <path
-                                                            d="M256 48C150 48 64 136.2 64 245.1v153.3c0 36.3 28.6 65.7 64 65.7h64V288h-85.3v-42.9c0-84.7 66.8-153.3 149.3-153.3s149.3 68.5 149.3 153.3V288H320v176h64c35.4 0 64-29.3 64-65.7V245.1C448 136.2 362 48 256 48z" />
-                                                    </svg>
-                                                    <h1 class="mx-3 text-white font-semibold text-lg">Focusing</h1>
-                                                </div>
-                                                <div class="py-4 px-6">
-                                                    <h1 class="text-2xl font-semibold text-gray-800">Patterson johnson
-                                                    </h1>
-                                                    <p class="py-2 text-lg text-gray-700">Full Stack maker & UI / UX
-                                                        Designer , love hip hop music Author of
-                                                        Building UI.</p>
-                                                    <div class="flex items-center mt-4 text-gray-700">
-                                                        <svg class="h-6 w-6 fill-current" viewBox="0 0 512 512">
-                                                            <path
-                                                                d="M239.208 343.937c-17.78 10.103-38.342 15.876-60.255 15.876-21.909 0-42.467-5.771-60.246-15.87C71.544 358.331 42.643 406 32 448h293.912c-10.639-42-39.537-89.683-86.704-104.063zM178.953 120.035c-58.479 0-105.886 47.394-105.886 105.858 0 58.464 47.407 105.857 105.886 105.857s105.886-47.394 105.886-105.857c0-58.464-47.408-105.858-105.886-105.858zm0 186.488c-33.671 0-62.445-22.513-73.997-50.523H252.95c-11.554 28.011-40.326 50.523-73.997 50.523z" />
-                                                            <g>
-                                                                <path
-                                                                    d="M322.602 384H480c-10.638-42-39.537-81.691-86.703-96.072-17.781 10.104-38.343 15.873-60.256 15.873-14.823 0-29.024-2.654-42.168-7.49-7.445 12.47-16.927 25.592-27.974 34.906C289.245 341.354 309.146 364 322.602 384zM306.545 200h100.493c-11.554 28-40.327 50.293-73.997 50.293-8.875 0-17.404-1.692-25.375-4.51a128.411 128.411 0 0 1-6.52 25.118c10.066 3.174 20.779 4.862 31.895 4.862 58.479 0 105.886-47.41 105.886-105.872 0-58.465-47.407-105.866-105.886-105.866-37.49 0-70.427 19.703-89.243 49.09C275.607 131.383 298.961 163 306.545 200z" />
-                                                            </g>
-                                                        </svg>
-                                                        <h1 class="px-2 text-sm">MerakiTeam</h1>
-                                                    </div>
-                                                    <div class="flex items-center mt-4 text-gray-700">
-                                                        <svg class="h-6 w-6 fill-current" viewBox="0 0 512 512">
-                                                            <path
-                                                                d="M256 32c-88.004 0-160 70.557-160 156.801C96 306.4 256 480 256 480s160-173.6 160-291.199C416 102.557 344.004 32 256 32zm0 212.801c-31.996 0-57.144-24.645-57.144-56 0-31.357 25.147-56 57.144-56s57.144 24.643 57.144 56c0 31.355-25.148 56-57.144 56z" />
-                                                        </svg>
-                                                        <h1 class="px-2 text-sm">California</h1>
-                                                    </div>
-                                                    <div class="flex items-center mt-4 text-gray-700">
-                                                        <svg class="h-6 w-6 fill-current" viewBox="0 0 512 512">
-                                                            <path
-                                                                d="M437.332 80H74.668C51.199 80 32 99.198 32 122.667v266.666C32 412.802 51.199 432 74.668 432h362.664C460.801 432 480 412.802 480 389.333V122.667C480 99.198 460.801 80 437.332 80zM432 170.667L256 288 80 170.667V128l176 117.333L432 128v42.667z" />
-                                                        </svg>
-                                                        <h1 class="px-2 text-sm">patterson@example.com</h1>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mt-12 swiper-pagination hidden"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="scroll-container h-screen overflow-y-auto overflow-x-hidden relative"
+            style="scrollbar-width: none;">
+            <!-- Section Slider -->
+            <section class="scroll-section hero-content relative h-screen flex flex-col md:flex-row md:w-4xl mx-auto">
+                <div>
+                    <h1 class="text-5xl font-bold">
+                        Trust in Every Profile
+                    </h1>
+                    <p class="py-6">
+                        Create and use your profile as passport for all your needs.
+                        <br>
+                        – multiple avatar, one bio, social connections, and verified links.
+                    </p>
+                    <button class="btn btn-primary">Start Free Now!</button>
                 </div>
-            </div>
+                {% include 'landing/slider-card.html' %}
+            </section>
+            {% include 'landing/horizontal-scroll.html' %}
         </div>
         <section class="relative">
             <div class="mx-auto max-w-6xl px-4 sm:px-6">
@@ -298,7 +243,8 @@
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                                         <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
                                         <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix"
-                                            result="shape"></feBlend>
+                                            result="shape">
+                                        </feBlend>
                                         <feGaussianBlur stdDeviation="32" result="effect1_foregroundBlur_2044_9">
                                         </feGaussianBlur>
                                     </filter>
@@ -597,90 +543,5 @@
             </div>
         </section>
     </main>
-    <footer>
-        <div class="mx-auto max-w-6xl px-4 sm:px-6">
-            <div
-                class="grid gap-10 py-8 sm:grid-cols-12 md:py-12 border-t [border-image:linear-gradient(to_right,transparent,var(--color-slate-200),transparent)1]">
-                <div class="space-y-2 sm:col-span-12 lg:col-span-4">
-                    <div><a class="inline-flex" aria-label="Cruip" href="/"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="28" height="28">
-                                <path class="fill-blue-500" fill-rule="evenodd"
-                                    d="M15.052 0c6.914.513 12.434 6.033 12.947 12.947h-5.015a7.932 7.932 0 0 1-7.932-7.932V0Zm-2.105 22.985V28C6.033 27.487.513 21.967 0 15.053h5.015a7.932 7.932 0 0 1 7.932 7.932Z"
-                                    clip-rule="evenodd"></path>
-                                <path class="fill-blue-300" fill-rule="evenodd"
-                                    d="M0 12.947C.513 6.033 6.033.513 12.947 0v5.015a7.932 7.932 0 0 1-7.932 7.932H0Zm22.984 2.106h5.015C27.486 21.967 21.966 27.487 15.052 28v-5.015a7.932 7.932 0 0 1 7.932-7.932Z"
-                                    clip-rule="evenodd"></path>
-                            </svg></a></div>
-                    <div class="text-sm text-gray-600">© Cruip.com - All rights reserved.</div>
-                </div>
-                <div class="space-y-2 sm:col-span-6 md:col-span-3 lg:col-span-2">
-                    <h3 class="text-sm font-medium">Product</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a class="text-gray-600 transition hover:text-gray-900" href="#0">Features</a></li>
-                        <li><a class="text-gray-600 transition hover:text-gray-900" href="#0">Integrations</a></li>
-                        <li><a class="text-gray-600 transition hover:text-gray-900" href="#0">Pricing &amp; Plans</a>
-                        </li>
-                        <li><a class="text-gray-600 transition hover:text-gray-900" href="#0">Changelog</a></li>
-                        <li><a class="text-gray-600 transition hover:text-gray-900" href="#0">Our method</a></li>
-                    </ul>
-                </div>
-                <div class="space-y-2 sm:col-span-6 md:col-span-3 lg:col-span-2">
-                    <h3 class="text-sm font-medium">Company</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a class="text-gray-600 transition hover:text-gray-900" href="#0">About us</a></li>
-                        <li><a class="text-gray-600 transition hover:text-gray-900" href="#0">Diversity &amp;
-                                Inclusion</a></li>
-                        <li><a class="text-gray-600 transition hover:text-gray-900" href="#0">Blog</a></li>
-                        <li><a class="text-gray-600 transition hover:text-gray-900" href="#0">Careers</a></li>
-                        <li><a class="text-gray-600 transition hover:text-gray-900" href="#0">Financial statements</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="space-y-2 sm:col-span-6 md:col-span-3 lg:col-span-2">
-                    <h3 class="text-sm font-medium">Resources</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a class="text-gray-600 transition hover:text-gray-900" href="#0">Community</a></li>
-                        <li><a class="text-gray-600 transition hover:text-gray-900" href="#0">Terms of service</a></li>
-                        <li><a class="text-gray-600 transition hover:text-gray-900" href="#0">Report a vulnerability</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="space-y-2 sm:col-span-6 md:col-span-3 lg:col-span-2">
-                    <h3 class="text-sm font-medium">Social</h3>
-                    <ul class="flex gap-1">
-                        <li><a class="flex items-center justify-center text-blue-500 transition hover:text-blue-600"
-                                aria-label="Twitter" href="#0"><svg class="h-8 w-8 fill-current" viewBox="0 0 32 32"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="m13.063 9 3.495 4.475L20.601 9h2.454l-5.359 5.931L24 23h-4.938l-3.866-4.893L10.771 23H8.316l5.735-6.342L8 9h5.063Zm-.74 1.347h-1.457l8.875 11.232h1.36l-8.778-11.232Z">
-                                    </path>
-                                </svg></a></li>
-                        <li><a class="flex items-center justify-center text-blue-500 transition hover:text-blue-600"
-                                aria-label="Medium" href="#0"><svg class="h-8 w-8 fill-current" viewBox="0 0 32 32"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M23 8H9a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1Zm-1.708 3.791-.858.823a.251.251 0 0 0-.1.241V18.9a.251.251 0 0 0 .1.241l.838.823v.181h-4.215v-.181l.868-.843c.085-.085.085-.11.085-.241v-4.887l-2.41 6.131h-.329l-2.81-6.13V18.1a.567.567 0 0 0 .156.472l1.129 1.37v.181h-3.2v-.181l1.129-1.37a.547.547 0 0 0 .146-.472v-4.749a.416.416 0 0 0-.138-.351l-1-1.209v-.181H13.8l2.4 5.283 2.122-5.283h2.971l-.001.181Z">
-                                    </path>
-                                </svg></a></li>
-                        <li><a class="flex items-center justify-center text-blue-500 transition hover:text-blue-600"
-                                aria-label="Github" href="#0"><svg class="h-8 w-8 fill-current" viewBox="0 0 32 32"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M16 8.2c-4.4 0-8 3.6-8 8 0 3.5 2.3 6.5 5.5 7.6.4.1.5-.2.5-.4V22c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.3 1.9.9 2.3.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8.6-.2 1.3-.3 2-.3s1.4.1 2 .3c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.7-3.7 3.9.3.4.6.9.6 1.6v2.2c0 .2.1.5.6.4 3.2-1.1 5.5-4.1 5.5-7.6-.1-4.4-3.7-8-8.1-8z">
-                                    </path>
-                                </svg></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="relative -mt-16 h-60 w-full" aria-hidden="true">
-            <div
-                class="pointer-events-none absolute left-1/2 -z-10 -translate-x-1/2 text-center text-[348px] font-bold leading-none before:bg-linear-to-b before:from-gray-200 before:to-gray-100/30 before:to-80% before:bg-clip-text before:text-transparent before:content-['Simple'] after:absolute after:inset-0 after:bg-gray-300/70 after:bg-clip-text after:text-transparent after:mix-blend-darken after:content-['Simple'] after:[text-shadow:0_1px_0_white]">
-            </div>
-            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-2/3" aria-hidden="true">
-                <div class="h-56 w-56 rounded-full border-[20px] border-blue-700 blur-[80px]"></div>
-            </div>
-        </div>
-    </footer>
 </div>
 {% endblock%}

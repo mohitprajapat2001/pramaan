@@ -46,3 +46,4 @@ class CacheTimeout:
 
 class Templates:
     LANDING = "landing/home.html"
+    LOGIN_TEMPLATE = "accounts/login.html"

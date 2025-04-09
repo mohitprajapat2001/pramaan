@@ -9,28 +9,29 @@
             </a>
             <ul class="menu md:menu-horizontal rounded-box hidden md:flex">
                 <li>
-                    <a class="disabled">
+                    <a class="disabled tooltip tooltip-bottom" data-tip="Coming Soon">
                         <i class="fas fa-link"></i>
                         Link in Bio
                     </a>
                 </li>
                 <li>
                     <!-- TODO: add Docs Link -->
-                    <a>
-                        <i class="fas fa-book"></i>
+                    <a class="tooltip tooltip-bottom" data-tip="Coming Soon">
+                        <i class=" fas fa-book"></i>
                         Docs
                         <span class="md:hidden badge badge-xs badge-warning">V1.0</span>
                     </a>
                 </li>
                 <li>
-                    <a href="https://github.com/mohitprajapat2001/pramaan">
+                    <a href="https://github.com/mohitprajapat2001/pramaan" class="tooltip tooltip-bottom"
+                        data-tip="Coming Soon">
                         <i class="fas fa-code"></i>
                         Source Code
                     </a>
                 </li>
             </ul>
             <div class="capitalize">
-                <a class="btn btn-sm btn-outline border-primary">Login</a>
+                <a href="{% url 'accounts:login' %}" class="btn btn-sm btn-outline border-primary">Login</a>
                 <a class="btn btn-sm btn-primary">Get Started Now</a>
             </div>
         </div>

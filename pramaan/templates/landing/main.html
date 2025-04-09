@@ -1,0 +1,24 @@
+{% load static %}
+<section class="scroll-section relative h-screen flex flex-col md:flex-row">
+    <div class="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-8">
+        <div class="max-w-lg float-animation">
+            <h2
+                class="mt-4 text-5xl md:text-7xl font-bold leading-none bg-gradient-to-r from-white to-neutral-400 bg-clip-text">
+                Trust in Every Profile
+            </h2>
+            <p class="mt-6 text-lg leading-relaxed">
+                Create and use your profile as passport for all your needs.
+                <br>
+                – multiple avatar, one bio, social connections, and verified links.
+            </p>
+            <!-- TODO: add register link -->
+            <a role="button" class="btn btn-primary">Start Free Now!</a>
+        </div>
+    </div>
+    <div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden group">
+        {% include 'landing/slider-card.html' %}
+        <div
+            class="absolute inset-0 bg-gradient-to-r from-neutral-950/70 to-neutral-950/50 transition-opacity duration-500 group-hover:opacity-0">
+        </div>
+    </div>
+</section>

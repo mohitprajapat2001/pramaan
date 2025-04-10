@@ -13,7 +13,7 @@
 
     {% if field.errors %}
     {% for error in field.errors %}
-    <p class="validator-hint text-start text-error">{{ error|escape }}</p>
+    <p class="validator-hint text-start text-md text-error italic">{{ error|escape }}</p>
     {% endfor %}
     {% endif %}
 </fieldset>

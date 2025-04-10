@@ -47,3 +47,16 @@ class CacheTimeout:
 class Templates:
     LANDING = "landing/home.html"
     LOGIN_TEMPLATE = "accounts/login.html"
+
+
+class AppModel:
+    USER = {
+        "app_label": "users",
+        "model_name": "User",
+    }
+
+
+class FormClass:
+    TEXT_INPUT = "validator input w-full input-primary"
+    FILE_INPUT = "validator file-input w-full file-input-primary"
+    SELECT_INPUT = "validator select w-full select-primary"

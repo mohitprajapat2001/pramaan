@@ -47,12 +47,29 @@ class CacheTimeout:
 class Templates:
     LANDING = "landing/home.html"
     LOGIN_TEMPLATE = "accounts/login.html"
+    REGISTER_TEMPLATE = "accounts/register.html"
 
 
 class AppModel:
     USER = {
         "app_label": "users",
         "model_name": "User",
+    }
+    USER_DETAIL = {
+        "app_label": "users",
+        "model_name": "UserDetail",
+    }
+    SOCIAL_ACCOUNTS = {
+        "app_label": "users",
+        "model_name": "SocialAccounts",
+    }
+    EMERGENCY_DETAILS = {
+        "app_label": "users",
+        "model_name": "EmergencyDetails",
+    }
+    SUBSCRIPTION = {
+        "app_label": "users",
+        "model_name": "Subscription",
     }
 
 

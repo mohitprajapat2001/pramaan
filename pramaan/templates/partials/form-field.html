@@ -1,5 +1,9 @@
+{%load static%}
 <fieldset class="fieldset mb-3">
-    <legend class="fieldset-legend text-left">{{ field.label }}</legend>
+    <legend class="fieldset-legend text-left ">
+        {{ field.label }}
+        {% if field.field.required %}*{% endif %}
+    </legend>
 
     <div class="relative">
         {% if field.field.widget.input_type == "password" %}

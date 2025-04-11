@@ -46,3 +46,47 @@ class CacheTimeout:
 
 class Templates:
     LANDING = "landing/home.html"
+    LOGIN_TEMPLATE = "accounts/login.html"
+    REGISTER_TEMPLATE = "accounts/register.html"
+    PROFILE_TEMPLATE = "accounts/profile.html"
+
+
+class AppModel:
+    USER = {
+        "app_label": "users",
+        "model_name": "User",
+    }
+    USER_DETAIL = {
+        "app_label": "users",
+        "model_name": "UserDetail",
+    }
+    PROFILE = {
+        "app_label": "users",
+        "model_name": "Profile",
+    }
+    ADDRESS = {
+        "app_label": "users",
+        "model_name": "Address",
+    }
+    SOCIAL_ACCOUNTS = {
+        "app_label": "users",
+        "model_name": "SocialAccounts",
+    }
+    EMERGENCY_DETAILS = {
+        "app_label": "users",
+        "model_name": "EmergencyDetails",
+    }
+    SECURITY_QUESTION = {
+        "app_label": "users",
+        "model_name": "SecurityQuestion",
+    }
+    SUBSCRIPTION = {
+        "app_label": "users",
+        "model_name": "Subscription",
+    }
+
+
+class FormClass:
+    TEXT_INPUT = "validator input w-full input-primary"
+    FILE_INPUT = "validator file-input w-full file-input-primary"
+    SELECT_INPUT = "validator select w-full select-primary"

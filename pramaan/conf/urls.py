@@ -9,4 +9,5 @@ urlpatterns = [
         include(router.urls),
     ),
     path("", include("landing.urls")),
+    path("accounts/", include("accounts.urls")),
 ]

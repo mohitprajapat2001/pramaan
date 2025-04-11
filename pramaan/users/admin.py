@@ -1,17 +1,16 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import (
-    User,
-    UserDetail,
-    Profile,
-    Address,
-    SocialAccounts,
-    EmergencyDetails,
-    SecurityQuestion,
-    Subscription,
-)
+from utils.utils import get_model
+from utils.constants import AppModel
 
-# Inline model classes for related models
+User = get_model(**AppModel.USER)
+UserDetail = get_model(**AppModel.USER_DETAIL)
+Profile = get_model(**AppModel.PROFILE)
+Address = get_model(**AppModel.ADDRESS)
+SocialAccounts = get_model(**AppModel.SOCIAL_ACCOUNTS)
+EmergencyDetails = get_model(**AppModel.EMERGENCY_DETAILS)
+SecurityQuestion = get_model(**AppModel.SECURITY_QUESTION)
+Subscription = get_model(**AppModel.SUBSCRIPTION)
 
 
 class UserDetailInline(admin.StackedInline):

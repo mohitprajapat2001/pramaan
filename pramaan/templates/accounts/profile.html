@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{request.user.username|title}} - Pramaan{% endblock%}
+
+
+{% block content %}
+<div class="grid grid-cols-12 gap-4 h-screen">
+    <!-- Sidebar -->
+    <div class="col-span-3 border overflow-auto px-2 py-3">
+        <h1 class="text-2xl font-bold">
+            Pramaan
+        </h1>
+        <div class="divider"></div>
+        <ul class="menu rounded-box w-full">
+            <li class="menu-title">User Details</li>
+            <li><a>Item 1</a></li>
+            <li><a>Item 2</a></li>
+            <li><a>Item 3</a></li>
+        </ul>
+
+    </div>
+    <div class="col-span-9 overflow-auto">
+        <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
+            {% include "includes/breadcrump.html" with page="Profile" icon="fas fa-user" %}
+            <div class="rounded-2xl border border-gray-700 lg:p-6 bg-base-100">
+                <h3 class="mb-5 text-lg font-semibold lg:mb-7">
+                    Welcome Back, {{request.user.username|title}}
+                </h3>
+
+                <div class="p-5 mb-6 border border-gray-700 rounded-2xl bg-base-200 lg:p-6">
+                    <div class="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
+                        <div class="flex flex-col items-center w-full gap-6 xl:flex-row">
+                            <div class="w-20 h-20 overflow-hidden border border-gray-700 rounded-full">
+                                <!-- TODO: Implement User Profile Image Primary Model -->
+                                <img src="{% static 'img/profile.jpg' %}" alt="user">
+                            </div>
+                            <div class="order-3 xl:order-2">
+                                <h4 class="mb-2 text-lg font-semibold text-center xl:text-left">
+                                    {% if request.get_full_name %}
+                                    {{request.get_full_name}}
+                                    {% else %}
+                                    <span class="text-error">
+                                        Please Update Your Profile
+                                    </span>
+                                    {% endif %}
+                                </h4>
+                                <div
+                                    class="flex flex-col items-center gap-1 text-center xl:flex-row xl:gap-3 xl:text-left">
+                                    <p class="text-sm italic">
+                                        {{request.user.username}}
+                                    </p>
+                                    <div class="divider divider-horizontal mx-0 px-0"></div>
+                                    <p class="text-sm italic">
+                                        {{request.user.email}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-center order-2 gap-2 grow xl:order-3 xl:justify-end">
+                                <!-- Social Media Links -->
+                                <button class="btn btn-circle bg-white group">
+                                    {% include 'icons/facebook.html' %}
+                                </button>
+                                <button class="btn btn-circle bg-white group">
+                                    {% include 'icons/instagram.html' %}
+                                </button>
+                                <button class="btn btn-circle bg-white group">
+                                    {% include 'icons/x-twitter.html' %}
+                                </button>
+                                <button class="btn btn-circle bg-white group">
+                                    {% include 'icons/tiktok.html' %}
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Edit Social Media Links -->
+                        <button class="btn btn-soft rounded-full border-gray-600">
+                            <i class="fa fa-paperclip"></i> Edit
+                        </button>
+                    </div>
+                </div>
+                <!-- TODO: Fix this Div Grid -->
+                <div class="p-5 mb-6 border border-gray-700 rounded-2xl lg:p-6">
+                    <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between w-full">
+                        <div>
+                            <h4 class="text-lg font-semibold lg:mb-6">
+                                Personal Information
+                            </h4>
+
+                            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-7 2xl:gap-x-32">
+                                <div>
+                                    <p class="mb-2 text-xs leading-normal">
+                                        First Name
+                                    </p>
+                                    <p class="text-sm font-medium">
+                                        {% if request.user.first_name %}
+                                        {{request.user.first_name}}
+                                        {%else%}
+                                        <span class="text-error">
+                                            Add First Name
+                                        </span>
+                                        {%endif%}
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p class="mb-2 text-xs leading-normal">
+                                        Last Name
+                                    </p>
+                                    <p class="text-sm font-medium">
+                                        {% if request.user.last_name %}
+                                        {{request.user.last_name}}
+                                        {%else%}
+                                        <span class="text-error">
+                                            Add Last Name
+                                        </span>
+                                        {%endif%}
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p class="mb-2 text-xs leading-normal">
+                                        Email address
+                                    </p>
+                                    <p class="text-sm font-medium">
+                                        {{request.user.email}}
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p class="mb-2 text-xs leading-normal">
+                                        Phone
+                                    </p>
+                                    <p class="text-sm font-medium">
+                                        {% if request.user.detail.phone_number %}
+                                        {{request.user.detail.phone_number}}
+                                        {%else%}
+                                        <span class="text-error">
+                                            Add Contact Number
+                                        </span>
+                                        {%endif%}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="w-full mt-6">
+                                <p class="mb-2 text-xs leading-normal">
+                                    Bio
+                                </p>
+                                <p
+                                    class="text-sm font-medium w-full border border-gray-500 rounded-lg focus:shadow-xl p-2 min-h-24 bg-base-300">
+                                    {% if request.user.detail.bio %}
+                                    {{request.user.detail.bio}}
+                                    {%else%}
+                                    Lorem
+                                    {%endif%}
+                                </p>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-soft border-gray-700 rounded-full">
+                            <i class="fas fa-user-pen"></i>
+                            Edit
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-5 border border-gray-700 rounded-2xl lg:p-6">
+                    <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+                        <div>
+                            <h4 class="text-lg font-semibold lg:mb-6">
+                                Address
+                            </h4>
+                            <div>
+                                {% for address in request.user.addresses.all %}
+                                {{address}}
+                                {%empty %}
+                                <span class="text-error">
+                                    No Address Found
+                                </span>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+                        <button class="btn btn-soft border-gray-700">
+                            <i class="fas fa-map-pin"></i>
+                            Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

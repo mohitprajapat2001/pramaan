@@ -1,0 +1,23 @@
+{%load static%}
+<fieldset class="fieldset mb-3">
+    <legend class="fieldset-legend text-left ">
+        {{ field.label }}
+        {% if field.field.required %}*{% endif %}
+    </legend>
+
+    <div class="relative">
+        {% if field.field.widget.input_type == "password" %}
+        {{ field }}
+        <i class="fas fa-eye absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500 toggle-password"
+            data-target="{{ field.id_for_label }}"></i>
+        {% else %}
+        {{ field }}
+        {% endif %}
+    </div>
+
+    {% if field.errors %}
+    {% for error in field.errors %}
+    <p class="validator-hint text-start text-md text-error italic">{{ error|escape }}</p>
+    {% endfor %}
+    {% endif %}
+</fieldset>

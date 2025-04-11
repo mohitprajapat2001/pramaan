@@ -28,6 +28,7 @@ class User(AbstractUser):
     status = models.CharField(
         max_length=64, choices=AccountStatus.CHOICES, default=AccountStatus.ACTIVE
     )
+    username = models.CharField(max_length=255, unique=True, null=True, blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]

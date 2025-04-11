@@ -48,6 +48,7 @@ class Templates:
     LANDING = "landing/home.html"
     LOGIN_TEMPLATE = "accounts/login.html"
     REGISTER_TEMPLATE = "accounts/register.html"
+    PROFILE_TEMPLATE = "accounts/profile.html"
 
 
 class AppModel:
@@ -59,6 +60,14 @@ class AppModel:
         "app_label": "users",
         "model_name": "UserDetail",
     }
+    PROFILE = {
+        "app_label": "users",
+        "model_name": "Profile",
+    }
+    ADDRESS = {
+        "app_label": "users",
+        "model_name": "Address",
+    }
     SOCIAL_ACCOUNTS = {
         "app_label": "users",
         "model_name": "SocialAccounts",
@@ -66,6 +75,10 @@ class AppModel:
     EMERGENCY_DETAILS = {
         "app_label": "users",
         "model_name": "EmergencyDetails",
+    }
+    SECURITY_QUESTION = {
+        "app_label": "users",
+        "model_name": "SecurityQuestion",
     }
     SUBSCRIPTION = {
         "app_label": "users",

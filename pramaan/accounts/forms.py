@@ -14,6 +14,7 @@ from django.contrib.auth.password_validation import validate_password
 from accounts.constants import Labels, Placeholders, ValidationErrors
 
 User = get_model(**AppModel.USER)
+UserDetail = get_model(**AppModel.USER_DETAIL)
 
 
 class RegisterForm(ModelForm):
@@ -79,3 +80,9 @@ class LoginForm(Form):
         label=Labels.PASSWORD,
         required=True,
     )
+
+
+class ProfileDetailForm(ModelForm):
+    class Meta:
+        model = UserDetail
+        fields = []

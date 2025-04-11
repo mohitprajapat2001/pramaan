@@ -33,6 +33,7 @@ class SucccessMessages:
     LOGIN_SUCCESS = _("Logged in successfully")
     LOGOUT_SUCCESS = _("Logout successfully")
     REGISTER_SUCCESS = _("Registered successfully")
+    PROFILE_SUCCESS = _("Profile updated successfully")
 
 
 class ValidationErrors:
@@ -41,3 +42,4 @@ class ValidationErrors:
     INVALID_EMAIL_PASSWORD = _("Invalid email or password")
     INVALID_CREDENTIALS = _("Invalid Credentials")
     PASSWORD_MISMATCH = _("Password mismatch")
+    LOGIN_REQUIRED = _("Please login to access this page")

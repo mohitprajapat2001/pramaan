@@ -1,8 +1,9 @@
 from django.views.generic import View, FormView
 from utils.constants import Templates
 from accounts.constants import SucccessMessages, ValidationErrors
-from accounts.forms import LoginForm, RegisterForm
+from accounts.forms import LoginForm, RegisterForm, ProfileDetailForm
 from django.contrib.messages.views import SuccessMessageMixin
+from utils.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib.auth import login, logout
 from django.contrib import messages
@@ -30,7 +31,7 @@ class LoginView(SuccessMessageMixin, FormView):
 login_view = LoginView.as_view()
 
 
-class LogoutView(View):
+class LogoutView(LoginRequiredMixin, View):
     success_url = reverse_lazy("landing:home")
     success_message = SucccessMessages.LOGOUT_SUCCESS
 
@@ -59,3 +60,13 @@ class RegisterationView(SuccessMessageMixin, FormView):
 
 
 register_view = RegisterationView.as_view()
+
+
+class ProfileView(LoginRequiredMixin, SuccessMessageMixin, FormView):
+    template_name = Templates.PROFILE_TEMPLATE
+    form_class = ProfileDetailForm
+    success_url = reverse_lazy("accounts:profile")
+    success_message = SucccessMessages.PROFILE_SUCCESS
+
+
+profile_view = ProfileView.as_view()

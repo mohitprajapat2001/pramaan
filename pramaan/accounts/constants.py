@@ -19,6 +19,7 @@ class SucccessMessages:
     """Accounts app success message"""
 
     LOGIN_SUCCESS = _("Logged in successfully")
+    LOGOUT_SUCCESS = _("Logout successfully")
 
 
 class ValidationErrors:

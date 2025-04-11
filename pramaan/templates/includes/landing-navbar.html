@@ -31,8 +31,12 @@
                 </li>
             </ul>
             <div class="capitalize">
+                {% if user.is_authenticated%}
+                <a href="{% url 'accounts:logout' %}" class="btn btn-sm btn-outline border-primary">Logout</a>
+                {%else%}
                 <a href="{% url 'accounts:login' %}" class="btn btn-sm btn-outline border-primary">Login</a>
                 <a class="btn btn-sm btn-primary">Get Started Now</a>
+                {% endif %}
             </div>
         </div>
     </div>

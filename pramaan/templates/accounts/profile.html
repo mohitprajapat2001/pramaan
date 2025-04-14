@@ -11,19 +11,14 @@
 {%endblock%}
 
 {% block content %}
-<div class="grid grid-cols-12 gap-4 h-screen">
+<div class="grid grid-cols-12 h-screen">
     <!-- Sidebar -->
-    <div class="col-span-3 border overflow-auto px-2 py-3">
+    <div class="col-span-3 bg-base-100 m-3 rounded-xl overflow-auto p-3">
         <h1 class="text-2xl font-bold">
             Pramaan
         </h1>
         <div class="divider"></div>
-        <ul class="menu rounded-box w-full">
-            <li class="menu-title">User Details</li>
-            <li><a>Item 1</a></li>
-            <li><a>Item 2</a></li>
-            <li><a>Item 3</a></li>
-        </ul>
+        {% include 'includes/sidebar.html' %}
 
     </div>
     <div class="col-span-9 overflow-auto">

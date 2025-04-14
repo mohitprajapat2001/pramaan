@@ -1,5 +1,4 @@
 from django.views.generic import View, FormView
-from django.views.generic.edit import FormMixin
 from utils.constants import Templates, AppModel
 from accounts.constants import (
     SucccessMessages,
@@ -79,7 +78,7 @@ class ProfileBaseViewMixin(SocialAccountsFormMixin, DetailFormMixin):
 
 
 class ProfileView(
-    ProfileBaseViewMixin, LoginRequiredMixin, SuccessMessageMixin, FormMixin, View
+    ProfileBaseViewMixin, LoginRequiredMixin, SuccessMessageMixin, FormView
 ):
     template_name = Templates.PROFILE_TEMPLATE
     form_class = AddressForm

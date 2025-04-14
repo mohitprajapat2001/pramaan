@@ -15,6 +15,7 @@ from accounts.constants import Labels, Placeholders, ValidationErrors
 
 User = get_model(**AppModel.USER)
 UserDetail = get_model(**AppModel.USER_DETAIL)
+SocialAccounts = get_model(**AppModel.SOCIAL_ACCOUNTS)
 
 
 class RegisterForm(ModelForm):
@@ -86,3 +87,13 @@ class ProfileDetailForm(ModelForm):
     class Meta:
         model = UserDetail
         fields = []
+
+
+class SocialAccountsForm(ModelForm):
+    class Meta:
+        model = SocialAccounts
+        fields = (
+            "facebook",
+            "twitter",
+            "instagram",
+        )

@@ -11,7 +11,7 @@ from users.choices import (
     AddressType,
 )
 from users.constants import USER_PROFILE_UPLOAD_MEDIA_PATH
-from cities_light.models import City, Region, Country
+from cities_light.models import City
 
 
 def _user_profile_image(self, filename) -> str:
@@ -76,10 +76,6 @@ class Address(models.Model):
     address_line_1 = models.CharField(max_length=255)
     address_line_2 = models.CharField(max_length=255, null=True, blank=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True, blank=True)
-    state = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True)
-    country = models.ForeignKey(
-        Country, on_delete=models.CASCADE, null=True, blank=True
-    )
     pincode = models.IntegerField(null=True, blank=True)
     address_type = models.CharField(
         max_length=255, choices=AddressType.CHOICES, default=AddressType.HOME

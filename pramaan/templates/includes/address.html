@@ -1,0 +1,28 @@
+<div class="w-full border bg-base-300 hover:shadow-xl border-gray-800 shadow-lg rounded-lg">
+    <div class="px-6 py-5">
+        <div class="flex items-center justify-between mb-5">
+            <div class="flex items-center justify-start gap-3">
+                <i class="fa fa-address-card"></i>
+                <p class="text-2xl font-bold capitalize">
+                    {{request.user.username}}'s Address
+                </p>
+                <p class="badge badge-primary rounded-md">
+                    {{address.address_type|title}}
+                </p>
+            </div>
+            <button class="btn btn-soft border-gray-700 btn-circle" onclick="address_{{address.id}}.showModal()">
+                <i class="fa fa-map-location-dot"></i>
+            </button>
+            {% include 'modals/accounts/map-modal.html' with address=address %}
+        </div>
+        <div class="flex flex-col items-start justify-start text-lg">
+            <div>
+                {{address.address_line_1}}, {{address.address_line_2}}
+            </div>
+            <div class="flex items-center justify-start gap-2">
+                <i class="fa fa-tree-city"></i>
+                {{address.city.name_ascii}}, {{address.city.region.name_ascii}}, {{address.city.country.name_ascii}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,7 +16,14 @@ from django.forms import (
 from utils.utils import get_model
 from utils.constants import AppModel, FormClass
 from django.contrib.auth.password_validation import validate_password
-from accounts.constants import Labels, Placeholders, ValidationErrors
+from accounts.constants import (
+    Labels,
+    Placeholders,
+    ValidationErrors,
+    ADDRESS_FORM,
+    SOCIAL_FORM,
+    USER_DETAIL_FORM,
+)
 
 User = get_model(**AppModel.USER)
 UserDetail = get_model(**AppModel.USER_DETAIL)
@@ -90,6 +97,12 @@ class LoginForm(Form):
 
 
 class SocialAccountsForm(ModelForm):
+    """Social Accounts Form"""
+
+    form = CharField(
+        required=True, widget=TextInput(attrs={"class": "hidden", "value": SOCIAL_FORM})
+    )
+
     class Meta:
         model = SocialAccounts
         fields = (
@@ -116,6 +129,13 @@ class SocialAccountsForm(ModelForm):
 
 
 class UserDetailForm(ModelForm):
+    """User Detail Form"""
+
+    form = CharField(
+        required=True,
+        widget=TextInput(attrs={"class": "hidden", "value": USER_DETAIL_FORM}),
+    )
+
     class Meta:
         model = UserDetail
         fields = (
@@ -158,9 +178,26 @@ class UserDetailForm(ModelForm):
 
 
 class AddressForm(ModelForm):
+    """Address Form"""
+
+    form = CharField(
+        required=True,
+        label=None,
+        widget=TextInput(
+            attrs={
+                "class": FormClass.TEXT_INPUT,
+                "value": ADDRESS_FORM,
+                "readonly": "readonly",
+                "disabled": "disabled",
+            }
+        ),
+        disabled=True,
+    )
+
     class Meta:
         model = Address
         fields = (
+            "form",
             "address_line_1",
             "address_line_2",
             "city",
@@ -170,6 +207,8 @@ class AddressForm(ModelForm):
         widgets = {}
         labels = {}
         for field in fields:
+            if field == "form":
+                continue
             class_name = FormClass.TEXT_INPUT
             input_type = TextInput
             if field == "pincode":

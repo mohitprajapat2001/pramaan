@@ -3,7 +3,7 @@ from typing import Any
 from utils.utils import get_model
 from utils.constants import AppModel
 from accounts.forms import SocialAccountsForm, UserDetailForm
-from accounts.constants import SucccessMessages
+from accounts.constants import SucccessMessages, SOCIAL_FORM, USER_DETAIL_FORM
 from django.contrib import messages
 
 SocialAccounts = get_model(**AppModel.SOCIAL_ACCOUNTS)
@@ -15,16 +15,18 @@ class SocialAccountsFormMixin:
         """
         SocialAccounts Form Update handling
         """
-        form = SocialAccountsForm(
-            data=self.request.POST, instance=self.request.user.social_accounts
-        )
-        if not form.is_valid():
-            for field, error in form.errors.items():
-                self.message_level = messages.ERROR
-                self.success_message = error
-            return self.form_invalid(form)
-        form.save()
+        if self.request.POST.get("form") == SOCIAL_FORM:
+            form = SocialAccountsForm(
+                data=self.request.POST, instance=self.request.user.social_accounts
+            )
+            if not form.is_valid():
+                for field, error in form.errors.items():
+                    self.message_level = messages.ERROR
+                    self.success_message = error
+                return self.form_invalid(form)
+            form.save()
         self.success_message = SucccessMessages.UPDATE_SUCCESS
+
         return super().form_valid(*args, **kwargs)
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
@@ -40,20 +42,23 @@ class DetailFormMixin:
         """
         SocialAccounts Form Update handling
         """
-        form = UserDetailForm(data=self.request.POST, instance=self.request.user.detail)
-        if not form.is_valid():
-            for field, error in form.errors.items():
-                self.message_level = messages.ERROR
-                self.success_message = error
-            return self.form_invalid(form)
-        form.save()
-        if data := self.request.POST:
-            if last_name := data.get("last_name"):
-                self.request.user.last_name = last_name
-            if first_name := data.get("first_name"):
-                self.request.user.first_name = first_name
-            self.request.user.save()
-        self.success_message = SucccessMessages.UPDATE_SUCCESS
+        if self.request.POST.get("form") == USER_DETAIL_FORM:
+            form = UserDetailForm(
+                data=self.request.POST, instance=self.request.user.detail
+            )
+            if not form.is_valid():
+                for field, error in form.errors.items():
+                    self.message_level = messages.ERROR
+                    self.success_message = error
+                return self.form_invalid(form)
+            form.save()
+            if data := self.request.POST:
+                if last_name := data.get("last_name"):
+                    self.request.user.last_name = last_name
+                if first_name := data.get("first_name"):
+                    self.request.user.first_name = first_name
+                self.request.user.save()
+            self.success_message = SucccessMessages.UPDATE_SUCCESS
         return super().form_valid(*args, **kwargs)
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:

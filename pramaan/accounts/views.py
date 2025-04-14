@@ -1,6 +1,11 @@
 from django.views.generic import View, FormView
+from django.views.generic.edit import FormMixin
 from utils.constants import Templates, AppModel
-from accounts.constants import SucccessMessages, ValidationErrors
+from accounts.constants import (
+    SucccessMessages,
+    ValidationErrors,
+    ADDRESS_FORM,
+)
 from accounts.forms import LoginForm, RegisterForm, AddressForm
 from django.contrib.messages.views import SuccessMessageMixin
 from utils.mixins import LoginRequiredMixin
@@ -74,10 +79,7 @@ class ProfileBaseViewMixin(SocialAccountsFormMixin, DetailFormMixin):
 
 
 class ProfileView(
-    ProfileBaseViewMixin,
-    LoginRequiredMixin,
-    SuccessMessageMixin,
-    FormView,
+    ProfileBaseViewMixin, LoginRequiredMixin, SuccessMessageMixin, FormMixin, View
 ):
     template_name = Templates.PROFILE_TEMPLATE
     form_class = AddressForm
@@ -85,9 +87,8 @@ class ProfileView(
     success_message = SucccessMessages.ADDRESS_SUCCESS
 
     def form_valid(self, form):
-        address = form.save(commit=False)
-        address.user = self.request.user
-        form.save()
+        if self.request.POST.get("form") == ADDRESS_FORM:
+            return super().form_valid(form)
         return super().form_valid(form)
 
 

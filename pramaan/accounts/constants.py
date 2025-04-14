@@ -1,5 +1,9 @@
 from django.utils.translation import gettext_lazy as _
 
+SOCIAL_FORM = "social_form"
+ADDRESS_FORM = "address_form"
+USER_DETAIL_FORM = "user_detail_form"
+
 
 class Labels:
     """Account app form label"""

@@ -7,6 +7,7 @@ from conf.api.api import (
     SubscriptionPlansApi,
     MarritialStatusApi,
     AddressTypeApi,
+    CityApiView,
 )
 
 
@@ -21,3 +22,4 @@ router.register(
 )
 router.register("marritial-status", MarritialStatusApi, basename="marritial-status")
 router.register("address-type", AddressTypeApi, basename="address-type")
+router.register("city", CityApiView, basename="city")

@@ -2,6 +2,13 @@
 {% load static %}
 {% block title %}Profile - {{request.user.username|title}}{% endblock%}
 
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/selectize.min.css' %}">
+{% endblock %}
+{% block pre-extrajs %}
+<script src="{% static 'js/selectize.js' %}"></script>
+<script src="{% static 'js/profile.js' %}"></script>
+{%endblock%}
 
 {% block content %}
 <div class="grid grid-cols-12 gap-4 h-screen">
@@ -36,8 +43,8 @@
                             </div>
                             <div class="order-3 xl:order-2">
                                 <h4 class="mb-2 text-lg font-semibold text-center xl:text-left">
-                                    {% if request.get_full_name %}
-                                    {{request.get_full_name}}
+                                    {% if request.user.get_full_name %}
+                                    {{request.user.get_full_name}}
                                     {% else %}
                                     <span class="text-error">
                                         Please Update Your Profile
@@ -72,10 +79,11 @@
                             </div>
                         </div>
                         <!-- Edit Social Media Links -->
-                        <button class="btn btn-soft rounded-full border-gray-600">
+                        <label for="social-update-modal" class="btn btn-soft rounded-full border-gray-600">
                             <i class="fa fa-paperclip"></i>
                             <span class="hidden md:block">Edit</span>
-                        </button>
+                        </label>
+                        {% include 'modals/accounts/social-modal.html' %}
                     </div>
                 </div>
                 <div class="p-5 mb-6 border border-gray-700 rounded-xl lg:p-6">
@@ -83,11 +91,11 @@
                         <h4 class="text-lg font-semibold lg:mb-6">
                             Personal Information
                         </h4>
-                        <!-- TODO:add edit modal with form -->
-                        <button class="btn btn-soft rounded-full border-gray-700">
-                            <i class="fas fa-user-pen"></i>
+                        <label for="detail-update-modal" class="btn btn-soft rounded-full border-gray-600">
+                            <i class="fa fa-user-pen"></i>
                             <span class="hidden md:block">Edit</span>
-                        </button>
+                        </label>
+                        {% include 'modals/accounts/detail-modal.html' %}
                     </div>
                     <div class="grid grid-cols-2 items-start justify-center gap-5">
                         <!-- First Name -->
@@ -129,6 +137,20 @@
                                 {{request.user.email}}
                             </p>
                         </div>
+                        <div>
+                            <p class="mb-2 text-xs leading-normal">
+                                Secondary Email address
+                            </p>
+                            <p class="text-sm font-medium">
+                                {% if request.user.detail.secondary_email %}
+                                {{request.user.detail.secondary_email}}
+                                {%else%}
+                                <span class="text-error">
+                                    Add Secondary Email
+                                </span>
+                                {%endif%}
+                            </p>
+                        </div>
                         <!-- Phone Number -->
                         <div>
                             <p class="mb-2 text-xs leading-normal">
@@ -140,6 +162,20 @@
                                 {%else%}
                                 <span class="text-error">
                                     Add Phone Number
+                                </span>
+                                {%endif%}
+                            </p>
+                        </div>
+                        <div>
+                            <p class="mb-2 text-xs leading-normal">
+                                Secondary Phone
+                            </p>
+                            <p class="text-sm font-medium">
+                                {% if request.user.detail.secondary_phone_number %}
+                                {{request.user.detail.secondary_phone_number}}
+                                {%else%}
+                                <span class="text-error">
+                                    Add Secondary Phone Number
                                 </span>
                                 {%endif%}
                             </p>
@@ -166,10 +202,11 @@
                         <h4 class="text-lg font-semibold lg:mb-6">
                             Address
                         </h4>
-                        <button class="btn btn-soft border-gray-700 rounded-full">
-                            <i class="fas fa-map-pin"></i>
-                            <span class="hidden md:block">Edit</span>
-                        </button>
+                        <label for="address-add-modal" class="btn btn-soft rounded-full border-gray-600">
+                            <i class="fa fa-plus"> </i>
+                            <span class="hidden md:block">Add</span>
+                        </label>
+                        {% include 'modals/accounts/add-address.html' %}
                     </div>
                     <div>
                         {% for address in request.user.addresses.all %}

@@ -13,6 +13,34 @@ class Labels:
         "confirm_password": "Confirm Password",
     }
 
+    SOCIAL_ACCOUNT = {
+        "facebook": "Facebook",
+        "instagram": "Instagram",
+        "twitter": "Twitter",
+        "linkedin": "Linkedin",
+        "youtube": "Youtube",
+        "github": "Github",
+        "website": "Website",
+        "tiktok": "Tiktok",
+    }
+    USER_DETAIL = {
+        "secondary_email": "Secondary Email",
+        "phone_number": "Phone Number",
+        "secondary_phone_number": "Secondary Phone Number",
+        "date_of_birth": "Date of Birth",
+        "gender": "Gender",
+        "marrital_status": "Marrital Status",
+        "bio": "Bio",
+    }
+
+    ADDRESS = {
+        "address_line_1": "Address Line 1",
+        "address_line_2": "Address Line 2",
+        "city": "City",
+        "pincode": "Pincode",
+        "address_type": "Address Type",
+    }
+
 
 class Placeholders:
     """Account app form placeholder"""
@@ -26,6 +54,34 @@ class Placeholders:
         "confirm_password": "Please confirm your password",
     }
 
+    SOCIAL_ACCOUNT = {
+        "facebook": "Facebook",
+        "instagram": "Instagram",
+        "twitter": "Twitter",
+        "linkedin": "Linkedin",
+        "youtube": "Youtube",
+        "github": "Github",
+        "website": "Website",
+        "tiktok": "Tiktok",
+    }
+
+    USER_DETAIL = {
+        "secondary_email": "Secondary Email",
+        "phone_number": "Phone Number",
+        "secondary_phone_number": "Secondary Phone Number",
+        "date_of_birth": "Date of Birth",
+        "gender": "Gender",
+        "marrital_status": "Marrital Status",
+        "bio": "Bio",
+    }
+    ADDRESS = {
+        "address_line_1": "Address Line 1",
+        "address_line_2": "Address Line 2",
+        "city": "City",
+        "pincode": "Pincode",
+        "address_type": "Address Type",
+    }
+
 
 class SucccessMessages:
     """Accounts app success message"""
@@ -34,6 +90,8 @@ class SucccessMessages:
     LOGOUT_SUCCESS = _("Logout successfully")
     REGISTER_SUCCESS = _("Registered successfully")
     PROFILE_SUCCESS = _("Profile updated successfully")
+    UPDATE_SUCCESS = _("Updated successfully")
+    ADDRESS_SUCCESS = _("Address added successfully")
 
 
 class ValidationErrors:

@@ -7,6 +7,11 @@ from django.forms import (
     CharField,
     TextInput,
     ValidationError,
+    URLInput,
+    DateInput,
+    NumberInput,
+    Select,
+    Textarea,
 )
 from utils.utils import get_model
 from utils.constants import AppModel, FormClass
@@ -16,6 +21,7 @@ from accounts.constants import Labels, Placeholders, ValidationErrors
 User = get_model(**AppModel.USER)
 UserDetail = get_model(**AppModel.USER_DETAIL)
 SocialAccounts = get_model(**AppModel.SOCIAL_ACCOUNTS)
+Address = get_model(**AppModel.ADDRESS)
 
 
 class RegisterForm(ModelForm):
@@ -83,17 +89,98 @@ class LoginForm(Form):
     )
 
 
-class ProfileDetailForm(ModelForm):
-    class Meta:
-        model = UserDetail
-        fields = []
-
-
 class SocialAccountsForm(ModelForm):
     class Meta:
         model = SocialAccounts
         fields = (
             "facebook",
-            "twitter",
             "instagram",
+            "twitter",
+            "linkedin",
+            "youtube",
+            "github",
+            "website",
+            "tiktok",
         )
+        widgets = {}
+        labels = {}
+        for field in fields:
+            class_name = FormClass.TEXT_INPUT
+            widgets[field] = URLInput(
+                attrs={
+                    "class": class_name,
+                    "placeholder": Placeholders.SOCIAL_ACCOUNT[field],
+                }
+            )
+            labels[field] = Labels.SOCIAL_ACCOUNT[field]
+
+
+class UserDetailForm(ModelForm):
+    class Meta:
+        model = UserDetail
+        fields = (
+            "secondary_email",
+            "phone_number",
+            "secondary_phone_number",
+            "date_of_birth",
+            "gender",
+            "marrital_status",
+            "bio",
+        )
+        widgets = {}
+        labels = {}
+        for field in fields:
+            class_name = FormClass.TEXT_INPUT
+            input_type = EmailInput
+            if field == "date_of_birth":
+                widgets[field] = DateInput(
+                    attrs={
+                        "class": class_name,
+                        "placeholder": Placeholders.USER_DETAIL[field],
+                        "type": "date",
+                    }
+                )
+            elif field in ("phone_number", "secondary_phone_number"):
+                input_type = NumberInput
+            elif field in ("gender", "marrital_status"):
+                input_type = Select
+            elif field == "bio":
+                input_type = Textarea
+                class_name = FormClass.TEXTAREA
+            if not field == "date_of_birth":
+                widgets[field] = input_type(
+                    attrs={
+                        "class": class_name,
+                        "placeholder": Placeholders.USER_DETAIL[field],
+                    }
+                )
+            labels[field] = Labels.USER_DETAIL[field]
+
+
+class AddressForm(ModelForm):
+    class Meta:
+        model = Address
+        fields = (
+            "address_line_1",
+            "address_line_2",
+            "city",
+            "pincode",
+            "address_type",
+        )
+        widgets = {}
+        labels = {}
+        for field in fields:
+            class_name = FormClass.TEXT_INPUT
+            input_type = TextInput
+            if field == "pincode":
+                input_type = NumberInput
+            elif field in ("address_type", "city"):
+                input_type = Select
+                class_name = FormClass.SELECT_INPUT if field == "address_type" else ""
+            widgets[field] = input_type(
+                attrs={
+                    "class": class_name,
+                    "placeholder": Placeholders.ADDRESS[field],
+                }
+            )
+            labels[field] = Labels.ADDRESS[field]

@@ -1,7 +1,7 @@
 from django.views.generic import View, FormView
-from utils.constants import Templates
+from utils.constants import Templates, AppModel
 from accounts.constants import SucccessMessages, ValidationErrors
-from accounts.forms import LoginForm, RegisterForm, ProfileDetailForm
+from accounts.forms import LoginForm, RegisterForm, AddressForm
 from django.contrib.messages.views import SuccessMessageMixin
 from utils.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -9,6 +9,10 @@ from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate
+from utils.utils import get_model
+from accounts.form_mixins import SocialAccountsFormMixin, DetailFormMixin
+
+SocialAccounts = get_model(**AppModel.SOCIAL_ACCOUNTS)
 
 
 class LoginView(SuccessMessageMixin, FormView):
@@ -62,11 +66,29 @@ class RegisterationView(SuccessMessageMixin, FormView):
 register_view = RegisterationView.as_view()
 
 
-class ProfileView(LoginRequiredMixin, SuccessMessageMixin, FormView):
+class ProfileBaseViewMixin(SocialAccountsFormMixin, DetailFormMixin):
+    invalid_error_url = reverse_lazy("accounts:profile")
+
+    def add_message(self):
+        messages.add_message(self.request, self.message_level, self.success_message)
+
+
+class ProfileView(
+    ProfileBaseViewMixin,
+    LoginRequiredMixin,
+    SuccessMessageMixin,
+    FormView,
+):
     template_name = Templates.PROFILE_TEMPLATE
-    form_class = ProfileDetailForm
+    form_class = AddressForm
     success_url = reverse_lazy("accounts:profile")
-    success_message = SucccessMessages.PROFILE_SUCCESS
+    success_message = SucccessMessages.ADDRESS_SUCCESS
+
+    def form_valid(self, form):
+        address = form.save(commit=False)
+        address.user = self.request.user
+        form.save()
+        return super().form_valid(form)
 
 
 profile_view = ProfileView.as_view()

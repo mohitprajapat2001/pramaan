@@ -1,9 +1,9 @@
 <input type="checkbox" id="detail-update-modal" class="modal-toggle" />
 <div class="modal" role="dialog">
     <div class="modal-box max-h-10/12">
-        <form action="" method="POST">
+        <form action="{% url action.detail %}" method="POST">
             {% csrf_token %}
-            <h3 class="text-lg font-bold">Update Social Accounts!</h3>
+            <h3 class="text-lg font-bold">Update Profile Details!</h3>
             <div class="py-4">
                 <div class="flex items-start justify-between gap-3">
                     <fieldset class="fieldset mb-3">
@@ -33,4 +33,7 @@
             </div>
         </form>
     </div>
+    <form method="dialog" class="modal-backdrop bg-base-300 opacity-80">
+        <button>close</button>
+    </form>
 </div>

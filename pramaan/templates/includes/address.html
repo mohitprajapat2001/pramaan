@@ -10,9 +10,20 @@
                     {{address.address_type|title}}
                 </p>
             </div>
-            <button class="btn btn-soft border-gray-700 btn-circle" onclick="address_{{address.id}}.showModal()">
-                <i class="fa fa-map-location-dot"></i>
-            </button>
+            <div class="flex justify-end items-center gap-3">
+                <button class="btn btn-soft border-gray-700 btn-circle tooltip" data-tip="View on Map"
+                    onclick="address_{{address.id}}.showModal()">
+                    <i class="fa fa-map-location-dot"></i>
+                </button>
+                <form action="{% url action.address %}" method="GET">
+                    {% csrf_token %}
+                    <input type="text" name="id" class="hidden" value="{{address.id}}">
+                    <button type="submit" class="btn btn-soft border-gray-700 btn-circle btn-error tooltip"
+                        data-tip="Delete Address">
+                        <i class="far fa-trash-can"></i>
+                    </button>
+                </form>
+            </div>
             {% include 'modals/accounts/map-modal.html' with address=address %}
         </div>
         <div class="flex flex-col items-start justify-start text-lg">

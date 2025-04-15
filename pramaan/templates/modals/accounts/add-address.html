@@ -1,9 +1,9 @@
 <input type="checkbox" id="address-add-modal" class="modal-toggle" />
 <div class="modal" role="dialog">
     <div class="modal-box max-h-10/12">
-        <form action="" method="POST">
+        <form action="{% url action.address %}" method="POST">
             {% csrf_token %}
-            <h3 class="text-lg font-bold">Add Accounts!</h3>
+            <h3 class="text-lg font-bold">Add Address!</h3>
             <div class="py-4">
                 {% for field in form %}
                 {% include 'partials/form-field.html' with field=field%}
@@ -15,4 +15,7 @@
             </div>
         </form>
     </div>
+    <form method="dialog" class="modal-backdrop bg-base-300 opacity-80">
+        <button>close</button>
+    </form>
 </div>

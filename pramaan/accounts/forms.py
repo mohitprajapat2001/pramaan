@@ -20,9 +20,6 @@ from accounts.constants import (
     Labels,
     Placeholders,
     ValidationErrors,
-    ADDRESS_FORM,
-    SOCIAL_FORM,
-    USER_DETAIL_FORM,
 )
 
 User = get_model(**AppModel.USER)
@@ -99,10 +96,6 @@ class LoginForm(Form):
 class SocialAccountsForm(ModelForm):
     """Social Accounts Form"""
 
-    form = CharField(
-        required=True, widget=TextInput(attrs={"class": "hidden", "value": SOCIAL_FORM})
-    )
-
     class Meta:
         model = SocialAccounts
         fields = (
@@ -130,11 +123,6 @@ class SocialAccountsForm(ModelForm):
 
 class UserDetailForm(ModelForm):
     """User Detail Form"""
-
-    form = CharField(
-        required=True,
-        widget=TextInput(attrs={"class": "hidden", "value": USER_DETAIL_FORM}),
-    )
 
     class Meta:
         model = UserDetail
@@ -180,24 +168,9 @@ class UserDetailForm(ModelForm):
 class AddressForm(ModelForm):
     """Address Form"""
 
-    form = CharField(
-        required=True,
-        label=None,
-        widget=TextInput(
-            attrs={
-                "class": FormClass.TEXT_INPUT,
-                "value": ADDRESS_FORM,
-                "readonly": "readonly",
-                "disabled": "disabled",
-            }
-        ),
-        disabled=True,
-    )
-
     class Meta:
         model = Address
         fields = (
-            "form",
             "address_line_1",
             "address_line_2",
             "city",

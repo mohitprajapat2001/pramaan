@@ -2,6 +2,9 @@
 from typing import Any
 from utils.utils import get_model
 from utils.constants import AppModel
+from django.views.generic import View
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from accounts.forms import SocialAccountsForm, UserDetailForm
 from accounts.constants import SucccessMessages, SOCIAL_FORM, USER_DETAIL_FORM
 from django.contrib import messages
@@ -11,7 +14,7 @@ UserDetail = get_model(**AppModel.USER_DETAIL)
 
 
 class SocialAccountsFormMixin:
-    def form_valid(self, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         """
         SocialAccounts Form Update handling
         """
@@ -25,9 +28,7 @@ class SocialAccountsFormMixin:
                     self.success_message = error
                 return self.form_invalid(form)
             form.save()
-        self.success_message = SucccessMessages.UPDATE_SUCCESS
-
-        return super().form_valid(*args, **kwargs)
+            self.success_message = SucccessMessages.UPDATE_SUCCESS
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -38,7 +39,7 @@ class SocialAccountsFormMixin:
 
 
 class DetailFormMixin:
-    def form_valid(self, *args, **kwargs):
+    def post(self, *args, **kwargs):
         """
         SocialAccounts Form Update handling
         """
@@ -59,9 +60,23 @@ class DetailFormMixin:
                     self.request.user.first_name = first_name
                 self.request.user.save()
             self.success_message = SucccessMessages.UPDATE_SUCCESS
-        return super().form_valid(*args, **kwargs)
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["detail_form"] = UserDetailForm(instance=self.request.user.detail)
         return context
+
+
+class BaseMultipleFormView(View):
+    success_url = reverse_lazy("landing:home")
+    message_level = messages.SUCCESS
+    success_message = None
+
+    def success_url_redirect(self):
+        if self.success_message:
+            messages.add_message(
+                request=self.request,
+                level=self.message_level,
+                message=self.success_message,
+            )
+        return redirect(self.success_url)

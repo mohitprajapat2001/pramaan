@@ -21,15 +21,14 @@
         {% include 'includes/sidebar.html' %}
 
     </div>
-    <div class="col-span-9 overflow-auto">
+    <div class="col-span-9 overflow-auto" id="sections">
         <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
             {% include "includes/breadcrump.html" with page="Profile" icon="fas fa-user" %}
             <div class="rounded-2xl border border-gray-700 lg:p-6 bg-base-100">
                 <h3 class="mb-5 text-lg font-semibold lg:mb-7">
                     Welcome Back, {{request.user.username|title}}
                 </h3>
-
-                <div class="p-5 mb-6 border border-gray-700 rounded-2xl bg-base-200 lg:p-6">
+                <section class="p-5 mb-6 border border-gray-700 rounded-2xl bg-base-200 lg:p-6" id="profile">
                     <div class="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
                         <div class="flex flex-col items-center w-full gap-6 xl:flex-row">
                             <div class="w-20 h-20 overflow-hidden border border-gray-700 rounded-full">
@@ -74,19 +73,21 @@
                             </div>
                         </div>
                         <!-- Edit Social Media Links -->
-                        <label for="social-update-modal" class="btn btn-soft rounded-full border-gray-600">
+                        <label for="social-update-modal" data-tip="Edit Social Links"
+                            class="tooltip btn btn-soft rounded-full border-gray-600">
                             <i class="fa fa-paperclip"></i>
                             <span class="hidden md:block">Edit</span>
                         </label>
                         {% include 'modals/accounts/social-modal.html' %}
                     </div>
-                </div>
-                <div class="p-5 mb-6 border border-gray-700 rounded-xl lg:p-6">
+                </section>
+                <section class="p-5 mb-6 border border-gray-700 rounded-xl lg:p-6" id="details">
                     <div class="flex items-center justify-between">
                         <h4 class="text-lg font-semibold lg:mb-6">
                             Personal Information
                         </h4>
-                        <label for="detail-update-modal" class="btn btn-soft rounded-full border-gray-600">
+                        <label for="detail-update-modal" data-tip="Edit Details"
+                            class="tooltip btn btn-soft rounded-full border-gray-600">
                             <i class="fa fa-user-pen"></i>
                             <span class="hidden md:block">Edit</span>
                         </label>
@@ -191,13 +192,14 @@
                             {%endif%}
                         </p>
                     </div>
-                </div>
-                <div class="p-5 border border-gray-700 rounded-xl lg:p-6">
+                </section>
+                <section class="p-5 border border-gray-700 rounded-xl lg:p-6" id="address">
                     <div class="flex gap-6 lg:flex-row lg:items-start lg:justify-between w-full">
                         <h4 class="text-lg font-semibold lg:mb-6">
                             Address
                         </h4>
-                        <label for="address-add-modal" class="btn btn-soft rounded-full border-gray-600">
+                        <label for="address-add-modal" data-tip="Add Address" class=" tooltip btn btn-soft
+                            rounded-full border-gray-600">
                             <i class="fa fa-plus"> </i>
                             <span class="hidden md:block">Add</span>
                         </label>
@@ -212,7 +214,7 @@
                         </span>
                         {% endfor %}
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     </div>

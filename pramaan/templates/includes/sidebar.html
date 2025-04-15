@@ -1,5 +1,6 @@
 <div class="menu rounded-box w-full">
     <li class="menu-title">User Details</li>
-    {% include 'partials/sidebar-link.html' with title='Profile'
-    url="{%url 'accounts:profile'%}#home" %}
+    {% include 'partials/sidebar-link.html' with title='Profile' url="accounts:profile" section="#profile"%}
+    {% include 'partials/sidebar-link.html' with title='Details' url="accounts:profile" section="#details"%}
+    {% include 'partials/sidebar-link.html' with title='Address' url="accounts:profile" section="#address"%}
 </div>

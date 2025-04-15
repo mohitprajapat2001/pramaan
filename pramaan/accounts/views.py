@@ -1,11 +1,19 @@
-from django.views.generic import View, FormView
+from django.views.generic import View, FormView, TemplateView
 from utils.constants import Templates, AppModel
 from accounts.constants import (
     SucccessMessages,
     ValidationErrors,
     ADDRESS_FORM,
+    USER_DETAIL_FORM,
+    SOCIAL_FORM,
 )
-from accounts.forms import LoginForm, RegisterForm, AddressForm
+from accounts.forms import (
+    LoginForm,
+    RegisterForm,
+    AddressForm,
+    SocialAccountsForm,
+    UserDetailForm,
+)
 from django.contrib.messages.views import SuccessMessageMixin
 from utils.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -14,7 +22,8 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate
 from utils.utils import get_model
-from accounts.form_mixins import SocialAccountsFormMixin, DetailFormMixin
+from accounts.form_mixins import BaseMultipleFormView
+from typing import Any
 
 SocialAccounts = get_model(**AppModel.SOCIAL_ACCOUNTS)
 
@@ -70,25 +79,102 @@ class RegisterationView(SuccessMessageMixin, FormView):
 register_view = RegisterationView.as_view()
 
 
-class ProfileBaseViewMixin(SocialAccountsFormMixin, DetailFormMixin):
-    invalid_error_url = reverse_lazy("accounts:profile")
-
-    def add_message(self):
-        messages.add_message(self.request, self.message_level, self.success_message)
-
-
-class ProfileView(
-    ProfileBaseViewMixin, LoginRequiredMixin, SuccessMessageMixin, FormView
-):
+class ProfileView(TemplateView):
     template_name = Templates.PROFILE_TEMPLATE
+
+    def get_context_data(self, **kwargs) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["social_form"] = SocialAccountsForm(
+            instance=self.request.user.social_accounts
+        )
+        context["detail_form"] = UserDetailForm(instance=self.request.user.detail)
+        context["form"] = AddressForm()
+        context["action"] = {
+            "social": SOCIAL_FORM,
+            "detail": USER_DETAIL_FORM,
+            "address": ADDRESS_FORM,
+        }
+        return context
+
+
+profile_view = ProfileView.as_view()
+
+
+class AddressView(BaseMultipleFormView):
     form_class = AddressForm
     success_url = reverse_lazy("accounts:profile")
     success_message = SucccessMessages.ADDRESS_SUCCESS
 
-    def form_valid(self, form):
-        if self.request.POST.get("form") == ADDRESS_FORM:
-            return super().form_valid(form)
-        return super().form_valid(form)
+    def get(self, request, *args, **kwargs):
+        if self.request.GET.get("id"):
+            address = self.request.user.addresses.filter(
+                id=self.request.GET.get("id")
+            ).first()
+            if not address:
+                self.success_message = SucccessMessages.ADDRESS_NOT_FOUND
+                self.message_level = messages.ERROR
+                return self.success_url_redirect()
+            address.delete()
+            self.success_message = SucccessMessages.ADDRESS_DELETED
+            self.message_level = messages.SUCCESS
+        return self.success_url_redirect()
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(data=self.request.POST)
+        if not form.is_valid():
+            for field, error in form.errors.items():
+                messages.error(self.request, error)
+            return self.form_invalid(form)
+        form.save(commit=False)
+        form.instance.user = self.request.user
+        form.save()
+        return self.success_url_redirect()
 
 
-profile_view = ProfileView.as_view()
+address_view = AddressView.as_view()
+
+
+class SocialView(BaseMultipleFormView):
+    form_class = SocialAccountsForm
+    success_url = reverse_lazy("accounts:profile")
+    success_message = SucccessMessages.SOCIAL_UPDATED
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(
+            instance=self.request.user.social_accounts, data=self.request.POST
+        )
+        if not form.is_valid():
+            for field, error in form.errors.items():
+                messages.error(self.request, error)
+            return self.form_invalid(form)
+        form.save()
+        return self.success_url_redirect()
+
+
+social_view = SocialView.as_view()
+
+
+class DetailView(BaseMultipleFormView):
+    form_class = UserDetailForm
+    success_url = reverse_lazy("accounts:profile")
+    success_message = SucccessMessages.UPDATE_SUCCESS
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(
+            instance=self.request.user.detail, data=self.request.POST
+        )
+        if not form.is_valid():
+            for field, error in form.errors.items():
+                messages.error(self.request, error)
+            return self.form_invalid(form)
+        form.save()
+        if data := self.request.POST:
+            if last_name := data.get("last_name"):
+                self.request.user.last_name = last_name
+            elif first_name := data.get("first_name"):
+                self.request.user.first_name = first_name
+            self.request.user.save()
+        return self.success_url_redirect()
+
+
+detail_view = DetailView.as_view()

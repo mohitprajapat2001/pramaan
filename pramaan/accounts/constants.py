@@ -1,8 +1,8 @@
 from django.utils.translation import gettext_lazy as _
 
-SOCIAL_FORM = "social_form"
-ADDRESS_FORM = "address_form"
-USER_DETAIL_FORM = "user_detail_form"
+SOCIAL_FORM = "accounts:social"
+ADDRESS_FORM = "accounts:address"
+USER_DETAIL_FORM = "accounts:detail"
 
 
 class Labels:
@@ -96,6 +96,10 @@ class SucccessMessages:
     PROFILE_SUCCESS = _("Profile updated successfully")
     UPDATE_SUCCESS = _("Updated successfully")
     ADDRESS_SUCCESS = _("Address added successfully")
+    SOCIAL_UPDATED = _("Social accounts updated successfully")
+    ADDRESS_DELETED = _("Address deleted successfully")
+    ADDRESS_UPDATED = _("Address updated successfully")
+    ADDRESS_NOT_FOUND = _("Address not found")
 
 
 class ValidationErrors:

@@ -84,6 +84,23 @@ class AppModel:
         "app_label": "users",
         "model_name": "Subscription",
     }
+    # Configuration App Models
+    USER_PREFERENCE = {
+        "app_label": "configuration",
+        "model_name": "UserPreference",
+    }
+    NOTIFICATION = {
+        "app_label": "configuration",
+        "model_name": "Notofication",
+    }
+    NOTIFICATION_PREFERENCE = {
+        "app_label": "configuration",
+        "model_name": "NotificationPreference",
+    }
+    USER_PRIVACY_SETTINGS = {
+        "app_label": "configuration",
+        "model_name": "UserPrivacySettings",
+    }
 
 
 class FormClass:

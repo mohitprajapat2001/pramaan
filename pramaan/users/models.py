@@ -104,6 +104,10 @@ class EmergencyDetails(models.Model):
     phone_number = PhoneNumberField(null=True, blank=True, region="IN")
     relationship = models.CharField(max_length=255, choices=RelationshipChoices.CHOICES)
 
+    class Meta:
+        verbose_name = "Emergency Details"
+        verbose_name_plural = "Emergency Details"
+
 
 class SecurityQuestion(models.Model):
     user = models.ForeignKey(
@@ -111,6 +115,11 @@ class SecurityQuestion(models.Model):
     )
     question = models.TextField(choices=QuestionChoices.CHOICES)
     answer = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = "Security Question"
+        verbose_name_plural = "Security Questions"
+        unique_together = ("user", "question")
 
 
 class Subscription(models.Model):

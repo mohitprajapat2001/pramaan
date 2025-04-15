@@ -7,6 +7,7 @@ from accounts.views import (
     address_view,
     social_view,
     detail_view,
+    emergency_view,
 )
 
 
@@ -20,4 +21,5 @@ urlpatterns = (
     path("address/", address_view, name="address"),
     path("social/", social_view, name="social"),
     path("detail/", detail_view, name="detail"),
+    path("emergency/", emergency_view, name="emergency"),
 )

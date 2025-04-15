@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 SOCIAL_FORM = "accounts:social"
 ADDRESS_FORM = "accounts:address"
 USER_DETAIL_FORM = "accounts:detail"
+EMERGENCY_FORM = "accounts:emergency"
 
 
 class Labels:
@@ -45,6 +46,12 @@ class Labels:
         "address_type": "Address Type",
     }
 
+    EMERYGENCY_DETAILS = {
+        "name": "Name",
+        "phone_number": "Phone Number",
+        "relationship": "Relationship",
+    }
+
 
 class Placeholders:
     """Account app form placeholder"""
@@ -85,6 +92,11 @@ class Placeholders:
         "pincode": "Pincode",
         "address_type": "Address Type",
     }
+    EMERYGENCY_DETAILS = {
+        "name": "Name",
+        "phone_number": "Phone Number",
+        "relationship": "Relationship",
+    }
 
 
 class SucccessMessages:
@@ -100,6 +112,9 @@ class SucccessMessages:
     ADDRESS_DELETED = _("Address deleted successfully")
     ADDRESS_UPDATED = _("Address updated successfully")
     ADDRESS_NOT_FOUND = _("Address not found")
+    EMERGENCY_SUCCESS = _("Emergency details added successfully")
+    EMERGENCY_CONTACT_NOT_FOUND = _("Emergency contact not found")
+    EMERGENCY_CONTACT_DELETED = _("Emergency contact deleted successfully")
 
 
 class ValidationErrors:

@@ -6,6 +6,7 @@ from accounts.constants import (
     ADDRESS_FORM,
     USER_DETAIL_FORM,
     SOCIAL_FORM,
+    EMERGENCY_FORM,
 )
 from accounts.forms import (
     LoginForm,
@@ -13,6 +14,7 @@ from accounts.forms import (
     AddressForm,
     SocialAccountsForm,
     UserDetailForm,
+    EmergencyDetailsForm,
 )
 from django.contrib.messages.views import SuccessMessageMixin
 from utils.mixins import LoginRequiredMixin
@@ -79,7 +81,7 @@ class RegisterationView(SuccessMessageMixin, FormView):
 register_view = RegisterationView.as_view()
 
 
-class ProfileView(TemplateView):
+class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = Templates.PROFILE_TEMPLATE
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
@@ -89,10 +91,12 @@ class ProfileView(TemplateView):
         )
         context["detail_form"] = UserDetailForm(instance=self.request.user.detail)
         context["form"] = AddressForm()
+        context["emergency_form"] = EmergencyDetailsForm()
         context["action"] = {
             "social": SOCIAL_FORM,
             "detail": USER_DETAIL_FORM,
             "address": ADDRESS_FORM,
+            "emergency": EMERGENCY_FORM,
         }
         return context
 
@@ -178,3 +182,37 @@ class DetailView(BaseMultipleFormView):
 
 
 detail_view = DetailView.as_view()
+
+
+class EmergencyView(BaseMultipleFormView):
+    form_class = EmergencyDetailsForm
+    success_url = reverse_lazy("accounts:profile")
+    success_message = SucccessMessages.EMERGENCY_SUCCESS
+
+    def get(self, request, *args, **kwargs):
+        if self.request.GET.get("id"):
+            address = self.request.user.emergency_details.filter(
+                id=self.request.GET.get("id")
+            ).first()
+            if not address:
+                self.success_message = SucccessMessages.EMERGENCY_CONTACT_NOT_FOUND
+                self.message_level = messages.ERROR
+                return self.success_url_redirect()
+            address.delete()
+            self.success_message = SucccessMessages.EMERGENCY_CONTACT_DELETED
+            self.message_level = messages.SUCCESS
+        return self.success_url_redirect()
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(data=self.request.POST)
+        if not form.is_valid():
+            for field, error in form.errors.items():
+                messages.error(self.request, error)
+            return self.form_invalid(form)
+        form.save(commit=False)
+        form.instance.user = request.user
+        form.save()
+        return self.success_url_redirect()
+
+
+emergency_view = EmergencyView.as_view()

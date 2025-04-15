@@ -1,0 +1,19 @@
+<input type="checkbox" id="emergency-add-modal" class="modal-toggle" />
+<div class="modal" role="dialog">
+    <div class="modal-box max-h-10/12">
+        <form action="{% url action.emergency %}" method="POST">
+            {% csrf_token %}
+            <h3 class="text-lg font-bold">Add Emergency Contact!</h3>
+            <div class="py-4">
+                {% for field in emergency_form %}
+                {% include 'partials/form-field.html' with field=field%}
+                {% endfor %}
+            </div>
+            <div class="modal-action">
+                <button type="submit" class="btn btn-primary">Add Emergency Contact!</button>
+                <label for="emergency-add-modal" class="btn">Close!</label>
+            </div>
+        </form>
+    </div>
+    <label class="modal-backdrop" for="emergency-add-modal">Close</label>
+</div>

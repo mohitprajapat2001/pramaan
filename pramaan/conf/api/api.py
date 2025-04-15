@@ -11,6 +11,9 @@ from rest_framework.mixins import ListModelMixin
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.response import Response
 from http import HTTPStatus
+from conf.api.serializers import CitySerializer
+from cities_light.models import City
+from rest_framework.pagination import PageNumberPagination
 
 
 class StaticBaseApi(ListModelMixin, GenericViewSet):
@@ -57,3 +60,16 @@ class MarritialStatusApi(StaticBaseApi):
 
 class AddressTypeApi(StaticBaseApi):
     choice_name = AddressType
+
+
+class CityApiView(ListModelMixin, GenericViewSet):
+    queryset = City.objects.all()
+    serializer_class = CitySerializer
+    pagination_class = PageNumberPagination
+    page_size = 25
+
+    def filter_queryset(self, queryset):
+        filter_queryset = super().filter_queryset(queryset)
+        if search := self.request.query_params.get("q"):
+            filter_queryset = filter_queryset.filter(name_ascii__icontains=search)
+        return filter_queryset

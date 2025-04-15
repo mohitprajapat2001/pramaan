@@ -2,32 +2,35 @@
 {% load static %}
 {% block title %}Profile - {{request.user.username|title}}{% endblock%}
 
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/selectize.min.css' %}">
+{% endblock %}
+{% block pre-extrajs %}
+<script src="{% static 'js/selectize.js' %}"></script>
+<script src="{% static 'js/profile.js' %}"></script>
+{%endblock%}
 
 {% block content %}
-<div class="grid grid-cols-12 gap-4 h-screen">
+<div class="grid grid-cols-12 h-screen">
     <!-- Sidebar -->
-    <div class="col-span-3 border overflow-auto px-2 py-3">
-        <h1 class="text-2xl font-bold">
+    <div class="col-span-3 bg-base-100 m-3 rounded-xl overflow-auto p-3">
+        <!-- TODO: Authenticated Dashboard URL -->
+        <!-- TODO: profile form update form handling -->
+        <a href="" class="text-2xl font-bold">
             Pramaan
-        </h1>
+        </a>
         <div class="divider"></div>
-        <ul class="menu rounded-box w-full">
-            <li class="menu-title">User Details</li>
-            <li><a>Item 1</a></li>
-            <li><a>Item 2</a></li>
-            <li><a>Item 3</a></li>
-        </ul>
+        {% include 'includes/sidebar.html' %}
 
     </div>
-    <div class="col-span-9 overflow-auto">
+    <div class="col-span-9 overflow-auto" id="sections">
         <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
             {% include "includes/breadcrump.html" with page="Profile" icon="fas fa-user" %}
             <div class="rounded-2xl border border-gray-700 lg:p-6 bg-base-100">
                 <h3 class="mb-5 text-lg font-semibold lg:mb-7">
                     Welcome Back, {{request.user.username|title}}
                 </h3>
-
-                <div class="p-5 mb-6 border border-gray-700 rounded-2xl bg-base-200 lg:p-6">
+                <section class="p-5 mb-6 border border-gray-700 rounded-2xl bg-base-200 lg:p-6" id="profile">
                     <div class="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
                         <div class="flex flex-col items-center w-full gap-6 xl:flex-row">
                             <div class="w-20 h-20 overflow-hidden border border-gray-700 rounded-full">
@@ -36,8 +39,8 @@
                             </div>
                             <div class="order-3 xl:order-2">
                                 <h4 class="mb-2 text-lg font-semibold text-center xl:text-left">
-                                    {% if request.get_full_name %}
-                                    {{request.get_full_name}}
+                                    {% if request.user.get_full_name %}
+                                    {{request.user.get_full_name}}
                                     {% else %}
                                     <span class="text-error">
                                         Please Update Your Profile
@@ -72,22 +75,25 @@
                             </div>
                         </div>
                         <!-- Edit Social Media Links -->
-                        <button class="btn btn-soft rounded-full border-gray-600">
+                        <label for="social-update-modal" data-tip="Edit Social Links"
+                            class="tooltip btn btn-soft rounded-full border-gray-600">
                             <i class="fa fa-paperclip"></i>
                             <span class="hidden md:block">Edit</span>
-                        </button>
+                        </label>
+                        {% include 'modals/accounts/social-modal.html' %}
                     </div>
-                </div>
-                <div class="p-5 mb-6 border border-gray-700 rounded-xl lg:p-6">
+                </section>
+                <section class="p-5 mb-6 border border-gray-700 rounded-xl lg:p-6" id="details">
                     <div class="flex items-center justify-between">
                         <h4 class="text-lg font-semibold lg:mb-6">
                             Personal Information
                         </h4>
-                        <!-- TODO:add edit modal with form -->
-                        <button class="btn btn-soft rounded-full border-gray-700">
-                            <i class="fas fa-user-pen"></i>
+                        <label for="detail-update-modal" data-tip="Edit Details"
+                            class="tooltip btn btn-soft rounded-full border-gray-600">
+                            <i class="fa fa-user-pen"></i>
                             <span class="hidden md:block">Edit</span>
-                        </button>
+                        </label>
+                        {% include 'modals/accounts/detail-modal.html' %}
                     </div>
                     <div class="grid grid-cols-2 items-start justify-center gap-5">
                         <!-- First Name -->
@@ -129,6 +135,20 @@
                                 {{request.user.email}}
                             </p>
                         </div>
+                        <div>
+                            <p class="mb-2 text-xs leading-normal">
+                                Secondary Email address
+                            </p>
+                            <p class="text-sm font-medium">
+                                {% if request.user.detail.secondary_email %}
+                                {{request.user.detail.secondary_email}}
+                                {%else%}
+                                <span class="text-error">
+                                    Add Secondary Email
+                                </span>
+                                {%endif%}
+                            </p>
+                        </div>
                         <!-- Phone Number -->
                         <div>
                             <p class="mb-2 text-xs leading-normal">
@@ -140,6 +160,20 @@
                                 {%else%}
                                 <span class="text-error">
                                     Add Phone Number
+                                </span>
+                                {%endif%}
+                            </p>
+                        </div>
+                        <div>
+                            <p class="mb-2 text-xs leading-normal">
+                                Secondary Phone
+                            </p>
+                            <p class="text-sm font-medium">
+                                {% if request.user.detail.secondary_phone_number %}
+                                {{request.user.detail.secondary_phone_number}}
+                                {%else%}
+                                <span class="text-error">
+                                    Add Secondary Phone Number
                                 </span>
                                 {%endif%}
                             </p>
@@ -160,16 +194,18 @@
                             {%endif%}
                         </p>
                     </div>
-                </div>
-                <div class="p-5 border border-gray-700 rounded-xl lg:p-6">
+                </section>
+                <section class="mb-6 p-5 border border-gray-700 rounded-xl lg:p-6" id="address">
                     <div class="flex gap-6 lg:flex-row lg:items-start lg:justify-between w-full">
                         <h4 class="text-lg font-semibold lg:mb-6">
                             Address
                         </h4>
-                        <button class="btn btn-soft border-gray-700 rounded-full">
-                            <i class="fas fa-map-pin"></i>
-                            <span class="hidden md:block">Edit</span>
-                        </button>
+                        <label for="address-add-modal" data-tip="Add Address" class=" tooltip btn btn-soft
+                            rounded-full border-gray-600">
+                            <i class="fa fa-plus"> </i>
+                            <span class="hidden md:block">Add</span>
+                        </label>
+                        {% include 'modals/accounts/add-address.html' %}
                     </div>
                     <div>
                         {% for address in request.user.addresses.all %}
@@ -180,7 +216,29 @@
                         </span>
                         {% endfor %}
                     </div>
-                </div>
+                </section>
+                <section class="mb-6 p-5 border border-gray-700 rounded-xl lg:p-6" id="emergency">
+                    <div class="flex gap-6 lg:flex-row lg:items-start lg:justify-between w-full">
+                        <h4 class="text-lg font-semibold lg:mb-6">
+                            Emergency Contact
+                        </h4>
+                        <label for="emergency-add-modal" data-tip="Add Emerygency Contact" class="tooltip btn btn-soft
+                                            rounded-full border-gray-600">
+                            <i class="fa fa-plus"> </i>
+                            <span class="hidden md:block">Add</span>
+                        </label>
+                        {% include 'modals/accounts/add-emergency.html' %}
+                    </div>
+                    <div class="grid grid-cols-3">
+                        {% for emergency in request.user.emergency_details.all %}
+                        {% include 'includes/emergency.html' with emergency=emergency %}
+                        {%empty %}
+                        <span class="text-error col-span-3">
+                            No Address Found
+                        </span>
+                        {% endfor %}
+                    </div>
+                </section>
             </div>
         </div>
     </div>

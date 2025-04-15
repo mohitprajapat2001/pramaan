@@ -1,0 +1,19 @@
+<input type="checkbox" id="social-update-modal" class="modal-toggle" />
+<div class="modal" role="dialog">
+    <div class="modal-box max-h-10/12">
+        <form action="{% url action.social %}" method="POST">
+            {% csrf_token %}
+            <h3 class="text-lg font-bold">Update Social Accounts!</h3>
+            <div class="py-4">
+                {% for field in social_form %}
+                {% include 'partials/form-field.html' with field=field%}
+                {% endfor %}
+            </div>
+            <div class="modal-action">
+                <button type="submit" class="btn btn-primary">Update!</button>
+                <label for="social-update-modal" class="btn">Close!</label>
+            </div>
+        </form>
+    </div>
+    <label class="modal-backdrop" for="social-update-modalww">Close</label>
+</div>

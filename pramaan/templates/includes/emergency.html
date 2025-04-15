@@ -1,0 +1,27 @@
+<div class="card shadow-md image-full hover:shadow-xl transition ease-in-out duration-300 w-3xs text-neutral-400">
+    <figure class="bg-base-300 opacity-50">
+        <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
+    </figure>
+    <div class="card-body">
+        <div class="flex items-center justify-between">
+            <h2 class="card-title text-white text-2xl font-semibold">{{emergency.name}}</h2>
+            <p class="badge badge-sm badge-primary w-min max-w-min uppercase cursor-pointer">{{emergency.relationship}}
+            </p>
+        </div>
+        <div class="flex justify-start items-center">
+            <a href="tel:{{emergency.phone_number}}" target="_blank"
+                class="btn bg-white text-black border-[#e5e5e5] btn-circle group tooltip" data-tip="Call Now">
+                <i
+                    class="fa fa-phone group-hover:scale-120 group-hover:shadow-inset-xl transition duration-300 ease-in-out"></i>
+            </a>
+        </div>
+        <div class="card-actions justify-end">
+            <button class="btn btn-sm btn-primary tooltip" data-tip="Edit Details">Edit</button>
+            <form action="{% url action.emergency %}">
+                <input type="text" name="id" value="{{emergency.id}}" hidden>
+                <button type="submit" class="btn btn-sm btn-error tooltip"
+                    data-tip="Delete Emergency Contact">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>

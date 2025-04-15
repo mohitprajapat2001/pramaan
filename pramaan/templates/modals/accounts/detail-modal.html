@@ -1,0 +1,37 @@
+<input type="checkbox" id="detail-update-modal" class="modal-toggle" />
+<div class="modal" role="dialog">
+    <div class="modal-box max-h-10/12">
+        <form action="{% url action.detail %}" method="POST">
+            {% csrf_token %}
+            <h3 class="text-lg font-bold">Update Profile Details!</h3>
+            <div class="py-4">
+                <div class="flex items-start justify-between gap-3">
+                    <fieldset class="fieldset mb-3">
+                        <legend class="fieldset-legend text-left ">
+                            First Name*
+                        </legend>
+                        <input type="text" name="first_name" id="" class="validator input w-full input-primary" required
+                            value="{{request.user.first_name}}" placeholder="Enter First Name">
+                        <p class="validator-hint text-start text-md text-error italic my-0 py-0">First name is required
+                        </p>
+                    </fieldset>
+                    <fieldset class="fieldset mb-3">
+                        <legend class="fieldset-legend text-left ">
+                            Last Name
+                        </legend>
+                        <input type="text" name="last_name" id="" class="input w-full input-primary"
+                            value="{{request.user.last_name}}" placeholder="Enter Last Name">
+                    </fieldset>
+                </div>
+                {% for field in detail_form %}
+                {% include 'partials/form-field.html' with field=field%}
+                {% endfor %}
+            </div>
+            <div class="modal-action">
+                <button type="submit" class="btn btn-primary">Update!</button>
+                <label for="detail-update-modal" class="btn">Close!</label>
+            </div>
+        </form>
+    </div>
+    <label class="modal-backdrop" for="detail-update-modal">Close</label>
+</div>

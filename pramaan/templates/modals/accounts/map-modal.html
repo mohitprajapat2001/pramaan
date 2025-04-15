@@ -1,6 +1,6 @@
 <!-- The button to open modal -->
 <dialog id="address_{{address.id}}" class="modal">
-    <div class="modal-box">
+    <div class="modal-box w-3xl">
         <h3 class="text-lg font-bold">Address Map View!</h3>
         <div class="py-4">
             <iframe
@@ -8,7 +8,5 @@
                 class="w-full h-94" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
-    <form method="dialog" class="modal-backdrop">
-        <button>close</button>
-    </form>
+    <label class="modal-backdrop" for="address_{{address.id}}">Close</label>
 </dialog>

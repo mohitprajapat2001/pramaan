@@ -7,15 +7,26 @@ from django.forms import (
     CharField,
     TextInput,
     ValidationError,
+    URLInput,
+    DateInput,
+    NumberInput,
+    Select,
+    Textarea,
 )
 from utils.utils import get_model
 from utils.constants import AppModel, FormClass
 from django.contrib.auth.password_validation import validate_password
-from accounts.constants import Labels, Placeholders, ValidationErrors
+from accounts.constants import (
+    Labels,
+    Placeholders,
+    ValidationErrors,
+)
 
 User = get_model(**AppModel.USER)
 UserDetail = get_model(**AppModel.USER_DETAIL)
 SocialAccounts = get_model(**AppModel.SOCIAL_ACCOUNTS)
+Address = get_model(**AppModel.ADDRESS)
+EmerygencyDetails = get_model(**AppModel.EMERGENCY_DETAILS)
 
 
 class RegisterForm(ModelForm):
@@ -83,17 +94,135 @@ class LoginForm(Form):
     )
 
 
-class ProfileDetailForm(ModelForm):
-    class Meta:
-        model = UserDetail
-        fields = []
-
-
 class SocialAccountsForm(ModelForm):
+    """Social Accounts Form"""
+
     class Meta:
         model = SocialAccounts
         fields = (
             "facebook",
-            "twitter",
             "instagram",
+            "twitter",
+            "linkedin",
+            "youtube",
+            "github",
+            "website",
+            "tiktok",
         )
+        widgets = {}
+        labels = {}
+        for field in fields:
+            class_name = FormClass.TEXT_INPUT
+            widgets[field] = URLInput(
+                attrs={
+                    "class": class_name,
+                    "placeholder": Placeholders.SOCIAL_ACCOUNT[field],
+                }
+            )
+            labels[field] = Labels.SOCIAL_ACCOUNT[field]
+
+
+class UserDetailForm(ModelForm):
+    """User Detail Form"""
+
+    class Meta:
+        model = UserDetail
+        fields = (
+            "secondary_email",
+            "phone_number",
+            "secondary_phone_number",
+            "date_of_birth",
+            "gender",
+            "marrital_status",
+            "bio",
+        )
+        widgets = {}
+        labels = {}
+        for field in fields:
+            class_name = FormClass.TEXT_INPUT
+            input_type = EmailInput
+            if field == "date_of_birth":
+                widgets[field] = DateInput(
+                    attrs={
+                        "class": class_name,
+                        "placeholder": Placeholders.USER_DETAIL[field],
+                        "type": "date",
+                    }
+                )
+            elif field in ("phone_number", "secondary_phone_number"):
+                input_type = NumberInput
+            elif field in ("gender", "marrital_status"):
+                input_type = Select
+            elif field == "bio":
+                input_type = Textarea
+                class_name = FormClass.TEXTAREA
+            if not field == "date_of_birth":
+                widgets[field] = input_type(
+                    attrs={
+                        "class": class_name,
+                        "placeholder": Placeholders.USER_DETAIL[field],
+                    }
+                )
+            labels[field] = Labels.USER_DETAIL[field]
+
+
+class AddressForm(ModelForm):
+    """Address Form"""
+
+    class Meta:
+        model = Address
+        fields = (
+            "address_line_1",
+            "address_line_2",
+            "city",
+            "pincode",
+            "address_type",
+        )
+        widgets = {}
+        labels = {}
+        for field in fields:
+            if field == "form":
+                continue
+            class_name = FormClass.TEXT_INPUT
+            input_type = TextInput
+            if field == "pincode":
+                input_type = NumberInput
+            elif field in ("address_type", "city"):
+                input_type = Select
+                class_name = FormClass.SELECT_INPUT if field == "address_type" else ""
+            widgets[field] = input_type(
+                attrs={
+                    "class": class_name,
+                    "placeholder": Placeholders.ADDRESS[field],
+                }
+            )
+            labels[field] = Labels.ADDRESS[field]
+
+
+class EmergencyDetailsForm(ModelForm):
+    """Emergency Details Form"""
+
+    class Meta:
+        model = EmerygencyDetails
+        fields = (
+            "name",
+            "phone_number",
+            "relationship",
+        )
+        widgets = {}
+        labels = {}
+        for field in fields:
+            class_name = FormClass.TEXT_INPUT
+            input_type = TextInput
+            if field == "phone_number":
+                input_type = NumberInput
+            elif field == "relationship":
+                input_type = Select
+                class_name = FormClass.SELECT_INPUT
+            widgets[field] = input_type(
+                attrs={
+                    "class": class_name,
+                    "placeholder": Placeholders.EMERYGENCY_DETAILS[field],
+                }
+            )
+            labels[field] = Labels.EMERYGENCY_DETAILS[field]

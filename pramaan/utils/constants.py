@@ -90,3 +90,4 @@ class FormClass:
     TEXT_INPUT = "validator input w-full input-primary"
     FILE_INPUT = "validator file-input w-full file-input-primary"
     SELECT_INPUT = "validator select w-full select-primary"
+    TEXTAREA = "textarea validator w-full textarea-primary"

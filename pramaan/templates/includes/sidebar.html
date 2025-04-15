@@ -1,7 +1,17 @@
 <div class="menu rounded-box w-full">
-    <li class="menu-title">User Details</li>
-    {% include 'partials/sidebar-link.html' with title='Profile' url="accounts:profile" section="#profile"%}
-    {% include 'partials/sidebar-link.html' with title='Details' url="accounts:profile" section="#details"%}
-    {% include 'partials/sidebar-link.html' with title='Address' url="accounts:profile" section="#address"%}
-    {% include 'partials/sidebar-link.html' with title='Emergency Contact' url="accounts:profile" section="#emergency"%}
+    <li>
+        <details {% if 'profile' in request.path %}open{%endif%}>
+            <summary>User Details</summary>
+            <ul>
+                {% include 'partials/sidebar-link.html' with title='Profile' url="accounts:profile" section="#profile"%}
+                {% include 'partials/sidebar-link.html' with title='Details' url="accounts:profile" section="#details"%}
+                {% include 'partials/sidebar-link.html' with title='Address' url="accounts:profile" section="#address"%}
+                <li>
+                    <a href="{% url 'accounts:profile' %}#emergency">
+                        Emergency Contact
+                    </a>
+                </li>
+            </ul>
+        </details>
+    </li>
 </div>

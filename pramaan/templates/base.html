@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Pramaan{%endblock%}</title>
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/loader.css' %}">
     <link rel="stylesheet" href="{% static 'css/daisy5.css' %}">
     <link rel="stylesheet" href="{% static 'css/themes.css' %}">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
@@ -23,6 +24,9 @@
 {% block pre-extrajs %}{%endblock%}
 
 <body data-theme="dark" class="bg-base-300">
+    <div class="h-screen fixed flex items-center justify-center w-full bg-base-300 z-10" id="loader">
+        <div class="loader scale-150"></div>
+    </div>
     {% include 'includes/messages.html' %}
     {% block content %}
     {% endblock %}

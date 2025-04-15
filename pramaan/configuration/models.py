@@ -19,7 +19,7 @@ class UserPreference(TimeStampedModel):
         return self.user
 
 
-class Notofication(TimeStampedModel, ActivatorModel):
+class Notification(TimeStampedModel, ActivatorModel):
     user = models.ForeignKey(
         "users.User", on_delete=models.CASCADE, related_name="notifications"
     )

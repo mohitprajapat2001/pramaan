@@ -24,7 +24,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate
 from utils.utils import get_model
-from accounts.form_mixins import BaseMultipleFormView
+from utils.mixins import BaseMultipleFormView
 from typing import Any
 
 SocialAccounts = get_model(**AppModel.SOCIAL_ACCOUNTS)
@@ -175,9 +175,10 @@ class DetailView(BaseMultipleFormView):
         if data := self.request.POST:
             if last_name := data.get("last_name"):
                 self.request.user.last_name = last_name
+                self.request.user.save(update_fields=["last_name"])
             elif first_name := data.get("first_name"):
                 self.request.user.first_name = first_name
-            self.request.user.save()
+                self.request.user.save(update_fields=["first_name"])
         return self.success_url_redirect()
 
 

@@ -2,55 +2,48 @@
 {% load static %}
 {% block title %}Configuration - {{request.user.username|title}}{% endblock%}
 
-{% block extracss %}
-<link rel="stylesheet" href="{% static 'css/selectize.min.css' %}">
-{% endblock %}
 {% block pre-extrajs %}
-<script src="{% static 'js/selectize.js' %}"></script>
-<script src="{% static 'js/profile.js' %}"></script>
+<script src="{% static 'js/configuration.js' %}"></script>
 {%endblock%}
 
 {% block content %}
 <div class="grid grid-cols-12 h-screen">
     <!-- Sidebar -->
     <div class="col-span-3 bg-base-100 m-3 rounded-xl overflow-auto p-3">
-        <!-- TODO: Authenticated Dashboard URL -->
-        <!-- TODO: profile form update form handling -->
-        <a href="" class="text-2xl font-bold">
-            Pramaan
-        </a>
+        <div class="flex items-center justify-between">
+            <a href="" class="text-2xl font-bold">
+                Pramaan
+            </a>
+            <a href="{% url 'accounts:logout' %}" role="button"
+                class="btn btn-error btn-circle btn-soft tooltip tooltip-left" data-tip="Click to Logout">
+                <i class="fa fa-door-open"></i>
+            </a>
+        </div>
         <div class="divider"></div>
         {% include 'includes/sidebar.html' %}
-
     </div>
+    <!-- Main Sections -->
     <div class="col-span-9 overflow-auto" id="sections">
         <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
             {% include "includes/breadcrump.html" with page="Configuration" icon="fas fa-screwdriver-wrench" %}
             <div class="rounded-2xl border border-gray-700 lg:p-6 bg-base-100">
-                <h3 class="mb-5 text-lg font-semibold lg:mb-7">
-                    {{request.user.username|title}}'s Configuration
-                </h3>
-                <section class="mb-6 p-5 border border-gray-700 rounded-xl lg:p-6" id="emergency">
-                    <div class="flex gap-6 lg:flex-row lg:items-start lg:justify-between w-full">
-                        <h4 class="text-lg font-semibold lg:mb-6">
-                            Emergency Contact
-                        </h4>
-                        <label for="emergency-add-modal" data-tip="Add Emerygency Contact" class="tooltip btn btn-soft
-                                            rounded-full border-gray-600">
-                            <i class="fa fa-plus"> </i>
-                            <span class="hidden md:block">Add</span>
-                        </label>
+                <div class="flex items-center justify-between gap-3">
+                    <h3 class="mb-5 text-lg font-semibold lg:mb-7">
+                        {{request.user.username|title}}'s Configuration
+                    </h3>
+                </div>
+                <form action="" method="POST">
+                    {%csrf_token%}
+                    {% include 'configuration/sections/account-preferances.html' with header='Account'%}
+                    {% include 'configuration/sections/notification-preferances.html' with header="Notification" %}
+                    {%include 'configuration/sections/privacy.html' with header='Privacy'%}
+                    <div class="flex justify-end items-center">
+                        <button type="submit" class="btn btn-primary mt-5 text-end justify-self-end tooltip"
+                            data-tip="Update Profile Default Preferences">
+                            Update Preferances
+                        </button>
                     </div>
-                    <div class="grid grid-cols-3">
-                        {% for emergency in request.user.emergency_details.all %}
-                        {{emergency}}
-                        {%empty %}
-                        <span class="text-error col-span-3">
-                            No Address Found
-                        </span>
-                        {% endfor %}
-                    </div>
-                </section>
+                </form>
             </div>
         </div>
     </div>

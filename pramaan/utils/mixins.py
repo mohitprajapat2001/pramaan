@@ -1,6 +1,8 @@
 from django.contrib.messages import info
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
+from django.views import View
+from django.contrib import messages
 
 
 class MessageMixin:
@@ -28,3 +30,18 @@ class LoginRequiredMixin:
         if not request.user.is_authenticated:
             return redirect(self.url)
         return super().dispatch(request, *args, **kwargs)
+
+
+class BaseMultipleFormView(View):
+    success_url = reverse_lazy("landing:home")
+    message_level = messages.SUCCESS
+    success_message = None
+
+    def success_url_redirect(self):
+        if self.success_message:
+            messages.add_message(
+                request=self.request,
+                level=self.message_level,
+                message=self.success_message,
+            )
+        return redirect(self.success_url)

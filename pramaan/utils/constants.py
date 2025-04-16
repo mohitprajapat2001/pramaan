@@ -92,7 +92,7 @@ class AppModel:
     }
     NOTIFICATION = {
         "app_label": "configuration",
-        "model_name": "Notofication",
+        "model_name": "Notification",
     }
     NOTIFICATION_PREFERENCE = {
         "app_label": "configuration",
@@ -109,3 +109,5 @@ class FormClass:
     FILE_INPUT = "validator file-input w-full file-input-primary"
     SELECT_INPUT = "validator select w-full select-primary"
     TEXTAREA = "textarea validator w-full textarea-primary"
+    SWITCH_INPUT = "toggle toggle-primary"
+    CHECKBOX_INPUT = "checkbox w-full checkbox-primary"

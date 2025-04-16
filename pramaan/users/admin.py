@@ -11,6 +11,35 @@ SocialAccounts = get_model(**AppModel.SOCIAL_ACCOUNTS)
 EmergencyDetails = get_model(**AppModel.EMERGENCY_DETAILS)
 SecurityQuestion = get_model(**AppModel.SECURITY_QUESTION)
 Subscription = get_model(**AppModel.SUBSCRIPTION)
+# Configuration App Model
+UserPreference = get_model(**AppModel.USER_PREFERENCE)
+NotificationPreference = get_model(**AppModel.NOTIFICATION_PREFERENCE)
+UserPrivacySettings = get_model(**AppModel.USER_PRIVACY_SETTINGS)
+
+
+# Inline Admin
+class UserPreferenceInline(admin.StackedInline):
+    model = UserPreference
+    can_delete = False
+    verbose_name_plural = "User Preference"
+    fk_name = "user"
+    extra = 1
+
+
+class NotificationPreferenceInline(admin.StackedInline):
+    model = NotificationPreference
+    can_delete = False
+    verbose_name_plural = "Notification Preference"
+    fk_name = "user"
+    extra = 1
+
+
+class UserPrivacySettingsInline(admin.StackedInline):
+    model = UserPrivacySettings
+    can_delete = False
+    verbose_name_plural = "User Privacy Settings"
+    fk_name = "user"
+    extra = 1
 
 
 class UserDetailInline(admin.StackedInline):
@@ -79,6 +108,9 @@ class UserAdmin(UserAdmin):
         EmergencyDetailsInline,
         SecurityQuestionInline,
         SubscriptionInline,
+        UserPreferenceInline,
+        NotificationPreferenceInline,
+        UserPrivacySettingsInline,
     ]
 
     list_display = (

@@ -23,7 +23,8 @@
 <script src="{% static 'js/index.js' %}"></script>
 {% block pre-extrajs %}{%endblock%}
 
-<body data-theme="dark" class="bg-base-300">
+<body data-theme="{%if request.user.preferences.theme%}{{request.user.preferences.theme}}{% else %}dark{%endif%}"
+    class="bg-base-300">
     <div class="h-screen fixed flex items-center justify-center w-full bg-base-300 z-10" id="loader">
         <div class="loader scale-150"></div>
     </div>

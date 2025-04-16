@@ -37,6 +37,9 @@ class User(AbstractUser):
         verbose_name = "User"
         verbose_name_plural = "Users"
 
+    def __str__(self):
+        return self.email
+
 
 class UserDetail(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="detail")

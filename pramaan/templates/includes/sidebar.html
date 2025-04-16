@@ -1,8 +1,8 @@
-<div class="menu rounded-box w-full">
+<div class="menu rounded-box w-full p-0 m-0">
     <li>
         <details open>
-            <summary>User Details</summary>
-            <ul>
+            <summary class="text-lg font-semibold">User Details</summary>
+            <ul class="text-md">
                 {% include 'partials/sidebar-link.html' with title='Profile' url="accounts:profile" section="#profile" icon="fas fa-user"%}
                 {% include 'partials/sidebar-link.html' with title='Details' url="accounts:profile" section="#details" icon="fas fa-user-edit"%}
                 {% include 'partials/sidebar-link.html' with title='Address' url="accounts:profile" section="#address" icon="fas fa-map-marker-alt"%}
@@ -15,23 +15,23 @@
             </ul>
         </details>
         <details open>
-            <summary>Configurations</summary>
-            <ul>
+            <summary class="text-lg font-semibold">Configurations</summary>
+            <ul class="text-md">
                 {% include 'partials/sidebar-link.html' with title='Preferences' url="configuration:configuration" section="#preferences" icon="fas fa-screwdriver-wrench"%}
                 {% include 'partials/sidebar-link.html' with title='Notification Preference' url="configuration:configuration" section="#notification" icon="fa fa-bell"%}
                 {% include 'partials/sidebar-link.html' with title='Privacy' url="configuration:configuration" section="#privacy" icon="fa fa-fingerprint"%}
             </ul>
         </details>
         <details open>
-            <summary>Account</summary>
-            <ul>
+            <summary class="text-lg font-semibold">Account</summary>
+            <ul class="text-md">
                 {% include 'partials/sidebar-link.html' with title='Change Password' url="landing:home" section="#change-password" icon="fa fa-key"%}
                 {% include 'partials/sidebar-link.html' with title='Change Username' url="landing:home" section="#change-username" icon="fa fa-signature"%}
             </ul>
         </details>
         <details open>
-            <summary>Integrations & Development</summary>
-            <ul>
+            <summary class="text-lg font-semibold">Integrations & Development</summary>
+            <ul class="text-md">
                 {% include 'partials/sidebar-link.html' with title='Applications' url="landing:home" section="#applications" icon="fa fa-shapes"%}
                 {% include 'partials/sidebar-link.html' with title='Developer Settings' url="landing:home" section="#developer-settings" icon="fa fa-terminal"%}
             </ul>

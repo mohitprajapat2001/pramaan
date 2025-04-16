@@ -15,9 +15,6 @@ class UserPreference(TimeStampedModel):
         verbose_name = "User Preference"
         verbose_name_plural = "User Preferences"
 
-    def __str__(self):
-        return self.user
-
 
 class Notification(TimeStampedModel, ActivatorModel):
     user = models.ForeignKey(
@@ -31,9 +28,6 @@ class Notification(TimeStampedModel, ActivatorModel):
         verbose_name = "Notification"
         verbose_name_plural = "Notifications"
 
-    def __str__(self):
-        return self.user
-
 
 class NotificationPreference(TimeStampedModel):
     user = models.OneToOneField(
@@ -44,9 +38,6 @@ class NotificationPreference(TimeStampedModel):
     class Meta:
         verbose_name = "Notification Preference"
         verbose_name_plural = "Notification Preferences"
-
-    def __str__(self):
-        return self.user
 
 
 class UserPrivacySettings(models.Model):
@@ -62,6 +53,3 @@ class UserPrivacySettings(models.Model):
     allow_messages = models.BooleanField(
         default=True, help_text="Allow others to send messages to the user."
     )
-
-    def __str__(self):
-        return f"Privacy Settings for {self.user.username}"

@@ -1,0 +1,59 @@
+<input type="checkbox" id="change-username-modal" class="modal-toggle" />
+<div class="modal" role="dialog">
+    <div class="modal-box max-h-10/12">
+        <form action="{% url url %}" method="POST">
+            {% csrf_token %}
+            <h3 class="text-lg font-bold mb-5">Really change your username?</h3>
+            <div class="py-4 flex flex-col gap-4">
+                <div role="alert" class="alert alert-soft alert-warning">
+                    <i class="fa-solid fa-circle-exclamation m-0 p-0 text-xl"></i>
+                    <span>Unexpected bad things will happen if you don’t read this!</span>
+                </div>
+                <ul class="list-disc list-inside">
+                    <li>
+                        We will not set up redirects for your old profile page.
+                    </li>
+                    <li>
+                        We will create redirects for your repositories (web and git access).
+                    </li>
+                    <li>
+                        Renaming may take a few minutes to complete.
+                    </li>
+                    <li>
+                        We will not set up redirects for Pages sites.
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-action">
+                <label type="button" for="change-username-modal-confirm" class="btn btn-soft btn-warning w-full">
+                    I understand continue changing username.
+                </label>
+            </div>
+        </form>
+    </div>
+    <label class="modal-backdrop" for="change-username-modal"></label>
+</div>
+
+<input type="checkbox" id="change-username-modal-confirm" class="modal-toggle" />
+<div class="modal" role="dialog">
+    <div class="modal-box max-h-10/12">
+        <form action="{% url url %}" method="POST">
+            {% csrf_token %}
+            <h3 class="text-lg font-bold">Change username</h3>
+            <div class="py-4">
+                {% for field in username_form %}
+                {% include 'partials/form-field.html' with field=field %}
+                {% endfor %}
+            </div>
+            <div class="modal-action flex items-center justify-end">
+                <button type="submit" class="btn btn-soft btn-primary">
+                    Change username
+                </button>
+                <label for="change-username-modal-confirm" class="btn btn-soft">
+                    Cancel
+                </label>
+            </div>
+        </form>
+    </div>
+    <label class="modal-backdrop" for="change-username-modal-confirm"></label>
+</div>

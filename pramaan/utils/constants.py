@@ -50,6 +50,7 @@ class Templates:
     REGISTER_TEMPLATE = "accounts/register.html"
     PROFILE_TEMPLATE = "accounts/profile.html"
     CONFIGURATION = "configuration/configuration.html"
+    ACCOUNT_TEMPLATE = "accounts/accounts.html"
 
 
 class AppModel:

@@ -226,3 +226,63 @@ class EmergencyDetailsForm(ModelForm):
                 }
             )
             labels[field] = Labels.EMERYGENCY_DETAILS[field]
+
+
+class PasswordChangeForm(Form):
+    """Password Change Form"""
+
+    confirm_password = CharField(
+        max_length=16,
+        required=True,
+        widget=PasswordInput(
+            attrs={
+                "placeholder": Placeholders.PASSWORD_CHANGE["confirm_password"],
+                "class": FormClass.TEXT_INPUT,
+            }
+        ),
+        label=Labels.PASSWORD_CHANGE["confirm_password"],
+    )
+    old_password = CharField(
+        max_length=16,
+        required=True,
+        widget=PasswordInput(
+            attrs={
+                "placeholder": Placeholders.PASSWORD_CHANGE["old_password"],
+                "class": FormClass.TEXT_INPUT,
+            }
+        ),
+        label=Labels.PASSWORD_CHANGE["old_password"],
+    )
+    password = CharField(
+        max_length=16,
+        required=True,
+        widget=PasswordInput(
+            attrs={
+                "placeholder": Placeholders.PASSWORD_CHANGE["password"],
+                "class": FormClass.TEXT_INPUT,
+            }
+        ),
+        label=Labels.PASSWORD_CHANGE["password"],
+        validators=[validate_password],
+    )
+
+    field_order = ("old_password", "password", "confirm_password")
+
+
+class UsernameChangeForm(ModelForm):
+    """Username Change Form"""
+
+    class Meta:
+        model = User
+        fields = ("username",)
+        widgets = {
+            "username": TextInput(
+                attrs={
+                    "placeholder": Placeholders.USERNAME_CHANGE["username"],
+                    "class": FormClass.TEXT_INPUT,
+                }
+            )
+        }
+        labels = {
+            "username": Labels.USERNAME_CHANGE["username"],
+        }

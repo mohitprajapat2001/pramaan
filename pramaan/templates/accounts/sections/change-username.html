@@ -1,0 +1,22 @@
+<section class="mb-6 p-5 border border-gray-700 rounded-xl lg:p-6" id="change-username">
+    <div class="flex gap-6 lg:flex-row lg:items-start lg:justify-between w-full">
+        <h4 class="text-lg font-semibold lg:mb-6">
+            Change {{header}}
+        </h4>
+        <!-- <label for="emergency-add-modal" data-tip="Add Emerygency Contact" class="tooltip btn btn-soft
+                                            rounded-full border-gray-600">
+            <i class="fa fa-plus"> </i>
+            <span class="hidden md:block">Add</span>
+        </label> -->
+    </div>
+    <div class="flex flex-col md:flex-row items-center justify-between gap-3">
+        <!-- TODO: Add Pages to display side effects of the change username -->
+        <p>
+            Changing your username can have <a href="" class="text-primary underline italic tooltip"
+                data-tip="change username at risk">unintended side
+                effects.</a>
+        </p>
+        <label for="change-username-modal" class="btn btn-soft btn-warning">Change Username</label>
+        {% include 'modals/accounts/change-username.html' with url=action.username %}
+    </div>
+</section>

@@ -8,6 +8,9 @@ from accounts.views import (
     social_view,
     detail_view,
     emergency_view,
+    account_view,
+    password_change_view,
+    username_change_view,
 )
 
 
@@ -22,4 +25,7 @@ urlpatterns = (
     path("social/", social_view, name="social"),
     path("detail/", detail_view, name="detail"),
     path("emergency/", emergency_view, name="emergency"),
+    path("account/", account_view, name="accounts"),
+    path("password-change/", password_change_view, name="password-change"),
+    path("username-change/", username_change_view, name="username-change"),
 )

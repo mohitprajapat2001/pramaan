@@ -9,7 +9,10 @@ THIRD_PARTY_APPS = [
 ]
 
 
-PROJECT_APPS = ["users.apps.UsersConfig"]
+PROJECT_APPS = [
+    "users.apps.UsersConfig",
+    "configuration.apps.ConfigurationConfig",
+]
 DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",

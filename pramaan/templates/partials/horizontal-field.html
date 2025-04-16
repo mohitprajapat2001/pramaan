@@ -1,0 +1,13 @@
+<fieldset class="fieldset mb-3">
+    <div class="flex flex-col md:flex-row w-full justify-between items-center gap-3">
+        <p class="text-base">{{ field.label|safe|escape }}
+            {% if field.field.required %}*{% endif %}</p>
+        </p>
+        {{field}}
+    </div>
+    {% if field.errors %}
+    {% for error in field.errors %}
+    <p class="validator-hint text-start text-md text-error italic">{{ error|escape }}</p>
+    {% endfor %}
+    {% endif %}
+</fieldset>

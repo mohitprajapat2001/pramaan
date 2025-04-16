@@ -49,6 +49,7 @@ class Templates:
     LOGIN_TEMPLATE = "accounts/login.html"
     REGISTER_TEMPLATE = "accounts/register.html"
     PROFILE_TEMPLATE = "accounts/profile.html"
+    CONFIGURATION = "configuration/configuration.html"
 
 
 class AppModel:
@@ -84,6 +85,23 @@ class AppModel:
         "app_label": "users",
         "model_name": "Subscription",
     }
+    # Configuration App Models
+    USER_PREFERENCE = {
+        "app_label": "configuration",
+        "model_name": "UserPreference",
+    }
+    NOTIFICATION = {
+        "app_label": "configuration",
+        "model_name": "Notification",
+    }
+    NOTIFICATION_PREFERENCE = {
+        "app_label": "configuration",
+        "model_name": "NotificationPreference",
+    }
+    USER_PRIVACY_SETTINGS = {
+        "app_label": "configuration",
+        "model_name": "UserPrivacySettings",
+    }
 
 
 class FormClass:
@@ -91,3 +109,5 @@ class FormClass:
     FILE_INPUT = "validator file-input w-full file-input-primary"
     SELECT_INPUT = "validator select w-full select-primary"
     TEXTAREA = "textarea validator w-full textarea-primary"
+    SWITCH_INPUT = "toggle toggle-primary"
+    CHECKBOX_INPUT = "checkbox w-full checkbox-primary"

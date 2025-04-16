@@ -2,9 +2,6 @@
 from typing import Any
 from utils.utils import get_model
 from utils.constants import AppModel
-from django.views.generic import View
-from django.shortcuts import redirect
-from django.urls import reverse_lazy
 from accounts.forms import SocialAccountsForm, UserDetailForm
 from accounts.constants import SucccessMessages, SOCIAL_FORM, USER_DETAIL_FORM
 from django.contrib import messages
@@ -65,18 +62,3 @@ class DetailFormMixin:
         context = super().get_context_data(**kwargs)
         context["detail_form"] = UserDetailForm(instance=self.request.user.detail)
         return context
-
-
-class BaseMultipleFormView(View):
-    success_url = reverse_lazy("landing:home")
-    message_level = messages.SUCCESS
-    success_message = None
-
-    def success_url_redirect(self):
-        if self.success_message:
-            messages.add_message(
-                request=self.request,
-                level=self.message_level,
-                message=self.success_message,
-            )
-        return redirect(self.success_url)

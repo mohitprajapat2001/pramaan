@@ -10,12 +10,12 @@
 <div class="p-4 min-h-screen">
     {% include "includes/breadcrump.html" with page="Dashboard" icon="fas fa-screwdriver-wrench" %}
     <div class="rounded-2xl border border-gray-700 lg:p-6 bg-base-100">
-        <div class="flex flex-col items-center justify-between gap-3">
-            <h3 class="mb-5 text-lg font-semibold lg:mb-7">
+        <div class="flex flex-col items-start justify-between">
+            <h3 class="text-2xl font-semibold">
                 {{request.user.username|title}}'s Dashboard
             </h3>
-            <p class="text-xs">
-                Its {% now "T M js, D P" %}
+            <p class="text-xs italic text-gray-400">
+                {% now "T M jS, D P" %}
             </p>
         </div>
     </div>

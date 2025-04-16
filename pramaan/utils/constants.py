@@ -49,8 +49,11 @@ class Templates:
     LOGIN_TEMPLATE = "accounts/login.html"
     REGISTER_TEMPLATE = "accounts/register.html"
     PROFILE_TEMPLATE = "accounts/profile.html"
-    CONFIGURATION = "configuration/configuration.html"
     ACCOUNT_TEMPLATE = "accounts/accounts.html"
+    # Configuration App
+    CONFIGURATION = "configuration/configuration.html"
+    # Dashboard App
+    DASHBOARD_TEMPLATE = "dashboard/dashboard.html"
 
 
 class AppModel:

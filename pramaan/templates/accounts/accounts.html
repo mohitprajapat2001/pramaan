@@ -7,35 +7,17 @@
 {%endblock%}
 
 {% block content %}
-<div class="grid grid-cols-12 h-screen">
-    <!-- Sidebar -->
-    <div class="col-span-3 bg-base-100 m-3 rounded-xl overflow-auto p-3">
-        <div class="flex items-center justify-between">
-            <a href="" class="text-2xl font-bold">
-                Pramaan
-            </a>
-            <a href="{% url 'accounts:logout' %}" role="button"
-                class="btn btn-error btn-circle btn-soft tooltip tooltip-left" data-tip="Click to Logout">
-                <i class="fa fa-door-open"></i>
-            </a>
+<div class="p-4 mx-auto">
+    {% include "includes/breadcrump.html" with page="Account Settings" icon="fas fa-universal-access" %}
+    <div class="rounded-2xl border border-gray-700 lg:p-6 bg-base-100">
+        <div class="flex items-center justify-between gap-3">
+            <h3 class="mb-5 text-lg font-semibold lg:mb-7">
+                {{request.user.username|title}}'s Account
+            </h3>
         </div>
-        <div class="divider"></div>
-        {% include 'includes/sidebar.html' %}
-    </div>
-    <!-- Main Sections -->
-    <div class="col-span-9 overflow-auto" id="sections">
-        <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
-            {% include "includes/breadcrump.html" with page="Account Settings" icon="fas fa-universal-access" %}
-            <div class="rounded-2xl border border-gray-700 lg:p-6 bg-base-100">
-                <div class="flex items-center justify-between gap-3">
-                    <h3 class="mb-5 text-lg font-semibold lg:mb-7">
-                        {{request.user.username|title}}'s Account
-                    </h3>
-                </div>
-                {% include 'accounts/sections/change-password.html' with header='Password'%}
-                {% include 'accounts/sections/change-username.html' with header='Username'%}
-            </div>
-        </div>
+        {% include 'accounts/sections/change-password.html' with header='Password'%}
+        {% include 'accounts/sections/change-username.html' with header='Username'%}
     </div>
 </div>
+{% include 'includes/sidebar-drawer.html' %}
 {% endblock %}

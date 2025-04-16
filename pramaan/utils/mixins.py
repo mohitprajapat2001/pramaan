@@ -37,6 +37,9 @@ class BaseMultipleFormView(View):
     message_level = messages.SUCCESS
     success_message = None
 
+    def get(self, request, *args, **kwargs):
+        return redirect(self.success_url)
+
     def success_url_redirect(self):
         if self.success_message:
             messages.add_message(

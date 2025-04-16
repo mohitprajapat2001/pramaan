@@ -15,6 +15,8 @@ from accounts.forms import (
     SocialAccountsForm,
     UserDetailForm,
     EmergencyDetailsForm,
+    PasswordChangeForm,
+    UsernameChangeForm,
 )
 from django.contrib.messages.views import SuccessMessageMixin
 from utils.mixins import LoginRequiredMixin
@@ -217,3 +219,87 @@ class EmergencyView(BaseMultipleFormView):
 
 
 emergency_view = EmergencyView.as_view()
+
+
+class AccountView(LoginRequiredMixin, TemplateView):
+    template_name = Templates.ACCOUNT_TEMPLATE
+
+    def get_context_data(self, **kwargs) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["password_form"] = PasswordChangeForm()
+        context["username_form"] = UsernameChangeForm(instance=self.request.user)
+        context["action"] = {
+            "password": "accounts:password-change",
+            "username": "accounts:username-change",
+        }
+        return context
+
+
+account_view = AccountView.as_view()
+
+
+class PasswordChangeView(BaseMultipleFormView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy("accounts:accounts")
+    success_message = SucccessMessages.PASSWORD_CHANGED
+
+    def validate_password_authenticated(self, data: dict):
+        if not self.request.user.check_password(data["old_password"]):
+            self.success_message = ValidationErrors.INCORRECT_PASSWORD
+            self.message_level = messages.ERROR
+            return False
+        return True
+
+    def validate_password_same(self, data: dict):
+        if data.get("password") == data.get("old_password"):
+            self.success_message = ValidationErrors.SAME_PASSWORD
+            self.message_level = messages.WARNING
+            return False
+        return True
+
+    def validate_password_mismatch(self, data: dict):
+        if data.get("password") != data.get("confirm_password"):
+            self.success_message = ValidationErrors.PASSWORD_MISMATCH
+            self.message_level = messages.ERROR
+            return False
+        return True
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(data=self.request.POST)
+        if not form.is_valid():
+            for field, error in form.errors.items():
+                self.success_message = str(error)
+            self.message_level = messages.ERROR
+            return self.success_url_redirect()
+        cleaned_data = form.clean()
+        if not self.validate_password_authenticated(cleaned_data):
+            return self.success_url_redirect()
+        if not self.validate_password_same(cleaned_data):
+            return self.success_url_redirect()
+        if not self.validate_password_mismatch(cleaned_data):
+            return self.success_url_redirect()
+        self.request.user.set_password(form.cleaned_data["password"])
+        self.request.user.save()
+        return self.success_url_redirect()
+
+
+password_change_view = PasswordChangeView.as_view()
+
+
+class UsernameChangeView(BaseMultipleFormView):
+    form_class = UsernameChangeForm
+    success_url = reverse_lazy("accounts:accounts")
+    success_message = SucccessMessages.USERNAME_CHANGED
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(data=self.request.POST, instance=self.request.user)
+        if not form.is_valid():
+            for field, error in form.errors.items():
+                self.success_message = str(error)
+            self.message_level = messages.ERROR
+        else:
+            form.save()
+        return self.success_url_redirect()
+
+
+username_change_view = UsernameChangeView.as_view()

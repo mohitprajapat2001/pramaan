@@ -52,6 +52,15 @@ class Labels:
         "relationship": "Relationship",
     }
 
+    PASSWORD_CHANGE = {
+        "old_password": "Old Password",
+        "password": "New Password",
+        "confirm_password": "Confirm Password",
+    }
+    USERNAME_CHANGE = {
+        "username": "Username",
+    }
+
 
 class Placeholders:
     """Account app form placeholder"""
@@ -98,6 +107,15 @@ class Placeholders:
         "relationship": "Relationship",
     }
 
+    PASSWORD_CHANGE = {
+        "old_password": "Old Password",
+        "password": "New Password",
+        "confirm_password": "Confirm Password",
+    }
+    USERNAME_CHANGE = {
+        "username": "Username",
+    }
+
 
 class SucccessMessages:
     """Accounts app success message"""
@@ -115,6 +133,8 @@ class SucccessMessages:
     EMERGENCY_SUCCESS = _("Emergency details added successfully")
     EMERGENCY_CONTACT_NOT_FOUND = _("Emergency contact not found")
     EMERGENCY_CONTACT_DELETED = _("Emergency contact deleted successfully")
+    PASSWORD_CHANGED = _("Password changed successfully")
+    USERNAME_CHANGED = _("Username changed successfully")
 
 
 class ValidationErrors:
@@ -124,3 +144,6 @@ class ValidationErrors:
     INVALID_CREDENTIALS = _("Invalid Credentials")
     PASSWORD_MISMATCH = _("Password mismatch")
     LOGIN_REQUIRED = _("Please login to access this page")
+    SAME_PASSWORD = _("Old and new password cannot be same")
+    USERNAME_NOT_AVAILABLE = _("Username not available")
+    INCORRECT_PASSWORD = _("Incorrect password")

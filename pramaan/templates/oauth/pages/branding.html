@@ -7,5 +7,34 @@
 
 
 {% block main-content %}
+<div class="p-2 max-h-[75vh] overflow-y-auto">
+    <div class="flex justify-end items-center">
+        <!-- <h1 class="text-xl font-bold">
+            OAuth Details
+        </h1> -->
+        <form action="{% url 'oauth:branding' %}" method="POST">
+            <select name="oauth" class="select select-primary w-40">
+                {% for oauth in request.user.oauths.all %}
+                <option value="{{oauth.id}}">{{ oauth.title }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+    <div>
+        <h1 class="text-2xl font-semibold">
+            App information
+        </h1>
+        <p class="text-gray-500 text-xs">
+            This shows in the consent screen, and helps end users know who you are and contact you
+        </p>
+        <form action="{% url 'oauth:branding' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in oauth_form %}
+            {% include 'partials/field.html' with field=field %}
+            {%endfor%}
+
+        </form>
+    </div>
+</div>
 
 {%endblock%}

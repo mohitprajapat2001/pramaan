@@ -3,6 +3,7 @@ from utils.mixins import LoginRequiredMixin, OAuthBaseMixin
 from utils.constants import Templates
 from oauth.constants import PageTitles
 from typing import Any
+from oauth.forms import OAuthForm
 
 
 class OAuthDashboardView(LoginRequiredMixin, TemplateView):
@@ -28,6 +29,7 @@ class OAuthBrandingView(LoginRequiredMixin, OAuthBaseMixin, TemplateView):
             context["oauth"] = oauth
         else:
             context["oauth"] = self.request.user.oauths.first()
+        context["oauth_form"] = OAuthForm(instance=context["oauth"])
         context["page_title"] = PageTitles.BRANDING
         return context
 

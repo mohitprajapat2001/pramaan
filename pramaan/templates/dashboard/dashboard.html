@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Dashboard - {{request.user.username|title}}{% endblock%}
+
+{% block pre-extrajs %}
+<script src="{% static 'js/dashboard.js' %}"></script>
+{%endblock%}
+
+{% block content %}
+<div class="p-4 min-h-screen">
+    {% include "includes/breadcrump.html" with page="Dashboard" icon="fas fa-screwdriver-wrench" %}
+    <div class="rounded-2xl border border-gray-700 lg:p-6 bg-base-100">
+        <div class="flex flex-col items-start justify-between">
+            <h3 class="text-2xl font-semibold">
+                {{request.user.username|title}}'s Dashboard
+            </h3>
+            <p class="text-xs italic text-gray-400">
+                {% now "T M jS, D P" %}
+            </p>
+        </div>
+    </div>
+</div>
+{% include 'includes/sidebar-drawer.html' %}
+{% endblock %}

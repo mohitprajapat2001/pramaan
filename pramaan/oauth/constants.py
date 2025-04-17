@@ -22,6 +22,7 @@ class PageTitles:
 
     OVERVIEW = _("Overview")
     BRANDING = _("Branding")
+    CLIENT = _("Client")
 
 
 class PlaceHolders:

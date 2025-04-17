@@ -46,3 +46,21 @@ class OAuthForm(forms.ModelForm):
                 attrs={"class": class_type, "placeholder": PlaceHolders.OAUTH[field]}
             )
             labels[field] = Labels.OAUTH[field]
+
+
+class ClientForm(forms.ModelForm):
+    class Meta:
+        model = Client
+        fields = ("title", "description")
+        widgets = {
+            "title": forms.TextInput(
+                attrs={"class": FormClass.TEXT_INPUT, "placeholder": "Title"}
+            ),
+            "description": forms.Textarea(
+                attrs={"class": FormClass.TEXTAREA, "placeholder": "Description"}
+            ),
+        }
+        labels = {
+            "title": "Title",
+            "description": "Description",
+        }

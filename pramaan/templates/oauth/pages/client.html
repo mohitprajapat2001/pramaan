@@ -1,11 +1,64 @@
 {%extends 'oauth/oauth.html'%}
+{% load static %}
 {% block title %}Oauth - Client{%endblock%}
 
 {% block extrac-css %}{% endblock %}
 
-{%block pre-extrajs%}{%endblock%}
+{%block pre-extrajs%}
+<script src="{% static 'js/oauth/oauth.js' %}"></script>
+{%endblock%}
 
 
 {% block main-content %}
-Hello
+<div class="p-2 max-h-[75vh] overflow-y-auto">
+    <div class="flex justify-between items-center mb-5">
+        <div class="flex justify-start-items-center gap-3">
+            <h1 class="text-xl font-bold">
+                Clients
+            </h1>
+            <label for="create-client-modal" class="btn btn-sm btn-primary">
+                <i class="fa fa-plus"></i>
+                Create client
+            </label>
+            {% include 'modals/oauth/create-client.html' %}
+        </div>
+        <form action="{% url 'oauth:branding' %}" method="POST">
+            <select name="oauth" class="select select-primary w-40">
+                {% for oauth in request.user.oauths.all %}
+                <option value="{{oauth.id}}">{{ oauth.title }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+    <div class="flex flex-col w-full gap-3">
+        <h1 class="text-2xl font-semibold">
+            Oauth Clients IDs
+        </h1>
+        <div class="border border-gray-700 rounded-xl p-2">
+            <table class="table table-zebra">
+                <thead>
+                    <tr class="uppercase">
+                        <th>ID</th>
+                        <th>TITLE</th>
+                        <th>CREATED</th>
+                        <th>STATUS</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in oauth.clients.all %}
+
+                    {%empty%}
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            No Clients Available
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 {%endblock%}

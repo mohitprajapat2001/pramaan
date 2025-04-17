@@ -5,6 +5,7 @@ from django_extensions.db.models import (
     TitleDescriptionModel,
 )
 from oauth.constants import OAUTH_LOGO_UPLOAD_PATH, OauthStatusChoices
+from utils.secrets import generate_client_id, generate_client_secret
 
 
 def _oauth_logo_path(self, filename):
@@ -44,14 +45,14 @@ class Oauth(TimeStampedModel, ActivatorModel, TitleDescriptionModel):
     )
 
 
-class Client(ActivatorModel, TimeStampedModel):
+class Client(TitleDescriptionModel, ActivatorModel, TimeStampedModel):
     """
     Client model
     """
 
     oauth = models.ForeignKey(Oauth, on_delete=models.CASCADE, related_name="clients")
-    client_id = models.CharField(max_length=255, unique=True)
-    client_secret = models.CharField(max_length=255)
+    client_id = models.CharField(max_length=16, unique=True, default=generate_client_id)
+    client_secret = models.CharField(max_length=64, default=generate_client_secret)
 
 
 class AuthorizedDomains(ActivatorModel, TimeStampedModel):

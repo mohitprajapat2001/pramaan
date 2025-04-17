@@ -8,6 +8,13 @@
         {{ field }}
         <i class="fas fa-eye absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500 toggle-password"
             data-target="{{ field.id_for_label }}"></i>
+        {% elif field.field.widget.input_type == 'file' %}
+        {% if field.value %}
+        <div class="flex items-center gap-2 mt-2 mb-4">
+            <img src="{{field.value.url}}" alt="image" class="w-xl rounded-xl object-cover">
+        </div>
+        {%endif%}
+        {{ field }}
         {% else %}
         {{ field }}
         {% endif %}

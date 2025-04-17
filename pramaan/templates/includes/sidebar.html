@@ -1,40 +1,125 @@
-<div class="menu rounded-box w-full p-0 m-0">
+<div class="menu rounded-box w-full p-0 m-0 subpixel-antialiased gap-2">
+    <!-- TODO: Update links according to template -->
     <li>
-        <details open>
-            <summary class="text-lg font-semibold">User Details</summary>
-            <ul class="text-md">
-                {% include 'partials/sidebar-link.html' with title='Profile' url="accounts:profile" section="" icon="fas fa-user"%}
-                {% include 'partials/sidebar-link.html' with title='Details' url="accounts:profile" section="#details" icon="fas fa-file-signature"%}
-                {% include 'partials/sidebar-link.html' with title='Address' url="accounts:profile" section="#address" icon="fas fa-map-marker-alt"%}
-                <li>
-                    <a href="{% url 'accounts:profile' %}#emergency">
-                        <i class="fa fa-circle-h"></i>
-                        Emergency Contact
-                    </a>
-                </li>
-            </ul>
-        </details>
-        <details open>
-            <summary class="text-lg font-semibold">Configurations</summary>
-            <ul class="text-md">
-                {% include 'partials/sidebar-link.html' with title='Preferences' url="configuration:configuration" section="" icon="fas fa-screwdriver-wrench"%}
-                {% include 'partials/sidebar-link.html' with title='Notification Preference' url="configuration:configuration" section="#notification" icon="fa fa-bell"%}
-                {% include 'partials/sidebar-link.html' with title='Privacy' url="configuration:configuration" section="#privacy" icon="fa fa-fingerprint"%}
-            </ul>
-        </details>
-        <details open>
-            <summary class="text-lg font-semibold">Account</summary>
-            <ul class="text-md">
-                {% include 'partials/sidebar-link.html' with title='Change Password' url="accounts:accounts" section="" icon="fa fa-key"%}
-                {% include 'partials/sidebar-link.html' with title='Change Username' url="accounts:accounts" section="#change-username" icon="fa fa-signature"%}
-            </ul>
-        </details>
-        <details open>
-            <summary class="text-lg">Integrations & Development</summary>
-            <ul>
-                {% include 'partials/sidebar-link.html' with title='Applications' url="landing:home" section="" icon="fa fa-shapes"%}
-                {% include 'partials/sidebar-link.html' with title='Developer Settings' url="landing:home" section="#developer-settings" icon="fa fa-terminal"%}
-            </ul>
-        </details>
+        <a href="{% url 'dashboard:dashboard'  %}" class="
+        {% if 'dashboard' in request.path %}
+        menu-active
+        {% endif %}
+        ">
+            {% include 'svg/dashboard.html' %}
+            Dashboard
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'dashboard:dashboard'  %}" class="
+        {% if 'linkinbio' in request.path %}
+        menu-active
+        {% endif %}
+        ">
+            <i class="fa fa-link w-6"></i>
+            Link in Bio
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'dashboard:dashboard'  %}" class="
+        {% if 'profile-card' in request.path %}
+        menu-active
+        {% endif %}
+        ">
+            <i class="fa fa-id-card w-6"></i>
+            Profile Card
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'dashboard:dashboard'  %}" class="
+        {% if 'portfolio' in request.path %}
+        menu-active
+        {% endif %}
+        ">
+            <i class="fa fa-user-tie w-6"></i>
+            Portfolio
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'dashboard:dashboard'  %}" class="
+        {% if 'user-blog' in request.path %}
+        menu-active
+        {% endif %}
+        ">
+            <i class="fa fa-blog w-6"></i>
+            User Blog
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'dashboard:dashboard'  %}" class="
+        {% if 'oauth' in request.path %}
+        menu-active
+        {% endif %}
+        ">
+            <i class="fa fa-unlock-keyhole w-6"></i>
+            O Auth
+        </a>
+    </li>
+    <div class="divider"></div>
+    <li>
+        <a href="{% url 'accounts:profile'  %}" class="
+        {% if 'profile' in request.path %}
+        menu-active
+        {% endif %}
+        ">
+            <i class="fa fa-user-gear"></i>
+            Public Profile
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'configuration:configuration'  %}" class="
+        {% if 'configuration' in request.path %}
+        menu-active
+        {% endif %}
+        ">
+            <i class="fa fa-screwdriver-wrench"></i>
+            Preferences
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'accounts:accounts'  %}" class="
+        {% if 'accounts' in request.path %}
+        menu-active
+        {% endif %}
+        ">
+            <i class="fa fa-user-shield"></i>
+            Account
+        </a>
+    </li>
+    <div class="divider"></div>
+    <li>
+        <a href="{% url 'dashboard:dashboard'  %}" class="
+        {% if 'blog' in request.path %}
+        menu-active
+        {% endif %}
+        ">
+            <i class="fa fa-square-rss"></i>
+            Pramaan Blog
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'dashboard:dashboard'  %}" class="
+        {% if 'contribute' in request.path %}
+        menu-active
+        {% endif %}
+        ">
+            <i class="fa fa-code-branch"></i>
+            Contribute
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'dashboard:dashboard'  %}" class="
+        {% if 'developer' in request.path %}
+        menu-active
+        {% endif %}
+        ">
+            <i class="fa fa-code"></i>
+            Developer Docs
+        </a>
     </li>
 </div>

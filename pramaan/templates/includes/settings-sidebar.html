@@ -1,0 +1,46 @@
+<div class="menu rounded-box w-full p-0 m-0">
+    <li>
+        <a href="{% url 'dashboard:dashboard'  %}">
+           {% include 'svg/dashboard.html' %}
+            Dashboard
+        </a>
+    </li>
+    <li>
+        <details open>
+            <summary class="text-lg font-semibold">User Details</summary>
+            <ul class="text-md">
+                {% include 'partials/sidebar-link.html' with title='Profile' url="accounts:profile" section="" icon="fas fa-user"%}
+                {% include 'partials/sidebar-link.html' with title='Details' url="accounts:profile" section="#details" icon="fas fa-file-signature"%}
+                {% include 'partials/sidebar-link.html' with title='Address' url="accounts:profile" section="#address" icon="fas fa-map-marker-alt"%}
+                <li>
+                    <a href="{% url 'accounts:profile' %}#emergency">
+                        <i class="fa fa-circle-h"></i>
+                        Emergency Contact
+                    </a>
+                </li>
+            </ul>
+        </details>
+        <details open>
+            <summary class="text-lg font-semibold">Configurations</summary>
+            <ul class="text-md">
+                {% include 'partials/sidebar-link.html' with title='Preferences' url="configuration:configuration" section="" icon="fas fa-screwdriver-wrench"%}
+                {% include 'partials/sidebar-link.html' with title='Notification Preference' url="configuration:configuration" section="#notification" icon="fa fa-bell"%}
+                {% include 'partials/sidebar-link.html' with title='Privacy' url="configuration:configuration" section="#privacy" icon="fa fa-fingerprint"%}
+            </ul>
+        </details>
+        <details open>
+            <summary class="text-lg font-semibold">Account</summary>
+            <ul class="text-md">
+                {% include 'partials/sidebar-link.html' with title='Change Password' url="accounts:accounts" section="" icon="fa fa-key"%}
+                {% include 'partials/sidebar-link.html' with title='Change Username' url="accounts:accounts" section="#change-username" icon="fa fa-signature"%}
+            </ul>
+        </details>
+        <details open>
+            <summary class="text-lg">Integrations & Development</summary>
+            <ul>
+                {% include 'partials/sidebar-link.html' with title='Applications' url="landing:home" section="" icon="fa fa-shapes"%}
+                {% include 'partials/sidebar-link.html' with title='Developer Settings' url="landing:home" section="#developer-settings" icon="fa fa-terminal"%}
+            </ul>
+        </details>
+    </li>
+</div>

@@ -1,0 +1,24 @@
+<li>
+    <a href="{% url 'oauth:oauth' %}" class="{% if request.path == '/oauth/' %} menu-active {% endif %}">
+        <i class="fa fa-home"></i>
+        Overview
+    </a>
+</li>
+<li>
+    <a href="{% url 'oauth:branding' %}" class="{% if 'branding' in request.path  %} menu-active {% endif %}">
+        <i class="fa fa-palette"></i>
+        Branding
+    </a>
+</li>
+<li>
+    <a href="{% url 'oauth:client' %}" class="{% if 'client' in request.path  %} menu-active {% endif %}">
+        <i class="fa fa-users"></i>
+        Client
+    </a>
+</li>
+<li>
+    <a href="{% url 'oauth:verification' %}" class="{% if 'verification' in request.path %} menu-active {% endif %}">
+        <i class="fa fa-certificate"></i>
+        Verification
+    </a>
+</li>

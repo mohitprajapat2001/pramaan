@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.views import View
 from django.contrib import messages
+from utils.constants import Messages
 
 
 class MessageMixin:
@@ -30,6 +31,20 @@ class LoginRequiredMixin:
         if not request.user.is_authenticated:
             return redirect(self.url)
         return super().dispatch(request, *args, **kwargs)
+
+
+class OAuthBaseMixin:
+    """
+    override dispatch method to check where query params have oauth id else redirect to user's oauth dashboard
+    """
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.GET.get("oauth"):
+            return super().dispatch(request, *args, **kwargs)
+        if oauth := request.user.oauths.first():
+            return redirect(reverse_lazy(self.url) + "?oauth=%s" % oauth.id)
+        messages.add_message(request, messages.INFO, Messages.OAUTH_NOT_IN_QUERY_PARAMS)
+        return redirect(reverse_lazy("oauth:oauth"))
 
 
 class BaseMultipleFormView(View):

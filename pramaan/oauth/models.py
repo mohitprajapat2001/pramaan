@@ -19,8 +19,8 @@ class Oauth(TimeStampedModel, ActivatorModel, TitleDescriptionModel):
     Oauth model
     """
 
-    user = models.OneToOneField(
-        "users.User", on_delete=models.CASCADE, related_name="oauth"
+    user = models.ForeignKey(
+        "users.User", on_delete=models.CASCADE, related_name="oauths"
     )
     support_email = models.EmailField(verbose_name="Support Email")
     logo = models.ImageField(
@@ -71,6 +71,6 @@ class RedirectURIs(ActivatorModel, TimeStampedModel):
     """
 
     client = models.ForeignKey(
-        Client, on_delete=models.CASCADE, related_name="redirect_uris"
+        Oauth, on_delete=models.CASCADE, related_name="redirect_uris"
     )
     redirect_uri = models.URLField(verbose_name="Redirect URI")

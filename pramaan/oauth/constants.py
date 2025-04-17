@@ -15,3 +15,10 @@ class OauthStatusChoices:
         (PRODUCTION_NOT_VERIFIED, _("Production Unverified")),
         (PRODUCTION_VERIFIED, _("Production Verified")),
     )
+
+
+class PageTitles:
+    """OAuth App Page Titles"""
+
+    OVERVIEW = _("Overview")
+    BRANDING = _("Branding")

@@ -1,3 +1,5 @@
+from django.utils.translation import gettext_lazy as _
+
 DD_MM_YYYY = "%d-%m-%Y"
 YYYY_MM_DD = "%Y-%m-%d"
 
@@ -54,6 +56,11 @@ class Templates:
     CONFIGURATION = "configuration/configuration.html"
     # Dashboard App
     DASHBOARD_TEMPLATE = "dashboard/dashboard.html"
+    # OAuth App
+    OAUTH_TEMPLATE = "oauth/pages/overview.html"
+    OAUTH_BRANDING_TEMPLATE = "oauth/pages/branding.html"
+    OAUTH_CLIENT_TEMPLATE = "oauth/pages/client.html"
+    OAUTH_VERIFICATION_TEMPLATE = "oauth/pages/verification.html"
 
 
 class AppModel:
@@ -106,6 +113,23 @@ class AppModel:
         "app_label": "configuration",
         "model_name": "UserPrivacySettings",
     }
+    # OAuth App Models
+    OAUTH = {
+        "app_label": "oauth",
+        "model_name": "Oauth",
+    }
+    CLIENT = {
+        "app_label": "oauth",
+        "model_name": "Client",
+    }
+    AUTHORIZED_DOMAINS = {
+        "app_label": "oauth",
+        "model_name": "AuthorizedDomains",
+    }
+    REDIRECT_URIS = {
+        "app_label": "oauth",
+        "model_name": "RedirectURIs",
+    }
 
 
 class FormClass:
@@ -115,3 +139,7 @@ class FormClass:
     TEXTAREA = "textarea validator w-full textarea-primary"
     SWITCH_INPUT = "toggle toggle-primary"
     CHECKBOX_INPUT = "checkbox w-full checkbox-primary"
+
+
+class Messages:
+    OAUTH_NOT_IN_QUERY_PARAMS = _("OAuth id not found in query params")

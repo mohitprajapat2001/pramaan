@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="p-4 min-h-screen">
+    {% include "includes/breadcrump.html" with page="Open Authorization" icon="fas fa-unlock-keyhole" %}
+    <div class="rounded-2xl border border-gray-700 p-2 md:p-6 bg-base-100">
+        <div class="flex items-center justify-between mb-5">
+            <div class="flex items-center">
+                <div class="dropdown dropdown-hover">
+                    {% include 'includes/dropdown-toggle.html' %}
+                    <div tabindex="0"
+                        class="dropdown-content menu bg-base-300 border border-gray-600 rounded-box z-1 w-52 p-2 shadow-sm">
+                        {% include 'oauth/menu.html' %}
+                    </div>
+                </div>
+                <h3 class="text-xs md:text-base font-semibold">
+                    <a href="{% url 'oauth:oauth' %}">Pramaan Open Authorization Platform</a> / {{page_title}}
+                </h3>
+            </div>
+            <p class="text-xs italic text-gray-400 hidden md:block">
+                {% now "T M jS, D P" %}
+            </p>
+        </div>
+        <div class="grid grid-cols-12 gap-3">
+            <div class="col-span-0 md:col-span-2">
+                <div
+                    class="menu bg-base-300 border border-gray-700 w-full h-[75vh] rounded-lg shadow-md text-base gap-2">
+                    {% include 'oauth/menu.html' %}
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-10">
+                {% block main-content %}{%endblock%}
+            </div>
+        </div>
+
+    </div>
+</div>
+{% include 'includes/sidebar-drawer.html' %}
+{% endblock %}

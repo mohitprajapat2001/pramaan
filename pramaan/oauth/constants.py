@@ -40,6 +40,9 @@ class PlaceHolders:
         "developer_email": _("Developer Email"),
     }
 
+    # Client
+    CLIENT = {"title": _("Title"), "description": _("Description")}
+
 
 class Labels:
     """OAuth App Labels"""
@@ -124,3 +127,6 @@ class Labels:
 """
         ),
     }
+
+    # Client Model
+    CLIENT = {"title": _("Title"), "description": _("Description")}

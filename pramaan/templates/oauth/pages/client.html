@@ -31,9 +31,27 @@
         </form>
     </div>
     <div class="flex flex-col w-full gap-3">
-        <h1 class="text-2xl font-semibold">
-            Oauth Clients IDs
-        </h1>
+        <div class="flex justify-between items-center gap-2 px-1">
+            <h1 class="text-2xl font-semibold">
+                Oauth Clients IDs
+            </h1>
+            <button class="tooltip tooltip-left btn btn-soft btn-circle">
+                <div class="tooltip-content p-3 text-start bg-neutral text-neutral-content rounded-box">
+                    <ul class="list-disc list-inside">
+                        <li>
+                            These are the client IDs that are associated with this oauth.
+                        </li>
+                        <li>
+                            You can use these client IDs to authenticate your application.
+                        </li>
+                        <li>
+                            Once you close this page you will not be able to see the client secret again.
+                        </li>
+                    </ul>
+                </div>
+                {% include 'svg/info.html' %}
+            </button>
+        </div>
         <div class="border border-gray-700 rounded-xl p-2">
             <table class="table table-zebra">
                 <thead>
@@ -47,7 +65,21 @@
                 </thead>
                 <tbody>
                     {% for client in oauth.clients.all %}
-
+                    <tr>
+                        <td>{{client.id}}</td>
+                        <td>{{client.title}}</td>
+                        <td>{{client.created}}</td>
+                        <td>
+                            <div class="badge badge-success">Active</div>
+                        </td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="btn btn-sm btn-soft btn-circle tooltip" data-tip="Click to delete">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
                     {%empty%}
                     <tr>
                         <td colspan="5" class="text-center">
@@ -60,5 +92,4 @@
         </div>
     </div>
 </div>
-
 {%endblock%}

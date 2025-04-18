@@ -54,13 +54,19 @@ class ClientForm(forms.ModelForm):
         fields = ("title", "description")
         widgets = {
             "title": forms.TextInput(
-                attrs={"class": FormClass.TEXT_INPUT, "placeholder": "Title"}
+                attrs={
+                    "class": FormClass.TEXT_INPUT,
+                    "placeholder": PlaceHolders.CLIENT["title"],
+                }
             ),
             "description": forms.Textarea(
-                attrs={"class": FormClass.TEXTAREA, "placeholder": "Description"}
+                attrs={
+                    "class": FormClass.TEXTAREA,
+                    "placeholder": PlaceHolders.CLIENT["description"],
+                }
             ),
         }
         labels = {
-            "title": "Title",
-            "description": "Description",
+            "title": Labels.CLIENT["title"],
+            "description": Labels.CLIENT["description"],
         }

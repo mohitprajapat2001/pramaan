@@ -2,13 +2,17 @@
 <div class="modal" role="dialog">
     <div class="modal-box">
         <h3 class="text-lg font-bold">Create OAuth Client!</h3>
-        <div class="p-4">
-            {% for field in create_client_form %}
-            {% include 'partials/form-field.html' with field=field %}
-            {% endfor %}
-        </div>
-        <div class="modal-action">
-            <label for="create-client-modal" class="btn">Close!</label>
-        </div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="p-4">
+                {% for field in form %}
+                {% include 'partials/form-field.html' with field=field %}
+                {% endfor %}
+            </div>
+            <div class="modal-action">
+                <button type="submit" class="btn btn-primary">Create</button>
+                <label for="create-client-modal" class="btn">Close!</label>
+            </div>
+        </form>
     </div>
 </div>

@@ -1,10 +1,12 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 from utils.mixins import LoginRequiredMixin, OAuthBaseMixin
-from utils.constants import Templates, AppModel
+from django.contrib.messages.views import SuccessMessageMixin
+from utils.constants import Templates, AppModel, Messages
 from oauth.constants import PageTitles
 from typing import Any
 from oauth.forms import OAuthForm, ClientForm
 from utils.utils import get_model
+from django.urls import reverse_lazy
 
 Oauth = get_model(**AppModel.OAUTH)
 Client = get_model(**AppModel.CLIENT)
@@ -53,21 +55,29 @@ class OAuthBrandingView(LoginRequiredMixin, OAuthBaseMixin, TemplateView):
 oauth_branding_view = OAuthBrandingView.as_view()
 
 
-class OAuthClientView(LoginRequiredMixin, OAuthBaseMixin, TemplateView):
+class OAuthClientView(
+    LoginRequiredMixin, OAuthBaseMixin, SuccessMessageMixin, FormView
+):
     template_name = Templates.OAUTH_CLIENT_TEMPLATE
     url = "oauth:client"
+    form_class = ClientForm
+    success_url = reverse_lazy("oauth:client")
+    success_message = Messages.CLIENT_CREATED
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        # context["create_client_form"] = ClientForm()
+        id = self.request.GET.get("oauth")
+        if oauth := self.request.user.oauths.filter(id=id).first():
+            context["oauth"] = oauth
+        else:
+            context["oauth"] = self.request.user.oauths.first()
         context["page_title"] = PageTitles.CLIENT
         return context
 
-    def post(self, request, *args, **kwargs):
-        form = ClientForm(request.POST)
-        if form.is_valid():
-            form.save()
-        return self.post(request, *args, **kwargs)
+    def form_valid(self, form):
+        form.instance.oauth = self.request.user.oauths.first()
+        form.save()
+        return super().form_valid(form)
 
 
 oauth_client_view = OAuthClientView.as_view()

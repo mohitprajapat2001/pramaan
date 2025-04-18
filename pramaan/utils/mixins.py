@@ -1,4 +1,3 @@
-from django.contrib.messages import info
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.views import View
@@ -12,11 +11,12 @@ class MessageMixin:
     """
 
     success_message = None
+    message_level = messages.SUCCESS
 
     def form_valid(self, form):
         response = super().form_valid(form)
         if self.success_message:
-            info(self.request, self.success_message)
+            messages.add_message(self.request, self.message_level, self.success_message)
         return response
 
 

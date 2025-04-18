@@ -53,6 +53,9 @@ class Client(TitleDescriptionModel, ActivatorModel, TimeStampedModel):
     oauth = models.ForeignKey(Oauth, on_delete=models.CASCADE, related_name="clients")
     client_id = ClientId()
     client_secret = ClientSecret()
+    status = models.IntegerField(
+        choices=ActivatorModel.STATUS_CHOICES, default=ActivatorModel.INACTIVE_STATUS
+    )
 
 
 class AuthorizedDomains(ActivatorModel, TimeStampedModel):

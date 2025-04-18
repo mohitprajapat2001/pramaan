@@ -60,6 +60,7 @@ class Templates:
     OAUTH_TEMPLATE = "oauth/pages/overview.html"
     OAUTH_BRANDING_TEMPLATE = "oauth/pages/branding.html"
     OAUTH_CLIENT_TEMPLATE = "oauth/pages/client.html"
+    CLIENT_DETAIL_TEMPLATE = "oauth/pages/client-detail.html"
     OAUTH_VERIFICATION_TEMPLATE = "oauth/pages/verification.html"
 
 
@@ -146,3 +147,4 @@ class Messages:
     CLIENT_CREATED = _("Client created successfully")
     CLIENT_UPDATED = _("Client updated successfully")
     CLIENT_DELETED = _("Client deleted successfully")
+    CLIENT_VIEW_ONCE_EXPIRED = _("Client view once link expired")

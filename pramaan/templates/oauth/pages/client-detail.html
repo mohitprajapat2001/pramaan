@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Client - Pramaan
+{% endblock title %}
+
+{% block pre-extrajs %}
+<script>
+    $(document).ready(() => {
+        /**
+        Reload Page After 2 Mins
+        */
+        setTimeout(() => {
+            window.location.reload()
+        }, 120000)
+        /*
+        Copy Secret To Clipboard
+        */
+    })
+    /*
+    * Copy Secret To Clipboard
+    */
+    function copyToClipboard(element) {
+        var secret = element.dataset.secret;
+        navigator.clipboard.writeText(secret).then(() => {
+            /* Clipboard successfully set. */
+            console.log('Secret copied to clipboard');
+            element.classList.add('btn-success')
+            element.classList.remove('btn-soft')
+            element.dataset.tip = 'Copied'
+            setTimeout(() => {
+                element.classList.remove('btn-success')
+                element.classList.add('btn-soft')
+                element.dataset.tip = 'Copy Secret'
+            }, 2000)
+        }, () => {
+            /* Clipboard write failed. */
+            console.error('Failed to copy secret to clipboard');
+        });
+
+    }
+</script>
+
+
+{%endblock%}
+
+{% block content %}
+<div class="h-screen relative flex flex-col items-center overflow-hidden bg-neutral">
+    <div class="z-[1] h-full items-center justify-center flex flex-col gap-4 w-xl">
+        <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border p-4 w-full">
+            <legend class="fieldset-legend text-2xl">Client Details</legend>
+            <table class="table table-zebra cursor-pointer">
+                <tbody class="border border-gray-700 rounded-xl">
+                    <tr class="hover:bg-base-300">
+                        <th>ID</th>
+                        <td>{{client.client_id}}</td>
+                    </tr>
+                    <tr class="hover:bg-base-300">
+                        <th>Name</th>
+                        <td>{{client.title}}</td>
+                    </tr>
+                    <tr class="hover:bg-base-300">
+                        <th>Description</th>
+                        <td>{{client.description}}</td>
+                    </tr>
+                    <tr class="hover:bg-base-300">
+                        <th>Created</th>
+                        <td>{{client.created}}</td>
+                    </tr>
+                    <tr class="hover:bg-base-300">
+                        <th>Secret</th>
+                        <td class="flex justify-between items-center">
+                            <span>
+                                {{client.client_secret}}
+                            </span>
+                            <button onclick="copyToClipboard(this)" class="btn btn-soft btn-circle tooltip"
+                                data-secret="{{client.client_secret}}" data-tip=" Copy Secret">
+                                <i class="fa fa-copy text-lg"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul class="list-disc list-inside flex flex-col gap-2">
+                <li>
+                    <span class="text-sm">
+                        Note: Please copy the secret key and store it in a safe place.
+                    </span>
+                </li>
+                <li>
+                    <span class="text-sm">
+                        Note: This page will automatically refresh every 2 minutes.
+                    </span>
+                </li>
+                <li>
+                    <span class="text-sm">
+                        Note: You can not see the secret again.
+                    </span>
+                </li>
+            </ul>
+        </fieldset>
+        <div class="flex justify-end w-full">
+            <a href="{%url 'oauth:client' %}" class="btn btn-soft">
+                Continue
+            </a>
+        </div>
+    </div>
+    <div aria-hidden="true" class="absolute h-full inset-0 flex items-center">
+        <div aria-hidden="true"
+            class="bg-scale w-56 h-56 m-auto blur-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-full md:w-[30rem] md:h-[30rem] md:blur-3xl animate-pulse ease-linear">
+        </div>
+    </div>
+    <div aria-hidden="true" class="absolute inset-0 w-full h-full bg-[#020314] opacity-80"></div>
+</div>
+{% endblock %}

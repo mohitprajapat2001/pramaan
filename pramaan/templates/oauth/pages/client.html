@@ -66,18 +66,20 @@
                 <tbody>
                     {% for client in oauth.clients.all %}
                     <tr>
-                        <td>{{client.id}}</td>
+                        <td>{{client.client_id}}</td>
                         <td>{{client.title}}</td>
                         <td>{{client.created}}</td>
                         <td>
                             <div class="badge badge-success">Active</div>
                         </td>
                         <td>
-                            <div class="flex gap-2">
-                                <button class="btn btn-sm btn-soft btn-circle tooltip" data-tip="Click to delete">
+                            <form method="POST" action="{% url 'oauth:client-delete' client.id %}" class="flex gap-2">
+                                {%csrf_token%}
+                                <button type="submit" class="btn btn-sm btn-soft btn-circle tooltip"
+                                    data-tip="Click to delete">
                                     <i class="fa fa-trash"></i>
                                 </button>
-                            </div>
+                            </form>
                         </td>
                     </tr>
                     {%empty%}

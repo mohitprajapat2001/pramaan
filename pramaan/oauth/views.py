@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, DeleteView, DetailView
 from utils.mixins import LoginRequiredMixin, OAuthBaseMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from utils.constants import Templates, AppModel, Messages
@@ -7,6 +7,9 @@ from typing import Any
 from oauth.forms import OAuthForm, ClientForm
 from utils.utils import get_model
 from django.urls import reverse_lazy
+from django_extensions.db.models import ActivatorModel
+from django.shortcuts import redirect
+from django.contrib import messages
 
 Oauth = get_model(**AppModel.OAUTH)
 Client = get_model(**AppModel.CLIENT)
@@ -77,10 +80,42 @@ class OAuthClientView(
     def form_valid(self, form):
         form.instance.oauth = self.request.user.oauths.first()
         form.save()
+        self.success_url = reverse_lazy(
+            "oauth:client-detail", kwargs={"pk": form.instance.id}
+        )
         return super().form_valid(form)
 
 
 oauth_client_view = OAuthClientView.as_view()
+
+
+class ClientDetailView(LoginRequiredMixin, DetailView):
+    queryset = Client.objects.all()
+    template_name = Templates.CLIENT_DETAIL_TEMPLATE
+    context_object_name = "client"
+
+    def get(self, request, *args, **kwargs):
+        client = super().get_object(self.queryset)
+        if client.status == ActivatorModel.ACTIVE_STATUS:
+            messages.add_message(
+                self.request, messages.INFO, Messages.CLIENT_VIEW_ONCE_EXPIRED
+            )
+            return redirect(reverse_lazy("oauth:client"))
+        client.status = ActivatorModel.ACTIVE_STATUS
+        client.save(update_fields=("status",))
+        return super().get(request, *args, **kwargs)
+
+
+client_detail_view = ClientDetailView.as_view()
+
+
+class OAuthDeleteView(SuccessMessageMixin, DeleteView):
+    queryset = Client.objects.filter(status=ActivatorModel.ACTIVE_STATUS)
+    success_url = reverse_lazy("oauth:client")
+    success_message = Messages.CLIENT_DELETED
+
+
+oauth_delete_view = OAuthDeleteView.as_view()
 
 
 class OAuthVerificationView(LoginRequiredMixin, OAuthBaseMixin, TemplateView):

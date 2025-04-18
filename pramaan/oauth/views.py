@@ -2,7 +2,7 @@ from django.views.generic import TemplateView, FormView, DeleteView, DetailView
 from utils.mixins import LoginRequiredMixin, OAuthBaseMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from utils.constants import Templates, AppModel, Messages
-from oauth.constants import PageTitles
+from oauth.constants import PageTitles, AccessError, AccessTypes
 from typing import Any
 from oauth.forms import OAuthForm, ClientForm
 from utils.utils import get_model
@@ -124,3 +124,18 @@ class OAuthVerificationView(LoginRequiredMixin, OAuthBaseMixin, TemplateView):
 
 
 oauth_verification_view = OAuthVerificationView.as_view()
+
+
+class OAuthValidationView(TemplateView):
+    template_name = Templates.OAUTH_VALIDATION_TEMPLATE
+
+    def get_context_data(self, **kwargs) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        if token := self.request.GET.get("token"):
+            token
+        context["access_type"] = AccessTypes.ACCESS_DENIED
+        context["error"] = AccessError.INVALID_TOKEN
+        return context
+
+
+oauth_validation_view = OAuthValidationView.as_view()

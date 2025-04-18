@@ -3,6 +3,40 @@ from django.utils.translation import gettext_lazy as _
 OAUTH_LOGO_UPLOAD_PATH = "oauth/%s/%s"
 
 
+class AccessTypes:
+    """OAuth Validation Access Types"""
+
+    ACCESS_BLOCKED = "Access Blocked"
+    ACCESS_GRANTED = "Access Granted"
+    ACCESS_DENIED = "Access Denied"
+
+    CHOICES = (
+        (ACCESS_BLOCKED, _("Access Blocked")),
+        (ACCESS_GRANTED, _("Access Granted")),
+        (ACCESS_DENIED, _("Access Denied")),
+    )
+
+
+class AccessError:
+    """OAuth Validation Access Error"""
+
+    UNAUTHORIZED = "Unauthorized"
+    INVALID_CLIENT = "Invalid Client"
+    INVALID_TOKEN = "Invalid Token"
+    INVALID_REDIRECT_URI = "Invalid Redirect URI"
+    INVALID_SCOPE = "Invalid Scope"
+    INVALID_AUTHORIZED_DOMAIN = "Invalid Authorized Domain"
+
+    CHOICES = (
+        (UNAUTHORIZED, _("Unauthorized")),
+        (INVALID_CLIENT, _("Invalid Client")),
+        (INVALID_TOKEN, _("Invalid Token")),
+        (INVALID_REDIRECT_URI, _("Invalid Redirect URI")),
+        (INVALID_SCOPE, _("Invalid Scope")),
+        (INVALID_AUTHORIZED_DOMAIN, _("Invalid Authorized Domain")),
+    )
+
+
 class OauthStatusChoices:
     """Ouath App Oauth Model status Choices"""
 

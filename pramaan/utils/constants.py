@@ -62,6 +62,7 @@ class Templates:
     OAUTH_CLIENT_TEMPLATE = "oauth/pages/client.html"
     CLIENT_DETAIL_TEMPLATE = "oauth/pages/client-detail.html"
     OAUTH_VERIFICATION_TEMPLATE = "oauth/pages/verification.html"
+    OAUTH_VALIDATION_TEMPLATE = "oauth/pages/validation.html"
 
 
 class AppModel:

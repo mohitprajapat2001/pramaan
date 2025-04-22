@@ -1,0 +1,113 @@
+{%load static%}
+<section class="p-5 mb-6 border border-gray-700 rounded-xl lg:p-6" id="details">
+    <div class="flex items-center justify-between">
+        <h4 class="text-lg font-semibold lg:mb-6">
+            Personal Information
+        </h4>
+        <label for="detail-update-modal" data-tip="Edit Details"
+            class="tooltip btn btn-soft rounded-full border-gray-600">
+            <i class="fa fa-user-pen"></i>
+            <span class="hidden md:block">Edit</span>
+        </label>
+        {% include 'modals/accounts/detail-modal.html' %}
+    </div>
+    <div class="grid grid-cols-2 items-start justify-center gap-5">
+        <!-- First Name -->
+        <div>
+            <p class="mb-2 text-xs leading-normal">
+                First Name
+            </p>
+            <p class="text-sm font-medium">
+                {% if request.user.first_name %}
+                {{request.user.first_name}}
+                {%else%}
+                <span class="text-error">
+                    Add First Name
+                </span>
+                {%endif%}
+            </p>
+        </div>
+        <!-- Lastname -->
+        <div>
+            <p class="mb-2 text-xs leading-normal">
+                Last Name
+            </p>
+            <p class="text-sm font-medium">
+                {% if request.user.last_name %}
+                {{request.user.last_name}}
+                {%else%}
+                <span class="text-error">
+                    Add Last Name
+                </span>
+                {%endif%}
+            </p>
+        </div>
+        <!-- Email -->
+        <div>
+            <p class="mb-2 text-xs leading-normal">
+                Email address
+            </p>
+            <p class="text-sm font-medium">
+                {{request.user.email}}
+            </p>
+        </div>
+        <div>
+            <p class="mb-2 text-xs leading-normal">
+                Secondary Email address
+            </p>
+            <p class="text-sm font-medium">
+                {% if request.user.detail.secondary_email %}
+                {{request.user.detail.secondary_email}}
+                {%else%}
+                <span class="text-error">
+                    Add Secondary Email
+                </span>
+                {%endif%}
+            </p>
+        </div>
+        <!-- Phone Number -->
+        <div>
+            <p class="mb-2 text-xs leading-normal">
+                Phone
+            </p>
+            <p class="text-sm font-medium">
+                {% if request.user.detail.phone_number %}
+                {{request.user.detail.phone_number}}
+                {%else%}
+                <span class="text-error">
+                    Add Phone Number
+                </span>
+                {%endif%}
+            </p>
+        </div>
+        <div>
+            <p class="mb-2 text-xs leading-normal">
+                Secondary Phone
+            </p>
+            <p class="text-sm font-medium">
+                {% if request.user.detail.secondary_phone_number %}
+                {{request.user.detail.secondary_phone_number}}
+                {%else%}
+                <span class="text-error">
+                    Add Secondary Phone Number
+                </span>
+                {%endif%}
+            </p>
+        </div>
+    </div>
+    <div class="w-full mt-6">
+        <p class="mb-2 text-xs leading-normal">
+            Bio
+        </p>
+        <p
+            class="text-sm font-medium w-full border border-gray-500 rounded-lg focus:shadow-xl p-2 min-h-24 bg-base-300">
+            {% if request.user.detail.bio %}
+            {{request.user.detail.bio}}
+            {%else%}
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero ipsa officia optio? Magni
+            velit aliquid labore maiores facere. A quos vitae rem dolore exercitationem! Unde
+            consectetur adipisci voluptatibus delectus tempore.
+            {%endif%}
+        </p>
+    </div>
+</section>

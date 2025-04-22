@@ -1,0 +1,23 @@
+{%load static%}
+<section class="mb-6 p-5 border border-gray-700 rounded-xl lg:p-6" id="address">
+    <div class="flex gap-6 lg:flex-row lg:items-start lg:justify-between w-full">
+        <h4 class="text-lg font-semibold lg:mb-6">
+            Address
+        </h4>
+        <label for="address-add-modal" data-tip="Add Address" class=" tooltip btn btn-soft
+                            rounded-full border-gray-600">
+            <i class="fa fa-plus"> </i>
+            <span class="hidden md:block">Add</span>
+        </label>
+        {% include 'modals/accounts/add-address.html' %}
+    </div>
+    <div>
+        {% for address in request.user.addresses.all %}
+        {% include 'includes/address.html' with address=address %}
+        {%empty %}
+        <span class="text-error">
+            No Address Found
+        </span>
+        {% endfor %}
+    </div>
+</section>

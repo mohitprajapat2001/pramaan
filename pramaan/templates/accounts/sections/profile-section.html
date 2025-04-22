@@ -1,0 +1,53 @@
+{%load static%}
+<section class="p-5 mb-6 border border-gray-700 rounded-2xl bg-base-200 lg:p-6" id="profile">
+    <div class="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
+        <div class="flex flex-col items-center w-full gap-6 xl:flex-row">
+            <div class="w-20 h-20 overflow-hidden border border-gray-700 rounded-full">
+                <!-- TODO: Implement User Profile Image Primary Model -->
+                <img src="{% static 'img/profile.jpg' %}" alt="user">
+            </div>
+            <div class="order-3 xl:order-2">
+                <h4 class="mb-2 text-lg font-semibold text-center xl:text-left">
+                    {% if request.user.get_full_name %}
+                    {{request.user.get_full_name}}
+                    {% else %}
+                    <span class="text-error">
+                        Please Update Your Profile
+                    </span>
+                    {% endif %}
+                </h4>
+                <div class="flex flex-col items-center gap-1 text-center xl:flex-row xl:gap-3 xl:text-left">
+                    <p class="text-sm italic">
+                        {{request.user.username}}
+                    </p>
+                    <div class="divider divider-horizontal mx-0 px-0"></div>
+                    <p class="text-sm italic">
+                        {{request.user.email}}
+                    </p>
+                </div>
+            </div>
+            <div class="flex items-center order-2 gap-2 grow xl:order-3 xl:justify-end">
+                <!-- Social Media Links -->
+                <button class="btn btn-circle bg-white group">
+                    {% include 'icons/facebook.html' %}
+                </button>
+                <button class="btn btn-circle bg-white group">
+                    {% include 'icons/instagram.html' %}
+                </button>
+                <button class="btn btn-circle bg-white group">
+                    {% include 'icons/x-twitter.html' %}
+                </button>
+                <button class="btn btn-circle bg-white group">
+                    {% include 'icons/tiktok.html' %}
+                </button>
+            </div>
+        </div>
+        <!-- Edit Social Media Links -->
+        <label for="social-update-modal" data-tip="Edit Social Links"
+            class="tooltip btn btn-soft rounded-full border-gray-600">
+            <i class="fa fa-paperclip"></i>
+            <span class="hidden md:block">Edit</span>
+        </label>
+        {% include 'modals/accounts/social-modal.html' %}
+    </div>
+</section>

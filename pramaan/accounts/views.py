@@ -37,7 +37,7 @@ class LoginView(SuccessMessageMixin, FormView):
 
     template_name = Templates.LOGIN_TEMPLATE
     form_class = LoginForm
-    success_url = reverse_lazy("landing:home")
+    success_url = reverse_lazy("dashboard:dashboard")
     success_message = SucccessMessages.LOGIN_SUCCESS
 
     def form_valid(self, form):

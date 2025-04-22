@@ -7,5 +7,15 @@
 
 
 {% block main-content %}
-Hello
+<div class="flex flex-col gap-3">
+    <div class="flex items-center justify-between">
+        <label role="button" for="create-oauth" class="btn btn-sm btn-primary">
+            Create OAuth
+        </label>
+    </div>
+    <div class="p-4 border border-gray-700 rounded-lg shadow-sm hover:shadow-xl">
+        More context available soon....
+    </div>
+</div>
+{% include 'modals/oauth/create-oauth.html' %}
 {%endblock%}

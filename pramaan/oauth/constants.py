@@ -162,5 +162,16 @@ class Labels:
         ),
     }
 
+    OAUTH_CREATE = {
+        "title": _("App Name"),
+        "description": _("App Description"),
+        "support_email": _("Support Email"),
+        "logo": _("Logo"),
+        "app_domain": _("App Domain"),
+        "app_terms_of_service": _("App Terms of Service"),
+        "app_privacy_policy": _("App Privacy Policy"),
+        "developer_email": _("Developer Email"),
+    }
+
     # Client Model
     CLIENT = {"title": _("Title"), "description": _("Description")}

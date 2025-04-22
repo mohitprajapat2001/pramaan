@@ -48,6 +48,13 @@ class OAuthForm(forms.ModelForm):
             labels[field] = Labels.OAUTH[field]
 
 
+class OAuthCreateForm(OAuthForm):
+    class Meta(OAuthForm.Meta):
+        labels = {}
+        for field in OAuthForm.Meta.fields:
+            labels[field] = Labels.OAUTH_CREATE[field]
+
+
 class ClientForm(forms.ModelForm):
     class Meta:
         model = Client

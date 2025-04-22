@@ -4,7 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from utils.constants import Templates, AppModel, Messages
 from oauth.constants import PageTitles, AccessError, AccessTypes
 from typing import Any
-from oauth.forms import OAuthForm, ClientForm
+from oauth.forms import OAuthForm, ClientForm, OAuthCreateForm
 from utils.utils import get_model
 from django.urls import reverse_lazy
 from django_extensions.db.models import ActivatorModel
@@ -17,13 +17,21 @@ AuthorizedDomains = get_model(**AppModel.AUTHORIZED_DOMAINS)
 RedirectURIs = get_model(**AppModel.REDIRECT_URIS)
 
 
-class OAuthDashboardView(LoginRequiredMixin, TemplateView):
+class OAuthDashboardView(LoginRequiredMixin, SuccessMessageMixin, FormView):
     template_name = Templates.OAUTH_TEMPLATE
+    form_class = OAuthCreateForm
+    success_url = reverse_lazy("oauth:oauth")
+    success_message = Messages.OAUTH_CREATED
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["page_title"] = PageTitles.OVERVIEW
         return context
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super().form_valid(form)
 
 
 oauth_dashboard_view = OAuthDashboardView.as_view()
@@ -131,11 +139,16 @@ class OAuthValidationView(TemplateView):
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        if token := self.request.GET.get("token"):
-            token
-        context["access_type"] = AccessTypes.ACCESS_DENIED
-        context["error"] = AccessError.INVALID_TOKEN
-        return context
+        if not self.request.GET.get("client_id"):
+            context["access_type"] = AccessTypes.ACCESS_DENIED
+            context["error"] = AccessError.INVALID_TOKEN
+            return context
+        if not Client.objects.filter(
+            client_id=self.request.GET.get("client_id")
+        ).exists():
+            context["access_type"] = AccessTypes.ACCESS_DENIED
+            context["error"] = AccessError.INVALID_CLIENT
+            return context
 
 
 oauth_validation_view = OAuthValidationView.as_view()

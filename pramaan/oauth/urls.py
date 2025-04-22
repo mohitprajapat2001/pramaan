@@ -18,5 +18,5 @@ urlpatterns = [
     path("detail/<int:pk>", client_detail_view, name="client-detail"),
     path("delete/<int:pk>", oauth_delete_view, name="client-delete"),
     path("verification/", oauth_verification_view, name="verification"),
-    path("signin/validation/", oauth_validation_view, name="validation"),
+    path("signin/", oauth_validation_view, name="validation"),
 ]

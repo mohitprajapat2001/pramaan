@@ -145,6 +145,9 @@ class FormClass:
 
 class Messages:
     OAUTH_NOT_IN_QUERY_PARAMS = _("OAuth id not found in query params")
+    OAUTH_CREATED = _("OAuth created successfully")
+    OAUTH_UPDATED = _("OAuth updated successfully")
+    OAUTH_DELETED = _("OAuth deleted successfully")
     CLIENT_CREATED = _("Client created successfully")
     CLIENT_UPDATED = _("Client updated successfully")
     CLIENT_DELETED = _("Client deleted successfully")

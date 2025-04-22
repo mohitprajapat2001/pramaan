@@ -15,12 +15,19 @@
         <!-- <h1 class="text-xl font-bold">
             OAuth Details
         </h1> -->
-        <form action="{% url 'oauth:branding' %}" method="POST">
-            <select name="oauth" class="select select-primary w-40">
-                {% for oauth in request.user.oauths.all %}
-                <option value="{{oauth.id}}">{{ oauth.title }}</option>
+        <form action="{% url 'oauth:branding' %}" method="GET" class="flex gap-2 items-center justify-end">
+            <select name="oauth" class="select select-sm">
+                {% for oauth_item in request.user.oauths.all %}
+                {%if oauth_item.id == oauth.id%}
+                <option value="{{oauth_item.id}}" selected>{{ oauth_item.title }}</option>
+                {%else%}
+                <option value="{{oauth_item.id}}">{{ oauth_item.title }}</option>
+                {%endif%}
                 {% endfor %}
             </select>
+            <button type="submit" class="btn btn-sm btn-glass bg-primary">
+                <i class="fa fa-magnifying-glass text-xl"></i>
+            </button>
         </form>
     </div>
     <div>
